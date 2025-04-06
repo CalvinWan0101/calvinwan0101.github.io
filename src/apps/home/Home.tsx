@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import avatar from '../../assets/images/avatar.png';
 
 const Container = styled.div`
   display: flex;

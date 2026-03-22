@@ -1,5 +1,6 @@
 import type { IconType } from 'react-icons'
 import avatar from '../../assets/avatar.png'
+import seal from '../../assets/seal.png'
 import {
   FiBookOpen,
   FiBriefcase,
@@ -162,9 +163,14 @@ export const Home = () => {
           </Tags>
         </HeroText>
 
-        <AvatarFrame>
-          <Avatar src={profile.avatar} alt="Calvin Wan" />
-        </AvatarFrame>
+        <AvatarCluster>
+          <AvatarFrame>
+            <Avatar src={profile.avatar} alt="Calvin Wan" />
+          </AvatarFrame>
+          <AvatarSeal aria-hidden="true">
+            <AvatarSealImage src={seal} alt="" />
+          </AvatarSeal>
+        </AvatarCluster>
       </HeroSection>
 
       <Section id="skills">
@@ -441,7 +447,15 @@ const Tag = styled.span`
   }
 `
 
+const AvatarCluster = styled.div`
+  position: relative;
+  display: grid;
+  place-items: center;
+`
+
 const AvatarFrame = styled.div`
+  position: relative;
+  z-index: 1;
   width: 11rem;
   height: 11rem;
   padding: 0.55rem;
@@ -455,6 +469,39 @@ const AvatarFrame = styled.div`
   @media (min-width: 768px) {
     width: 15rem;
     height: 15rem;
+  }
+`
+
+const AvatarSeal = styled.div`
+  position: absolute;
+  right: -0.15rem;
+  bottom: -0.1rem;
+  z-index: 2;
+  width: 3.2rem;
+  height: 3.2rem;
+  padding: 0.2rem;
+  border: 2px solid var(--accent);
+  background: var(--bg-card);
+  box-shadow: 0 10px 18px rgba(140, 46, 46, 0.12);
+
+  @media (min-width: 768px) {
+    right: -0.2rem;
+    bottom: -0.15rem;
+    width: 4rem;
+    height: 4rem;
+    padding: 0.24rem;
+  }
+`
+
+const AvatarSealImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  opacity: 0.94;
+
+  @media (min-width: 768px) {
+    opacity: 0.96;
   }
 `
 

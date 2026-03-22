@@ -36,7 +36,9 @@ export const Footer = () => {
 const FooterShell = styled.footer`
   margin-top: auto;
   padding: 2rem 0;
-  border-top: 4px solid var(--accent);
+  border-top: 2px solid var(--accent);
+  background: rgba(244, 241, 225, 0.9);
+  backdrop-filter: blur(12px);
 `
 
 const FooterInner = styled.div`
@@ -67,13 +69,14 @@ const FooterText = styled.p`
 const FooterLinks = styled.div`
   display: flex;
   gap: 1rem;
+  opacity: 0.7;
 `
 
 const FooterLink = styled.a`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--text);
+  color: inherit;
   font-size: 1.25rem;
   transition:
     color 0.2s ease,

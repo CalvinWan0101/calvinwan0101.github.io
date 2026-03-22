@@ -116,38 +116,105 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     color: var(--accent);
     transform: translateY(-2px);
   }
-`;function Zc(e){let t=e.icon;return(0,W.jsx)(Xc,{href:e.href,target:`_blank`,rel:`noreferrer`,"aria-label":e.label,children:(0,W.jsx)(t,{})},e.label)}var Qc=[{href:`/`,label:`首頁`},{href:`/projects`,label:`專案`},{href:`/portfolio`,label:`投資`},{href:`/contact`,label:`聯繫`}],$c=()=>{let e=(0,Yi.c)(1),t;return e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,W.jsx)(el,{children:(0,W.jsx)(tl,{children:(0,W.jsx)(nl,{children:Qc.map(ol)})})}),e[0]=t):t=e[0],t},el=H.header`
+`;function Zc(e){let t=e.icon;return(0,W.jsx)(Xc,{href:e.href,target:`_blank`,rel:`noreferrer`,"aria-label":e.label,children:(0,W.jsx)(t,{})},e.label)}var Qc=[{href:`/`,label:`首頁`},{href:`/projects`,label:`專案`},{href:`/portfolio`,label:`投資`},{href:`/contact`,label:`聯繫`}],$c=()=>{let e=(0,Yi.c)(2),t=Xn(),n;return e[0]===t.pathname?n=e[1]:(n=(0,W.jsx)(el,{},t.pathname),e[0]=t.pathname,e[1]=n),n},el=()=>{let e=(0,Yi.c)(16),[t,n]=(0,x.useState)(!1),r=t?`關閉導覽選單`:`開啟導覽選單`,i;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(i=()=>n(ll),e[0]=i):i=e[0];let a,o,s;e[1]===Symbol.for(`react.memo_cache_sentinel`)?(a=(0,W.jsx)(`span`,{}),o=(0,W.jsx)(`span`,{}),s=(0,W.jsx)(`span`,{}),e[1]=a,e[2]=o,e[3]=s):(a=e[1],o=e[2],s=e[3]);let c;e[4]===t?c=e[5]:(c=(0,W.jsxs)(il,{"aria-hidden":`true`,$isOpen:t,children:[a,o,s]}),e[4]=t,e[5]=c);let l;e[6]!==t||e[7]!==r||e[8]!==c?(l=(0,W.jsx)(rl,{type:`button`,"aria-label":r,"aria-expanded":t,"aria-controls":`mobile-navigation`,onClick:i,children:c}),e[6]=t,e[7]=r,e[8]=c,e[9]=l):l=e[9];let u;e[10]===Symbol.for(`react.memo_cache_sentinel`)?(u=Qc.map(e=>e.href.startsWith(`/`)?(0,W.jsx)(sl,{to:e.href,end:e.href===`/`,onClick:()=>n(!1),children:e.label},e.href):(0,W.jsx)(cl,{href:e.href,onClick:()=>n(!1),children:e.label},e.href)),e[10]=u):u=e[10];let d;e[11]===t?d=e[12]:(d=(0,W.jsx)(al,{id:`mobile-navigation`,$isOpen:t,children:u}),e[11]=t,e[12]=d);let f;return e[13]!==l||e[14]!==d?(f=(0,W.jsx)(tl,{children:(0,W.jsxs)(nl,{children:[l,d]})}),e[13]=l,e[14]=d,e[15]=f):f=e[15],f},tl=H.header`
   position: sticky;
   top: 0;
   z-index: 20;
   border-bottom: 2px solid var(--accent);
   background: rgba(244, 241, 225, 0.9);
   backdrop-filter: blur(12px);
-`,tl=H.div`
+`,nl=H.div`
   width: min(64rem, calc(100% - 3rem));
   height: 4rem;
   margin: 0 auto;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-end;
 
   @media (max-width: 720px) {
     width: min(64rem, calc(100% - 2rem));
-    justify-content: center;
+    justify-content: flex-end;
   }
-`,nl=H.nav`
+`,rl=H.button`
+  display: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: var(--ink);
+  cursor: pointer;
+
+  @media (max-width: 720px) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-left: auto;
+    border-radius: 999px;
+    background: rgba(23, 30, 28, 0.06);
+  }
+`,il=H.span`
+  position: relative;
+  width: 1.25rem;
+  height: 1rem;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    transform-origin: center;
+  }
+
+  span:nth-child(1) {
+    transform: ${({$isOpen:e})=>e?`translateY(0.4375rem) rotate(45deg)`:`none`};
+  }
+
+  span:nth-child(2) {
+    opacity: ${({$isOpen:e})=>e?0:1};
+  }
+
+  span:nth-child(3) {
+    transform: ${({$isOpen:e})=>e?`translateY(-0.4375rem) rotate(-45deg)`:`none`};
+  }
+`,al=H.nav`
   display: flex;
   align-items: center;
   gap: 2rem;
 
   @media (max-width: 720px) {
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    right: 0;
+    width: max-content;
+    max-width: calc(100vw - 2rem);
+    padding: 0.65rem;
+    gap: 0.25rem;
+    flex-direction: column;
+    align-items: flex-end;
+    border: 1px solid rgba(23, 30, 28, 0.14);
+    border-radius: 1.25rem;
+    background: rgba(244, 241, 225, 0.98);
+    box-shadow: 0 1rem 2.5rem rgba(23, 30, 28, 0.12);
+    opacity: ${({$isOpen:e})=>e?1:0};
+    transform: ${({$isOpen:e})=>e?`translateY(0)`:`translateY(-0.5rem)`};
+    pointer-events: ${({$isOpen:e})=>e?`auto`:`none`};
+    transition: opacity 0.2s ease, transform 0.2s ease;
   }
-`,rl=`
+`,ol=`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.875rem;
   font-weight: 700;
+  color: inherit;
+  text-decoration: none;
   transition: color 0.2s ease;
 
   &:hover {
@@ -156,14 +223,33 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
 
   &.active {
     color: var(--accent);
-    border-bottom: 2px solid var(--accent);
-    padding-bottom: 2px;
   }
-`,il=H(ji)`
-  ${rl}
-`,al=H.a`
-  ${rl}
-`;function ol(e){return e.href.startsWith(`/`)?(0,W.jsx)(il,{to:e.href,end:e.href===`/`,children:e.label},e.href):(0,W.jsx)(al,{href:e.href,children:e.label},e.href)}var sl=()=>{let e=(0,Yi.c)(1),t;return e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,W.jsxs)(W.Fragment,{children:[(0,W.jsx)($c,{}),(0,W.jsx)(Ir,{}),(0,W.jsx)(Gc,{}),(0,W.jsx)(zc,{})]}),e[0]=t):t=e[0],t};function cl(){let e=(0,Yi.c)(2),t;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,W.jsx)(ll,{}),e[0]=t):t=e[0];let n;return e[1]===Symbol.for(`react.memo_cache_sentinel`)?(n=(0,W.jsxs)(W.Fragment,{children:[t,(0,W.jsx)(ul,{children:(0,W.jsx)(sl,{})})]}),e[1]=n):n=e[1],n}var ll=Ys`
+
+  @media (min-width: 721px) {
+    &.active {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 2px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    width: auto;
+    justify-content: center;
+    align-self: flex-end;
+    white-space: nowrap;
+    padding: 0.5rem 0.75rem;
+    border-radius: 999px;
+
+    &:hover,
+    &.active {
+      background: rgba(180, 99, 62, 0.12);
+    }
+  }
+`,sl=H(ji)`
+  ${ol}
+`,cl=H.a`
+  ${ol}
+`;function ll(e){return!e}var ul=()=>{let e=(0,Yi.c)(1),t;return e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,W.jsxs)(W.Fragment,{children:[(0,W.jsx)($c,{}),(0,W.jsx)(Ir,{}),(0,W.jsx)(Gc,{}),(0,W.jsx)(zc,{})]}),e[0]=t):t=e[0],t};function dl(){let e=(0,Yi.c)(2),t;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,W.jsx)(fl,{}),e[0]=t):t=e[0];let n;return e[1]===Symbol.for(`react.memo_cache_sentinel`)?(n=(0,W.jsxs)(W.Fragment,{children:[t,(0,W.jsx)(pl,{children:(0,W.jsx)(ul,{})})]}),e[1]=n):n=e[1],n}var fl=Ys`
   @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&display=swap');
 
   :root {
@@ -226,9 +312,9 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     background: #d5cbbd;
     border-radius: 0;
   }
-`,ul=H.div`
+`,pl=H.div`
   min-height: 100vh;
-`;function dl(e){return U({tag:`svg`,attr:{viewBox:`0 0 640 512`},child:[{tag:`path`,attr:{d:`M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.971,0-52.843-26.587-52.843-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.82,52.844,59.239C470.715,310.993,447.538,337.58,417.871,337.58Z`},child:[]}]})(e)}var fl=[{label:`Discord`,value:`傳送訊息`,subtext:`即時訊息`,href:`https://discord.com/users/593315109095473153`,icon:dl},{label:`GitHub`,value:`查看個人頁`,subtext:`開源專案與程式碼`,href:`https://github.com/CalvinWan0101`,icon:Tc},{label:`LinkedIn`,value:`查看個人頁`,subtext:`職涯經歷與專業網絡`,href:`https://www.linkedin.com/in/calvinwan0101`,icon:bc},{label:`Email`,value:`發送郵件`,subtext:`最直接的聯繫方式`,href:`mailto:calvinwan0101@gmail.com`,icon:yc}],pl=()=>{let e=(0,Yi.c)(3),t;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,W.jsxs)(gl,{children:[(0,W.jsxs)(_l,{children:[(0,W.jsx)(vl,{}),`聯絡我`]}),(0,W.jsx)(yl,{children:`保持聯繫`}),(0,W.jsx)(bl,{children:`歡迎透過以下方式與我聯繫，無論是工作機會、技術交流，或只是打個招呼。`})]}),e[0]=t):t=e[0];let n;e[1]===Symbol.for(`react.memo_cache_sentinel`)?(n=(0,W.jsx)(xl,{children:fl.map(Il)}),e[1]=n):n=e[1];let r;return e[2]===Symbol.for(`react.memo_cache_sentinel`)?(r=(0,W.jsxs)(hl,{children:[t,n,(0,W.jsxs)(kl,{children:[(0,W.jsxs)(Al,{children:[(0,W.jsx)(jl,{children:(0,W.jsx)(vc,{})}),(0,W.jsxs)(`div`,{children:[(0,W.jsx)(Ml,{children:`目前據點`}),(0,W.jsx)(Nl,{children:`台北，台灣`}),(0,W.jsx)(Pl,{children:`UTC+8 · 台灣標準時間`})]})]}),(0,W.jsx)(Fl,{src:`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d231756.53481937056!2d121.36166!3d25.0443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442ac8b01f9b7b3%3A0xbde20f9cd0d87c7f!2sTaipei%2C%20Taiwan!5e0!3m2!1sen!2s!4v1`,loading:`lazy`,referrerPolicy:`no-referrer-when-downgrade`,title:`台北，台灣`})]})]}),e[2]=r):r=e[2],r},ml=Zs`
+`;function ml(e){return U({tag:`svg`,attr:{viewBox:`0 0 640 512`},child:[{tag:`path`,attr:{d:`M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.971,0-52.843-26.587-52.843-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.82,52.844,59.239C470.715,310.993,447.538,337.58,417.871,337.58Z`},child:[]}]})(e)}var hl=[{label:`Discord`,value:`傳送訊息`,subtext:`即時訊息`,href:`https://discord.com/users/593315109095473153`,icon:ml},{label:`GitHub`,value:`查看個人頁`,subtext:`開源專案與程式碼`,href:`https://github.com/CalvinWan0101`,icon:Tc},{label:`LinkedIn`,value:`查看個人頁`,subtext:`職涯經歷與專業網絡`,href:`https://www.linkedin.com/in/calvinwan0101`,icon:bc},{label:`Email`,value:`發送郵件`,subtext:`最直接的聯繫方式`,href:`mailto:calvinwan0101@gmail.com`,icon:yc}],gl=()=>{let e=(0,Yi.c)(3),t;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,W.jsxs)(yl,{children:[(0,W.jsxs)(bl,{children:[(0,W.jsx)(xl,{}),`聯絡我`]}),(0,W.jsx)(Sl,{children:`保持聯繫`}),(0,W.jsx)(Cl,{children:`歡迎透過以下方式與我聯繫，無論是工作機會、技術交流，或只是打個招呼。`})]}),e[0]=t):t=e[0];let n;e[1]===Symbol.for(`react.memo_cache_sentinel`)?(n=(0,W.jsx)(wl,{children:hl.map(K)}),e[1]=n):n=e[1];let r;return e[2]===Symbol.for(`react.memo_cache_sentinel`)?(r=(0,W.jsxs)(vl,{children:[t,n,(0,W.jsxs)(Ml,{children:[(0,W.jsxs)(Nl,{children:[(0,W.jsx)(Pl,{children:(0,W.jsx)(vc,{})}),(0,W.jsxs)(`div`,{children:[(0,W.jsx)(Fl,{children:`目前據點`}),(0,W.jsx)(Il,{children:`台北，台灣`}),(0,W.jsx)(Ll,{children:`UTC+8 · 台灣標準時間`})]})]}),(0,W.jsx)(Rl,{src:`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d231756.53481937056!2d121.36166!3d25.0443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442ac8b01f9b7b3%3A0xbde20f9cd0d87c7f!2sTaipei%2C%20Taiwan!5e0!3m2!1sen!2s!4v1`,loading:`lazy`,referrerPolicy:`no-referrer-when-downgrade`,title:`台北，台灣`})]})]}),e[2]=r):r=e[2],r},_l=Zs`
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -238,7 +324,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     opacity: 1;
     transform: translateY(0);
   }
-`,hl=H.main`
+`,vl=H.main`
   width: min(64rem, calc(100% - 3rem));
   margin: 0 auto;
   padding: 2rem 0 5rem;
@@ -249,13 +335,13 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   @media (max-width: 720px) {
     width: min(64rem, calc(100% - 2rem));
   }
-`,gl=H.section`
+`,yl=H.section`
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding-top: 1rem;
-  animation: ${ml} 0.7s ease both;
-`,_l=H.div`
+  animation: ${_l} 0.7s ease both;
+`,bl=H.div`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -268,24 +354,24 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   letter-spacing: 0.1em;
   border-radius: 2px;
   background: rgba(253, 252, 248, 0.72);
-`,vl=H(_c)`
+`,xl=H(_c)`
   font-size: 0.9rem;
-`,yl=H.h1`
+`,Sl=H.h1`
   margin: 0;
   font-size: clamp(2.4rem, 6vw, 4rem);
   font-weight: 900;
   letter-spacing: 0.05em;
-`,bl=H.p`
+`,Cl=H.p`
   margin: 0;
   max-width: 36rem;
   font-size: 0.95rem;
   line-height: 1.9;
   color: var(--text-muted);
-`,xl=H.section`
+`,wl=H.section`
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.5rem;
-  animation: ${ml} 0.7s ease 0.08s both;
+  animation: ${_l} 0.7s ease 0.08s both;
 
   @media (max-width: 960px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -294,7 +380,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   @media (max-width: 560px) {
     grid-template-columns: 1fr;
   }
-`,Sl=H.a`
+`,Tl=H.a`
   position: relative;
   overflow: hidden;
   min-height: 15rem;
@@ -332,7 +418,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   &:hover::after {
     width: 100%;
   }
-`,Cl=H.div`
+`,El=H.div`
   width: 2.75rem;
   height: 2.75rem;
   display: inline-flex;
@@ -346,28 +432,28 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     border-color 0.2s ease,
     background 0.2s ease;
 
-  ${Sl}:hover & {
+  ${Tl}:hover & {
     border-color: var(--accent);
     background: rgba(140, 46, 46, 0.06);
   }
-`,wl=H.div`
+`,Dl=H.div`
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-`,Tl=H.div`
+`,Ol=H.div`
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-muted);
-`,El=H.div`
+`,kl=H.div`
   font-size: 1rem;
   font-weight: 900;
   letter-spacing: 0.02em;
-`,Dl=H.div`
+`,Al=H.div`
   font-size: 0.8rem;
   color: var(--text-muted);
-`,Ol=H.div`
+`,jl=H.div`
   margin-top: auto;
   align-self: flex-end;
   color: var(--accent);
@@ -378,17 +464,17 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     opacity 0.2s ease,
     transform 0.2s ease;
 
-  ${Sl}:hover & {
+  ${Tl}:hover & {
     opacity: 1;
     transform: translateX(0);
   }
-`,kl=H.section`
+`,Ml=H.section`
   overflow: hidden;
   border: 2px solid var(--border-soft);
   border-radius: 2px;
   background: var(--bg-card);
-  animation: ${ml} 0.7s ease 0.16s both;
-`,Al=H.div`
+  animation: ${_l} 0.7s ease 0.16s both;
+`,Nl=H.div`
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -398,7 +484,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   @media (max-width: 560px) {
     align-items: flex-start;
   }
-`,jl=H.div`
+`,Pl=H.div`
   width: 2.75rem;
   height: 2.75rem;
   flex-shrink: 0;
@@ -409,32 +495,32 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   border-radius: 2px;
   color: var(--accent);
   font-size: 1.1rem;
-`,Ml=H.div`
+`,Fl=H.div`
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-muted);
-`,Nl=H.div`
+`,Il=H.div`
   margin-top: 0.15rem;
   font-size: 1rem;
   font-weight: 900;
-`,Pl=H.div`
+`,Ll=H.div`
   margin-top: 0.1rem;
   font-size: 0.8rem;
   color: var(--text-muted);
-`,Fl=H.iframe`
+`,Rl=H.iframe`
   display: block;
   width: 100%;
   height: 320px;
   border: 0;
   filter: sepia(20%) contrast(0.95);
-`;function Il(e){let t=e.icon;return(0,W.jsxs)(Sl,{href:e.href,target:e.href.startsWith(`mailto:`)?void 0:`_blank`,rel:e.href.startsWith(`mailto:`)?void 0:`noreferrer`,children:[(0,W.jsx)(Cl,{children:(0,W.jsx)(t,{})}),(0,W.jsxs)(wl,{children:[(0,W.jsx)(Tl,{children:e.label}),(0,W.jsx)(El,{children:e.value}),(0,W.jsx)(Dl,{children:e.subtext})]}),(0,W.jsx)(Ol,{children:(0,W.jsx)(Nc,{})})]},e.label)}var Ll={avatar:`/assets/avatar-wAiLg8Si.png`,name:`萬祥瑞`,badge:`軟體工程師 @ 叡揚資訊`,location:`台北，台灣`,birthYear:`生於 2003 年`},Rl=[`.NET`,`C#`,`React`,`DDD`],K=[{corner:`壹`,title:`後端開發`,icon:mc,items:[`C#`,`.NET`,`ABP Framework`]},{corner:`貳`,title:`前端開發`,icon:Cc,items:[`React`,`TypeScript`,`HTML / CSS`]},{corner:`參`,title:`資料與雲端`,icon:Oc,items:[`MySQL`,`Microsoft Azure`]},{corner:`肆`,title:`系統架構`,icon:Sc,items:[`Domain-Driven Design`,`Agile Development`]}],q=[{company:`叡揚資訊 (Galaxy Software Services)`,title:`程式設計師 (Full-time)`,period:`2025/06 - 至今`,items:[`使用 C#、.NET 與 ABP Framework 構建強健的後端服務。`,`前端採用 React 與 TypeScript 進行開發。`,`實踐 Domain-Driven Design (DDD) 進行系統架構設計，確保業務邏輯的清晰與可維護性。`,`在 Agile 開發流程下運作，持續交付高價值的軟體功能。`],active:!0},{company:`叡揚資訊 (Galaxy Software Services)`,title:`助理程式設計師 (Internship)`,period:`2024/07 - 2025/06`,items:[`協助開發企業級系統，熟悉現有程式與架構。`,`參與前後端開發。`]}],J=[{company:`國立臺北科技大學`,title:`電資學士班（主修資訊工程）`,period:`2021/09 - 2025/07`,items:[`加入軟體系統實驗室，學習 DDD、TDD、BDD`],active:!0},{title:`臺灣嘉義縣協同中學高中部`,period:`2017/09 - 2020/07`,compact:!0},{title:`臺灣嘉義縣協同中學國中部`,period:`2015/02 - 2017/07`,compact:!0},{title:`中國廣州中山大學附屬外國語實驗中學`,period:`2014/09 - 2015/01`,compact:!0},{title:`中國廣州中山大學附屬黃埔實驗小學`,period:`2008/09 - 2014/07`,compact:!0}],Y={skills:kc,experience:Ac,education:jc,location:vc,user:fc},X=()=>{let e=(0,Yi.c)(12),t=Y.skills,n=Y.experience,r=Y.education,i=Y.location,a=Y.user,o,s;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(o=(0,W.jsxs)(Gl,{children:[(0,W.jsx)(Kl,{}),Ll.badge]}),s=(0,W.jsx)(ql,{children:Ll.name}),e[0]=o,e[1]=s):(o=e[0],s=e[1]);let c;e[2]===Symbol.for(`react.memo_cache_sentinel`)?(c=(0,W.jsxs)(Yl,{children:[(0,W.jsx)(Xl,{children:(0,W.jsx)(i,{})}),Ll.location]}),e[2]=c):c=e[2];let l;e[3]===Symbol.for(`react.memo_cache_sentinel`)?(l=(0,W.jsxs)(Jl,{children:[c,(0,W.jsxs)(Yl,{children:[(0,W.jsx)(Xl,{children:(0,W.jsx)(a,{})}),Ll.birthYear]})]}),e[3]=l):l=e[3];let u;e[4]===Symbol.for(`react.memo_cache_sentinel`)?(u=(0,W.jsxs)(Wl,{children:[o,s,l,(0,W.jsx)(Zl,{children:Rl.map(xu)})]}),e[4]=u):u=e[4];let d;e[5]===Symbol.for(`react.memo_cache_sentinel`)?(d=(0,W.jsxs)(Ul,{id:`home`,children:[u,(0,W.jsx)($l,{children:(0,W.jsx)(eu,{src:Ll.avatar,alt:`Calvin Wan`})})]}),e[5]=d):d=e[5];let f;e[6]===Symbol.for(`react.memo_cache_sentinel`)?(f=(0,W.jsxs)(tu,{children:[(0,W.jsx)(nu,{children:(0,W.jsx)(t,{})}),(0,W.jsx)(ru,{children:`技藝專長`})]}),e[6]=f):f=e[6];let p;e[7]===Symbol.for(`react.memo_cache_sentinel`)?(p=(0,W.jsxs)(Hl,{id:`skills`,children:[f,(0,W.jsx)(iu,{children:K.map(Cu)})]}),e[7]=p):p=e[7];let m;e[8]===Symbol.for(`react.memo_cache_sentinel`)?(m=(0,W.jsxs)(tu,{children:[(0,W.jsx)(nu,{children:(0,W.jsx)(n,{})}),(0,W.jsx)(ru,{children:`過往經歷`})]}),e[8]=m):m=e[8];let h;e[9]===Symbol.for(`react.memo_cache_sentinel`)?(h=(0,W.jsxs)(Hl,{id:`experience`,children:[m,(0,W.jsx)(du,{children:q.map(wu)})]}),e[9]=h):h=e[9];let g;e[10]===Symbol.for(`react.memo_cache_sentinel`)?(g=(0,W.jsxs)(tu,{children:[(0,W.jsx)(nu,{children:(0,W.jsx)(r,{})}),(0,W.jsx)(ru,{children:`教育背景`})]}),e[10]=g):g=e[10];let _;return e[11]===Symbol.for(`react.memo_cache_sentinel`)?(_=(0,W.jsxs)(Vl,{children:[d,p,h,(0,W.jsxs)(Hl,{id:`education`,children:[g,(0,W.jsx)(du,{children:J.map(Tu)})]})]}),e[11]=_):_=e[11],_},zl=Zs`
+`;function K(e){let t=e.icon;return(0,W.jsxs)(Tl,{href:e.href,target:e.href.startsWith(`mailto:`)?void 0:`_blank`,rel:e.href.startsWith(`mailto:`)?void 0:`noreferrer`,children:[(0,W.jsx)(El,{children:(0,W.jsx)(t,{})}),(0,W.jsxs)(Dl,{children:[(0,W.jsx)(Ol,{children:e.label}),(0,W.jsx)(kl,{children:e.value}),(0,W.jsx)(Al,{children:e.subtext})]}),(0,W.jsx)(jl,{children:(0,W.jsx)(Nc,{})})]},e.label)}var q={avatar:`/assets/avatar-wAiLg8Si.png`,name:`萬祥瑞`,badge:`軟體工程師 @ 叡揚資訊`,location:`台北，台灣`,birthYear:`生於 2003 年`},J=[`.NET`,`C#`,`React`,`DDD`],Y=[{corner:`壹`,title:`後端開發`,icon:mc,items:[`C#`,`.NET`,`ABP Framework`]},{corner:`貳`,title:`前端開發`,icon:Cc,items:[`React`,`TypeScript`,`HTML / CSS`]},{corner:`參`,title:`資料與雲端`,icon:Oc,items:[`MySQL`,`Microsoft Azure`]},{corner:`肆`,title:`系統架構`,icon:Sc,items:[`Domain-Driven Design`,`Agile Development`]}],X=[{company:`叡揚資訊 (Galaxy Software Services)`,title:`程式設計師 (Full-time)`,period:`2025/06 - 至今`,items:[`使用 C#、.NET 與 ABP Framework 構建強健的後端服務。`,`前端採用 React 與 TypeScript 進行開發。`,`實踐 Domain-Driven Design (DDD) 進行系統架構設計，確保業務邏輯的清晰與可維護性。`,`在 Agile 開發流程下運作，持續交付高價值的軟體功能。`],active:!0},{company:`叡揚資訊 (Galaxy Software Services)`,title:`助理程式設計師 (Internship)`,period:`2024/07 - 2025/06`,items:[`協助開發企業級系統，熟悉現有程式與架構。`,`參與前後端開發。`]}],zl=[{company:`國立臺北科技大學`,title:`電資學士班（主修資訊工程）`,period:`2021/09 - 2025/07`,items:[`加入軟體系統實驗室，學習 DDD、TDD、BDD`],active:!0},{title:`臺灣嘉義縣協同中學高中部`,period:`2017/09 - 2020/07`,compact:!0},{title:`臺灣嘉義縣協同中學國中部`,period:`2015/02 - 2017/07`,compact:!0},{title:`中國廣州中山大學附屬外國語實驗中學`,period:`2014/09 - 2015/01`,compact:!0},{title:`中國廣州中山大學附屬黃埔實驗小學`,period:`2008/09 - 2014/07`,compact:!0}],Bl={skills:kc,experience:Ac,education:jc,location:vc,user:fc},Vl=()=>{let e=(0,Yi.c)(12),t=Bl.skills,n=Bl.experience,r=Bl.education,i=Bl.location,a=Bl.user,o,s;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(o=(0,W.jsxs)(Jl,{children:[(0,W.jsx)(Yl,{}),q.badge]}),s=(0,W.jsx)(Xl,{children:q.name}),e[0]=o,e[1]=s):(o=e[0],s=e[1]);let c;e[2]===Symbol.for(`react.memo_cache_sentinel`)?(c=(0,W.jsxs)(Ql,{children:[(0,W.jsx)($l,{children:(0,W.jsx)(i,{})}),q.location]}),e[2]=c):c=e[2];let l;e[3]===Symbol.for(`react.memo_cache_sentinel`)?(l=(0,W.jsxs)(Zl,{children:[c,(0,W.jsxs)(Ql,{children:[(0,W.jsx)($l,{children:(0,W.jsx)(a,{})}),q.birthYear]})]}),e[3]=l):l=e[3];let u;e[4]===Symbol.for(`react.memo_cache_sentinel`)?(u=(0,W.jsxs)(ql,{children:[o,s,l,(0,W.jsx)(eu,{children:J.map(wu)})]}),e[4]=u):u=e[4];let d;e[5]===Symbol.for(`react.memo_cache_sentinel`)?(d=(0,W.jsxs)(Kl,{id:`home`,children:[u,(0,W.jsx)(nu,{children:(0,W.jsx)(ru,{src:q.avatar,alt:`Calvin Wan`})})]}),e[5]=d):d=e[5];let f;e[6]===Symbol.for(`react.memo_cache_sentinel`)?(f=(0,W.jsxs)(iu,{children:[(0,W.jsx)(au,{children:(0,W.jsx)(t,{})}),(0,W.jsx)(ou,{children:`技藝專長`})]}),e[6]=f):f=e[6];let p;e[7]===Symbol.for(`react.memo_cache_sentinel`)?(p=(0,W.jsxs)(Gl,{id:`skills`,children:[f,(0,W.jsx)(su,{children:Y.map(Eu)})]}),e[7]=p):p=e[7];let m;e[8]===Symbol.for(`react.memo_cache_sentinel`)?(m=(0,W.jsxs)(iu,{children:[(0,W.jsx)(au,{children:(0,W.jsx)(n,{})}),(0,W.jsx)(ou,{children:`過往經歷`})]}),e[8]=m):m=e[8];let h;e[9]===Symbol.for(`react.memo_cache_sentinel`)?(h=(0,W.jsxs)(Gl,{id:`experience`,children:[m,(0,W.jsx)(mu,{children:X.map(Du)})]}),e[9]=h):h=e[9];let g;e[10]===Symbol.for(`react.memo_cache_sentinel`)?(g=(0,W.jsxs)(iu,{children:[(0,W.jsx)(au,{children:(0,W.jsx)(r,{})}),(0,W.jsx)(ou,{children:`教育背景`})]}),e[10]=g):g=e[10];let _;return e[11]===Symbol.for(`react.memo_cache_sentinel`)?(_=(0,W.jsxs)(Wl,{children:[d,p,h,(0,W.jsxs)(Gl,{id:`education`,children:[g,(0,W.jsx)(mu,{children:zl.map(Ou)})]})]}),e[11]=_):_=e[11],_},Hl=Zs`
   75%, 100% {
     transform: scale(2);
     opacity: 0;
   }
-`,Bl=Zs`
+`,Ul=Zs`
   from {
     opacity: 0;
     transform: translateY(24px);
@@ -444,7 +530,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     opacity: 1;
     transform: translateY(0);
   }
-`,Vl=H.main`
+`,Wl=H.main`
   width: min(64rem, calc(100% - 3rem));
   margin: 0 auto;
   padding: 2rem 0 5rem;
@@ -456,10 +542,10 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     width: min(64rem, calc(100% - 2rem));
     gap: 4.5rem;
   }
-`,Hl=H.section`
+`,Gl=H.section`
   scroll-margin-top: 5.5rem;
-  animation: ${Bl} 0.7s ease both;
-`,Ul=H(Hl)`
+  animation: ${Ul} 0.7s ease both;
+`,Kl=H(Gl)`
   min-height: calc(100vh - 6rem);
   display: flex;
   flex-direction: column-reverse;
@@ -472,7 +558,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     flex-direction: row;
     justify-content: space-between;
   }
-`,Wl=H.div`
+`,ql=H.div`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -484,7 +570,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     align-items: flex-start;
     text-align: left;
   }
-`,Gl=H.div`
+`,Jl=H.div`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -496,7 +582,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   letter-spacing: 0.1em;
   border-radius: 2px;
   background: rgba(253, 252, 248, 0.72);
-`,Kl=H.span`
+`,Yl=H.span`
   position: relative;
   display: inline-flex;
   width: 0.5rem;
@@ -512,16 +598,16 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   }
 
   &::before {
-    animation: ${zl} 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+    animation: ${Hl} 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
     opacity: 0.75;
   }
-`,ql=H.h1`
+`,Xl=H.h1`
   margin: 0.5rem 0;
   font-size: clamp(3rem, 8vw, 4.5rem);
   font-weight: 900;
   letter-spacing: 0.2em;
   color: var(--accent);
-`,Jl=H.div`
+`,Zl=H.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -536,14 +622,14 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   @media (min-width: 768px) {
     justify-content: flex-start;
   }
-`,Yl=H.span`
+`,Ql=H.span`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-`,Xl=H.span`
+`,$l=H.span`
   color: var(--accent);
   font-size: 1.2rem;
-`,Zl=H.div`
+`,eu=H.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -553,7 +639,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   @media (min-width: 768px) {
     justify-content: flex-start;
   }
-`,Ql=H.span`
+`,tu=H.span`
   padding: 0.375rem 1rem;
   font-size: 0.75rem;
   font-weight: 700;
@@ -572,7 +658,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     color: var(--bg);
     transform: translateY(-2px);
   }
-`,$l=H.div`
+`,nu=H.div`
   width: 11rem;
   height: 11rem;
   padding: 0.55rem;
@@ -587,28 +673,28 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     width: 15rem;
     height: 15rem;
   }
-`,eu=H.img`
+`,ru=H.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-`,tu=H.div`
+`,iu=H.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--border-soft);
-`,nu=H.span`
+`,au=H.span`
   color: var(--accent);
   font-size: 1.5rem;
   display: inline-flex;
-`,ru=H.h2`
+`,ou=H.h2`
   margin: 0;
   font-size: 1.5rem;
   font-weight: 900;
   letter-spacing: 0.15em;
-`,iu=H.div`
+`,su=H.div`
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   gap: 1.5rem;
@@ -620,7 +706,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   @media (min-width: 1024px) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
-`,au=H.article`
+`,cu=H.article`
   position: relative;
   padding: 1.5rem;
   background: rgba(253, 252, 248, 0.92);
@@ -636,7 +722,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     transform: translateY(-4px);
     box-shadow: var(--shadow);
   }
-`,ou=H.div`
+`,lu=H.div`
   position: absolute;
   top: 0;
   right: 0;
@@ -651,27 +737,27 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   border-left: 1px solid var(--border-soft);
   border-bottom: 1px solid var(--border-soft);
   background: var(--bg);
-`,su=H.span`
+`,uu=H.span`
   display: inline-flex;
   margin-bottom: 1rem;
   color: var(--accent);
   font-size: 2rem;
-`,cu=H.h3`
+`,du=H.h3`
   margin: 0 0 1rem;
   font-size: 1.125rem;
   font-weight: 700;
   letter-spacing: 0.05em;
-`,lu=H.ul`
+`,fu=H.ul`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
-`,uu=H.li`
+`,pu=H.li`
   font-size: 0.875rem;
   font-weight: 500;
-`,du=H.div`
+`,mu=H.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -687,11 +773,11 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     background: var(--border-soft);
     transform: translateX(-50%);
   }
-`,fu=H.article`
+`,hu=H.article`
   position: relative;
   display: flex;
   align-items: flex-start;
-`,pu=H.div`
+`,gu=H.div`
   position: absolute;
   left: ${e=>e.$compact?`0.5rem`:`0`};
   z-index: 1;
@@ -704,11 +790,11 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   border: 2px solid ${e=>e.$active?`var(--accent)`:`var(--text-muted)`};
   border-radius: 2px;
   background: var(--bg);
-`,mu=H.div`
+`,_u=H.div`
   width: ${e=>e.$compact?`0.5rem`:`0.75rem`};
   height: ${e=>e.$compact?`0.5rem`:`0.75rem`};
   background: ${e=>e.$active?`var(--accent)`:`var(--text-muted)`};
-`,hu=H.div`
+`,vu=H.div`
   width: ${e=>e.$compact?`calc(100% - 2.5rem)`:`calc(100% - 3.5rem)`};
   margin-left: ${e=>e.$compact?`2.5rem`:`3.5rem`};
   padding: ${e=>e.$compact?`0.55rem 1rem`:`1.5rem`};
@@ -726,16 +812,16 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     align-items: flex-start;
     gap: ${e=>e.$compact?`0.35rem`:`0`};
   }
-`,gu=H.div`
+`,yu=H.div`
   color: ${e=>e.$active?`var(--accent)`:`var(--text-muted)`};
   font-weight: 700;
   letter-spacing: 0.1em;
-`,_u=H.h3`
+`,bu=H.h3`
   margin: ${e=>e.$compact?`0`:`0.25rem 0 0`};
   font-size: ${e=>e.$compact?`0.875rem`:`1.125rem`};
   font-weight: ${e=>e.$compact?700:900};
   opacity: ${e=>e.$compact?.7:1};
-`,vu=H.div`
+`,xu=H.div`
   display: inline-block;
   margin: ${e=>e.$compact?`0`:`0.75rem 0 1rem`};
   padding-bottom: ${e=>e.$compact?`0`:`0.5rem`};
@@ -744,9 +830,9 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-weight: 700;
   opacity: ${e=>e.$compact?.45:.8};
   white-space: ${e=>e.$compact?`nowrap`:`normal`};
-`,yu=H(lu)`
+`,Su=H(fu)`
   gap: 0.5rem;
-`,bu=H.li`
+`,Cu=H.li`
   position: relative;
   padding-left: 1rem;
   font-size: 0.875rem;
@@ -762,7 +848,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     height: 6px;
     background: ${e=>e.$active?`var(--accent)`:`var(--text-muted)`};
   }
-`;function xu(e){return(0,W.jsx)(Ql,{children:e},e)}function Su(e){return(0,W.jsx)(uu,{children:e},e)}function Cu(e){let t=e.icon;return(0,W.jsxs)(au,{children:[(0,W.jsx)(ou,{children:e.corner}),(0,W.jsx)(su,{children:(0,W.jsx)(t,{})}),(0,W.jsx)(cu,{children:e.title}),(0,W.jsx)(lu,{children:e.items.map(Su)})]},e.title)}function wu(e){return(0,W.jsxs)(fu,{$active:e.active,children:[(0,W.jsx)(pu,{$active:e.active,children:(0,W.jsx)(mu,{$active:e.active})}),(0,W.jsxs)(hu,{$active:e.active,children:[e.company?(0,W.jsx)(gu,{$active:e.active,children:e.company}):null,(0,W.jsx)(_u,{children:e.title}),(0,W.jsx)(vu,{children:e.period}),e.items?(0,W.jsx)(yu,{children:e.items.map(t=>(0,W.jsx)(bu,{$active:e.active,children:t},t))}):null]})]},`${e.title}-${e.period}`)}function Tu(e){return(0,W.jsxs)(fu,{$active:e.active,$compact:e.compact,children:[(0,W.jsx)(pu,{$active:e.active,$compact:e.compact,children:(0,W.jsx)(mu,{$active:e.active,$compact:e.compact})}),(0,W.jsxs)(hu,{$active:e.active,$compact:e.compact,children:[e.company?(0,W.jsx)(gu,{$active:e.active,children:e.company}):null,(0,W.jsx)(_u,{$compact:e.compact,children:e.title}),(0,W.jsx)(vu,{$compact:e.compact,children:e.period}),e.items?(0,W.jsx)(yu,{children:e.items.map(t=>(0,W.jsx)(bu,{$active:e.active,children:t},t))}):null]})]},`${e.title}-${e.period}`)}var Eu=new Intl.NumberFormat(`en-US`,{style:`currency`,currency:`USD`,minimumFractionDigits:2,maximumFractionDigits:2}),Du=new Intl.NumberFormat(`en-US`,{minimumFractionDigits:5,maximumFractionDigits:5,useGrouping:!1}),Ou=new Intl.NumberFormat(`en-US`,{minimumFractionDigits:0,maximumFractionDigits:2}),ku=e=>Number(e.replace(`$`,``)),Au=e=>{let[t,n,r]=e.split(`/`).map(Number);return new Date(t,n-1,r)},ju=e=>[`一月`,`二月`,`三月`,`四月`,`五月`,`六月`,`七月`,`八月`,`九月`,`十月`,`十一月`,`十二月`][e-1],Mu=e=>`${e.getFullYear()} / ${String(e.getMonth()+1).padStart(2,`0`)} / ${String(e.getDate()).padStart(2,`0`)}`,Nu=e=>{if(!Number.isFinite(e)||e<=0)return 1;let t=10**Math.floor(Math.log10(e)),n=e/t;return n<=1?t:n<=2?2*t:n<=5?5*t:10*t},Pu=55,Fu=585,Iu=15,Lu=135,Ru=Fu-Pu,zu=Lu-Iu,Bu=8,Vu=[{month:`2026 年 3 月`,entries:[{date:`2026/03/20`,shares:`1.00000`,price:`$137.41`},{date:`2026/03/16`,shares:`1.38741`,price:`$141.270487`},{date:`2026/03/09`,shares:`1.00000`,price:`$139.75`},{date:`2026/03/06`,shares:`1.00000`,price:`$142.43`},{date:`2026/03/05`,shares:`1.37359`,price:`$144.147559`},{date:`2026/03/03`,shares:`1.00000`,price:`$142.91`}]},{month:`2026 年 2 月`,entries:[{date:`2026/02/25`,shares:`1.21921`,price:`$148.457253`},{date:`2026/02/17`,shares:`1.24151`,price:`$145.79`},{date:`2026/02/09`,shares:`1.22803`,price:`$146.575899`}]},{month:`2026 年 1 月`,entries:[{date:`2026/01/30`,shares:`1.00000`,price:`$146.13`},{date:`2026/01/14`,shares:`1.00000`,price:`$144.57`},{date:`2026/01/08`,shares:`1.00000`,price:`$143.42`},{date:`2026/01/05`,shares:`1.00000`,price:`$142.835`}]}],Hu=Vu.flatMap(({entries:e})=>e.map(e=>{let t=Au(e.date);return{date:e.date,shares:Number(e.shares),price:ku(e.price),timestamp:t.getTime(),month:t.getMonth()+1,sharesLabel:e.shares,priceLabel:e.price}})),Uu=[...Hu].sort((e,t)=>e.timestamp-t.timestamp),Wu=Hu.reduce((e,t)=>e+t.shares,0),Z=Hu.reduce((e,t)=>e+t.shares*t.price,0),Gu=Wu===0?0:Z/Wu,Ku=Uu[0],qu=Uu[Uu.length-1],Ju=Ku?new Date(new Date(Ku.timestamp).getFullYear(),new Date(Ku.timestamp).getMonth(),1):new Date,Yu=qu?new Date(new Date(qu.timestamp).getFullYear(),new Date(qu.timestamp).getMonth()+1,0):new Date(Ju),Xu=Ju.getTime(),Zu=Yu.getTime(),Qu=Zu-Xu,$u=Math.min(...Uu.map(e=>e.price)),ed=Math.max(...Uu.map(e=>e.price)),td=Nu(Uu.length>1?(ed-$u)/Math.max(Bu-1,1):ed||1),nd=Math.floor($u/td)*td,rd=Math.ceil(ed/td)*td||td,id=rd-nd||td,ad=e=>Qu===0?Pu+Ru/2:Pu+(e-Xu)/Qu*Ru,od=e=>Iu+(rd-e)/id*zu,sd=Uu.map(e=>({x:ad(e.timestamp),y:od(e.price),date:e.date,sharesLabel:e.sharesLabel,priceLabel:e.priceLabel})),cd=[];for(let e=rd;e>=nd-td/2;e-=td)cd.push(Number(e.toFixed(4)));var ld=cd.map((e,t)=>({label:Ou.format(e),y:od(e),strong:t===cd.length-1})),ud=[];if(Ku&&qu){let e=new Date(Ju),t=new Date(Yu.getFullYear(),Yu.getMonth(),1);for(;e<=t;)ud.push(new Date(e)),e.setMonth(e.getMonth()+1)}var dd=ud.slice(1).map(e=>e.getTime()).filter(e=>e>=Xu&&e<=Zu).map(ad),fd=ud.map(e=>{let t=Math.max(e.getTime(),Xu),n=new Date(e.getFullYear(),e.getMonth()+1,1).getTime();return{x:ad(t+(Math.min(n,Zu)-t)/2),label:ju(e.getMonth()+1)}}),pd=od(Gu),md=[{label:`持有股數`,value:Du.format(Wu),unit:`VT`},{label:`平均購入價格`,value:Eu.format(Gu),unit:`USD`},{label:`總投入金額`,value:Eu.format(Z),unit:`進行中`,active:!0}],hd=sd.map(({x:e,y:t})=>`${e},${t}`).join(` `),gd=()=>{let e=(0,Yi.c)(10),t;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,W.jsx)(yd,{children:(0,W.jsxs)(Q,{children:[(0,W.jsxs)(bd,{children:[(0,W.jsx)(xd,{children:(0,W.jsx)(pc,{})}),`投資紀錄`]}),(0,W.jsx)(Sd,{children:`投資旅程：VT`}),(0,W.jsx)(Cd,{children:`長期被動投資策略的記錄，專注於全球分散配置與持續成長。`})]})}),e[0]=t):t=e[0];let n;e[1]===Symbol.for(`react.memo_cache_sentinel`)?(n=(0,W.jsx)(wd,{children:md.map(Xd)}),e[1]=n):n=e[1];let r;e[2]===Symbol.for(`react.memo_cache_sentinel`)?(r=(0,W.jsx)(Md,{children:`購入單價走勢`}),e[2]=r):r=e[2];let i;e[3]===Symbol.for(`react.memo_cache_sentinel`)?(i=(0,W.jsxs)(Nd,{children:[(0,W.jsx)(Pd,{}),`購入單價`]}),e[3]=i):i=e[3];let a;e[4]===Symbol.for(`react.memo_cache_sentinel`)?(a=(0,W.jsx)(Fd,{}),e[4]=a):a=e[4];let o;e[5]===Symbol.for(`react.memo_cache_sentinel`)?(o=(0,W.jsxs)(jd,{children:[r,(0,W.jsxs)($,{children:[i,(0,W.jsxs)(Nd,{children:[a,`平均 `,Eu.format(Gu)]})]})]}),e[5]=o):o=e[5];let s;e[6]===Symbol.for(`react.memo_cache_sentinel`)?(s=(0,W.jsx)(Id,{children:(0,W.jsxs)(Ld,{viewBox:`0 0 640 195`,"aria-label":`VT 購入單價走勢圖`,role:`img`,children:[ld.map(Zd),(0,W.jsx)(`line`,{x1:Pu,y1:Iu,x2:Pu,y2:Lu,stroke:`rgba(140,46,46,0.25)`,strokeWidth:`1.5`}),(0,W.jsx)(`line`,{x1:Pu,y1:pd,x2:Fu,y2:pd,stroke:`rgba(62,50,44,0.35)`,strokeWidth:`1.5`,strokeDasharray:`5,4`}),(0,W.jsx)(`polyline`,{points:hd,fill:`none`,stroke:`#8c2e2e`,strokeWidth:`2`,strokeLinejoin:`round`,strokeLinecap:`round`}),sd.map(Qd),(0,W.jsx)(`line`,{x1:Pu,y1:Lu,x2:Fu,y2:Lu,stroke:`rgba(140,46,46,0.25)`,strokeWidth:`1.5`}),dd.map($d),fd.map(ef)]})}),e[6]=s):s=e[6];let c;e[7]===Symbol.for(`react.memo_cache_sentinel`)?(c=(0,W.jsxs)(Ad,{children:[o,s,(0,W.jsxs)(Rd,{children:[(0,W.jsx)(`span`,{children:Mu(Ju)}),(0,W.jsx)(`span`,{children:Mu(Yu)})]})]}),e[7]=c):c=e[7];let l;e[8]===Symbol.for(`react.memo_cache_sentinel`)?(l=(0,W.jsx)(Bd,{children:(0,W.jsx)(Md,{children:`購入紀錄`})}),e[8]=l):l=e[8];let u;return e[9]===Symbol.for(`react.memo_cache_sentinel`)?(u=(0,W.jsxs)(vd,{children:[t,n,c,(0,W.jsxs)(zd,{children:[l,(0,W.jsx)(Vd,{children:(0,W.jsxs)(Hd,{children:[(0,W.jsx)(`thead`,{children:(0,W.jsxs)(`tr`,{children:[(0,W.jsx)(Ud,{children:`日期`}),(0,W.jsx)(Ud,{children:`購入股數`}),(0,W.jsx)(Ud,{children:`單價 (USD)`})]})}),(0,W.jsx)(`tbody`,{children:Vu.map(nf)})]})})]})]}),e[9]=u):u=e[9],u},_d=Zs`
+`;function wu(e){return(0,W.jsx)(tu,{children:e},e)}function Tu(e){return(0,W.jsx)(pu,{children:e},e)}function Eu(e){let t=e.icon;return(0,W.jsxs)(cu,{children:[(0,W.jsx)(lu,{children:e.corner}),(0,W.jsx)(uu,{children:(0,W.jsx)(t,{})}),(0,W.jsx)(du,{children:e.title}),(0,W.jsx)(fu,{children:e.items.map(Tu)})]},e.title)}function Du(e){return(0,W.jsxs)(hu,{$active:e.active,children:[(0,W.jsx)(gu,{$active:e.active,children:(0,W.jsx)(_u,{$active:e.active})}),(0,W.jsxs)(vu,{$active:e.active,children:[e.company?(0,W.jsx)(yu,{$active:e.active,children:e.company}):null,(0,W.jsx)(bu,{children:e.title}),(0,W.jsx)(xu,{children:e.period}),e.items?(0,W.jsx)(Su,{children:e.items.map(t=>(0,W.jsx)(Cu,{$active:e.active,children:t},t))}):null]})]},`${e.title}-${e.period}`)}function Ou(e){return(0,W.jsxs)(hu,{$active:e.active,$compact:e.compact,children:[(0,W.jsx)(gu,{$active:e.active,$compact:e.compact,children:(0,W.jsx)(_u,{$active:e.active,$compact:e.compact})}),(0,W.jsxs)(vu,{$active:e.active,$compact:e.compact,children:[e.company?(0,W.jsx)(yu,{$active:e.active,children:e.company}):null,(0,W.jsx)(bu,{$compact:e.compact,children:e.title}),(0,W.jsx)(xu,{$compact:e.compact,children:e.period}),e.items?(0,W.jsx)(Su,{children:e.items.map(t=>(0,W.jsx)(Cu,{$active:e.active,children:t},t))}):null]})]},`${e.title}-${e.period}`)}var ku=new Intl.NumberFormat(`en-US`,{style:`currency`,currency:`USD`,minimumFractionDigits:2,maximumFractionDigits:2}),Au=new Intl.NumberFormat(`en-US`,{minimumFractionDigits:5,maximumFractionDigits:5,useGrouping:!1}),ju=new Intl.NumberFormat(`en-US`,{minimumFractionDigits:0,maximumFractionDigits:2}),Mu=e=>Number(e.replace(`$`,``)),Nu=e=>{let[t,n,r]=e.split(`/`).map(Number);return new Date(t,n-1,r)},Pu=e=>[`一月`,`二月`,`三月`,`四月`,`五月`,`六月`,`七月`,`八月`,`九月`,`十月`,`十一月`,`十二月`][e-1],Fu=e=>`${e.getFullYear()} / ${String(e.getMonth()+1).padStart(2,`0`)} / ${String(e.getDate()).padStart(2,`0`)}`,Iu=e=>{if(!Number.isFinite(e)||e<=0)return 1;let t=10**Math.floor(Math.log10(e)),n=e/t;return n<=1?t:n<=2?2*t:n<=5?5*t:10*t},Lu=55,Ru=585,zu=15,Bu=135,Vu=Ru-Lu,Hu=Bu-zu,Uu=8,Wu=[{month:`2026 年 3 月`,entries:[{date:`2026/03/20`,shares:`1.00000`,price:`$137.41`},{date:`2026/03/16`,shares:`1.38741`,price:`$141.270487`},{date:`2026/03/09`,shares:`1.00000`,price:`$139.75`},{date:`2026/03/06`,shares:`1.00000`,price:`$142.43`},{date:`2026/03/05`,shares:`1.37359`,price:`$144.147559`},{date:`2026/03/03`,shares:`1.00000`,price:`$142.91`}]},{month:`2026 年 2 月`,entries:[{date:`2026/02/25`,shares:`1.21921`,price:`$148.457253`},{date:`2026/02/17`,shares:`1.24151`,price:`$145.79`},{date:`2026/02/09`,shares:`1.22803`,price:`$146.575899`}]},{month:`2026 年 1 月`,entries:[{date:`2026/01/30`,shares:`1.00000`,price:`$146.13`},{date:`2026/01/14`,shares:`1.00000`,price:`$144.57`},{date:`2026/01/08`,shares:`1.00000`,price:`$143.42`},{date:`2026/01/05`,shares:`1.00000`,price:`$142.835`}]}],Z=Wu.flatMap(({entries:e})=>e.map(e=>{let t=Nu(e.date);return{date:e.date,shares:Number(e.shares),price:Mu(e.price),timestamp:t.getTime(),month:t.getMonth()+1,sharesLabel:e.shares,priceLabel:e.price}})),Gu=[...Z].sort((e,t)=>e.timestamp-t.timestamp),Ku=Z.reduce((e,t)=>e+t.shares,0),qu=Z.reduce((e,t)=>e+t.shares*t.price,0),Ju=Ku===0?0:qu/Ku,Yu=Gu[0],Xu=Gu[Gu.length-1],Zu=Yu?new Date(new Date(Yu.timestamp).getFullYear(),new Date(Yu.timestamp).getMonth(),1):new Date,Qu=Xu?new Date(new Date(Xu.timestamp).getFullYear(),new Date(Xu.timestamp).getMonth()+1,0):new Date(Zu),$u=Zu.getTime(),ed=Qu.getTime(),td=ed-$u,nd=Math.min(...Gu.map(e=>e.price)),rd=Math.max(...Gu.map(e=>e.price)),id=Iu(Gu.length>1?(rd-nd)/Math.max(Uu-1,1):rd||1),ad=Math.floor(nd/id)*id,od=Math.ceil(rd/id)*id||id,sd=od-ad||id,cd=e=>td===0?Lu+Vu/2:Lu+(e-$u)/td*Vu,ld=e=>zu+(od-e)/sd*Hu,ud=Gu.map(e=>({x:cd(e.timestamp),y:ld(e.price),date:e.date,sharesLabel:e.sharesLabel,priceLabel:e.priceLabel})),dd=[];for(let e=od;e>=ad-id/2;e-=id)dd.push(Number(e.toFixed(4)));var fd=dd.map((e,t)=>({label:ju.format(e),y:ld(e),strong:t===dd.length-1})),pd=[];if(Yu&&Xu){let e=new Date(Zu),t=new Date(Qu.getFullYear(),Qu.getMonth(),1);for(;e<=t;)pd.push(new Date(e)),e.setMonth(e.getMonth()+1)}var md=pd.slice(1).map(e=>e.getTime()).filter(e=>e>=$u&&e<=ed).map(cd),hd=pd.map(e=>{let t=Math.max(e.getTime(),$u),n=new Date(e.getFullYear(),e.getMonth()+1,1).getTime();return{x:cd(t+(Math.min(n,ed)-t)/2),label:Pu(e.getMonth()+1)}}),gd=ld(Ju),_d=[{label:`持有股數`,value:Au.format(Ku),unit:`VT`},{label:`平均購入價格`,value:ku.format(Ju),unit:`USD`},{label:`總投入金額`,value:ku.format(qu),unit:`進行中`,active:!0}],vd=ud.map(({x:e,y:t})=>`${e},${t}`).join(` `),yd=()=>{let e=(0,Yi.c)(10),t;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,W.jsx)(xd,{children:(0,W.jsxs)(Sd,{children:[(0,W.jsxs)(Cd,{children:[(0,W.jsx)(wd,{children:(0,W.jsx)(pc,{})}),`投資紀錄`]}),(0,W.jsx)(Td,{children:`投資旅程：VT`}),(0,W.jsx)(Ed,{children:`長期被動投資策略的記錄，專注於全球分散配置與持續成長。`})]})}),e[0]=t):t=e[0];let n;e[1]===Symbol.for(`react.memo_cache_sentinel`)?(n=(0,W.jsx)(Dd,{children:_d.map($d)}),e[1]=n):n=e[1];let r;e[2]===Symbol.for(`react.memo_cache_sentinel`)?(r=(0,W.jsx)(Pd,{children:`購入單價走勢`}),e[2]=r):r=e[2];let i;e[3]===Symbol.for(`react.memo_cache_sentinel`)?(i=(0,W.jsxs)(Id,{children:[(0,W.jsx)(Ld,{}),`購入單價`]}),e[3]=i):i=e[3];let a;e[4]===Symbol.for(`react.memo_cache_sentinel`)?(a=(0,W.jsx)(Rd,{}),e[4]=a):a=e[4];let o;e[5]===Symbol.for(`react.memo_cache_sentinel`)?(o=(0,W.jsxs)(Nd,{children:[r,(0,W.jsxs)(Fd,{children:[i,(0,W.jsxs)(Id,{children:[a,`平均 `,ku.format(Ju)]})]})]}),e[5]=o):o=e[5];let s;e[6]===Symbol.for(`react.memo_cache_sentinel`)?(s=(0,W.jsx)(zd,{children:(0,W.jsxs)(Bd,{viewBox:`0 0 640 195`,"aria-label":`VT 購入單價走勢圖`,role:`img`,children:[fd.map(ef),(0,W.jsx)(`line`,{x1:Lu,y1:zu,x2:Lu,y2:Bu,stroke:`rgba(140,46,46,0.25)`,strokeWidth:`1.5`}),(0,W.jsx)(`line`,{x1:Lu,y1:gd,x2:Ru,y2:gd,stroke:`rgba(62,50,44,0.35)`,strokeWidth:`1.5`,strokeDasharray:`5,4`}),(0,W.jsx)(`polyline`,{points:vd,fill:`none`,stroke:`#8c2e2e`,strokeWidth:`2`,strokeLinejoin:`round`,strokeLinecap:`round`}),ud.map(tf),(0,W.jsx)(`line`,{x1:Lu,y1:Bu,x2:Ru,y2:Bu,stroke:`rgba(140,46,46,0.25)`,strokeWidth:`1.5`}),md.map(nf),hd.map(rf)]})}),e[6]=s):s=e[6];let c;e[7]===Symbol.for(`react.memo_cache_sentinel`)?(c=(0,W.jsxs)($,{children:[o,s,(0,W.jsxs)(Vd,{children:[(0,W.jsx)(`span`,{children:Fu(Zu)}),(0,W.jsx)(`span`,{children:Fu(Qu)})]})]}),e[7]=c):c=e[7];let l;e[8]===Symbol.for(`react.memo_cache_sentinel`)?(l=(0,W.jsx)(Ud,{children:(0,W.jsx)(Pd,{children:`購入紀錄`})}),e[8]=l):l=e[8];let u;return e[9]===Symbol.for(`react.memo_cache_sentinel`)?(u=(0,W.jsxs)(bd,{children:[t,n,c,(0,W.jsxs)(Hd,{children:[l,(0,W.jsx)(Wd,{children:(0,W.jsxs)(Gd,{children:[(0,W.jsx)(`thead`,{children:(0,W.jsxs)(`tr`,{children:[(0,W.jsx)(Kd,{children:`日期`}),(0,W.jsx)(Kd,{children:`購入股數`}),(0,W.jsx)(Kd,{children:`單價 (USD)`})]})}),(0,W.jsx)(`tbody`,{children:Wu.map(of)})]})})]})]}),e[9]=u):u=e[9],u},Q=Zs`
   from {
     opacity: 0;
     transform: translateY(24px);
@@ -772,7 +858,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     opacity: 1;
     transform: translateY(0);
   }
-`,vd=H.main`
+`,bd=H.main`
   width: min(64rem, calc(100% - 3rem));
   margin: 0 auto;
   padding: 2rem 0 5rem;
@@ -784,12 +870,12 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     width: min(64rem, calc(100% - 2rem));
     padding-top: 1.5rem;
   }
-`,yd=H.section`
+`,xd=H.section`
   padding-top: 1rem;
-  animation: ${_d} 0.7s ease both;
-`,Q=H.div`
+  animation: ${Q} 0.7s ease both;
+`,Sd=H.div`
   max-width: 38rem;
-`,bd=H.div`
+`,Cd=H.div`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -802,26 +888,26 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-weight: 700;
   letter-spacing: 0.1em;
   background: rgba(253, 252, 248, 0.72);
-`,xd=H.span`
+`,wd=H.span`
   display: inline-flex;
   flex-shrink: 0;
   font-size: 0.875rem;
-`,Sd=H.h1`
+`,Td=H.h1`
   margin: 0 0 0.75rem;
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 900;
   letter-spacing: 0.05em;
-`,Cd=H.p`
+`,Ed=H.p`
   margin: 0;
   font-size: 0.9375rem;
   line-height: 1.8;
   color: var(--text-muted);
-`,wd=H.section`
+`,Dd=H.section`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
-  animation: ${_d} 0.7s ease 0.08s both;
-`,Td=H.article`
+  animation: ${Q} 0.7s ease 0.08s both;
+`,Od=H.article`
   padding: 1.5rem;
   background: rgba(253, 252, 248, 0.92);
   border: 2px solid var(--border-soft);
@@ -836,14 +922,14 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     transform: translateY(-4px);
     box-shadow: var(--shadow);
   }
-`,Ed=H.div`
+`,kd=H.div`
   margin-bottom: 0.6rem;
   color: var(--text-muted);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-`,Dd=H.div`
+`,Ad=H.div`
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -851,7 +937,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-size: 1.75rem;
   font-weight: 900;
   letter-spacing: -0.02em;
-`,Od=H.span`
+`,jd=H.span`
   display: inline-flex;
   align-items: center;
   gap: 0.2rem;
@@ -860,26 +946,26 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-`,kd=H.section`
+`,Md=H.section`
   background: rgba(253, 252, 248, 0.92);
   border: 2px solid var(--border-soft);
   border-radius: 2px;
-  animation: ${_d} 0.7s ease 0.16s both;
-`,Ad=H(kd)`
+  animation: ${Q} 0.7s ease 0.16s both;
+`,$=H(Md)`
   padding: 1.5rem;
-`,jd=H.div`
+`,Nd=H.div`
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
   gap: 0.75rem;
   margin-bottom: 1.25rem;
-`,Md=H.h2`
+`,Pd=H.h2`
   margin: 0;
   font-size: 1.125rem;
   font-weight: 900;
   letter-spacing: 0.05em;
-`,$=H.div`
+`,Fd=H.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -888,28 +974,28 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-`,Nd=H.span`
+`,Id=H.span`
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-`,Pd=H.span`
+`,Ld=H.span`
   display: inline-block;
   width: 18px;
   height: 2px;
   background: var(--accent);
-`,Fd=H.span`
+`,Rd=H.span`
   display: inline-block;
   width: 18px;
   height: 0;
   border-top: 2px dashed var(--text-muted);
-`,Id=H.div`
+`,zd=H.div`
   width: 100%;
-`,Ld=H.svg`
+`,Bd=H.svg`
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
-`,Rd=H.div`
+`,Vd=H.div`
   display: flex;
   justify-content: space-between;
   padding: 0 2px;
@@ -918,19 +1004,19 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-`,zd=H(kd)`
+`,Hd=H(Md)`
   overflow: hidden;
   animation-delay: 0.24s;
-`,Bd=H.div`
+`,Ud=H.div`
   padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-soft);
-`,Vd=H.div`
+`,Wd=H.div`
   overflow-x: auto;
-`,Hd=H.table`
+`,Gd=H.table`
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-`,Ud=H.th`
+`,Kd=H.th`
   position: sticky;
   top: 0;
   z-index: 1;
@@ -943,18 +1029,18 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   letter-spacing: 0.12em;
   text-transform: uppercase;
   white-space: nowrap;
-`,Wd=H.td`
+`,qd=H.td`
   padding: 0.9rem 1.5rem;
   border-bottom: 1px solid rgba(62, 50, 44, 0.07);
   font-size: 0.875rem;
   font-weight: 500;
   white-space: nowrap;
-`,Gd=H(Wd)`
+`,Jd=H(qd)`
   color: var(--text-muted);
   font-weight: 700;
-`,Kd=H(Wd)`
+`,Yd=H(qd)`
   font-weight: 900;
-`,qd=H.tr`
+`,Xd=H.tr`
   &:last-child td {
     border-bottom: none;
   }
@@ -962,9 +1048,9 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   &:hover {
     background: rgba(140, 46, 46, 0.04);
   }
-`,Jd=H.tr`
+`,Zd=H.tr`
   background: rgba(140, 46, 46, 0.06);
-`,Yd=H.td`
+`,Qd=H.td`
   padding: 0.5rem 1.5rem;
   border-bottom: 1px solid var(--border-soft);
   color: var(--accent);
@@ -972,7 +1058,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-`;function Xd(e){return(0,W.jsxs)(Td,{children:[(0,W.jsx)(Ed,{children:e.label}),(0,W.jsxs)(Dd,{children:[e.value,(0,W.jsxs)(Od,{$active:e.active,children:[e.active?(0,W.jsx)(Mc,{}):null,e.unit]})]})]},e.label)}function Zd(e){return(0,W.jsxs)(x.Fragment,{children:[(0,W.jsx)(`line`,{x1:Pu,y1:e.y,x2:Fu,y2:e.y,stroke:e.strong?`rgba(140,46,46,0.2)`:`rgba(140,46,46,0.1)`,strokeWidth:e.strong?`1.5`:`1`}),(0,W.jsx)(`text`,{x:`48`,y:e.y+4,fontSize:`9`,fontFamily:`inherit`,textAnchor:`end`,fill:`rgba(62,50,44,0.5)`,children:e.label})]},e.label)}function Qd(e){return(0,W.jsx)(`circle`,{cx:e.x,cy:e.y,r:`3.5`,fill:`#8c2e2e`,children:(0,W.jsx)(`title`,{children:`${e.date}\n購入股數 ${e.sharesLabel}\n單價 ${e.priceLabel}`})},`${e.date}-${e.x}`)}function $d(e){return(0,W.jsx)(`line`,{x1:e,y1:Lu,x2:e,y2:Lu+8,stroke:`rgba(140,46,46,0.3)`,strokeWidth:`1`,strokeDasharray:`3,2`},e)}function ef(e){return(0,W.jsx)(`text`,{x:e.x,y:`168`,fontSize:`8`,fontFamily:`inherit`,textAnchor:`middle`,fill:`rgba(140,46,46,0.6)`,fontWeight:`700`,letterSpacing:`1`,children:e.label},e.label)}function tf(e){return(0,W.jsxs)(qd,{children:[(0,W.jsx)(Gd,{children:e.date}),(0,W.jsx)(Kd,{children:e.shares}),(0,W.jsx)(Wd,{children:e.price})]},e.date)}function nf(e){return(0,W.jsxs)(x.Fragment,{children:[(0,W.jsx)(Jd,{children:(0,W.jsx)(Yd,{colSpan:3,children:e.month})}),e.entries.map(tf)]},e.month)}var rf={"C#":`#178600`,"C++":`#f34b7d`,CSS:`#663399`,Go:`#00add8`,HTML:`#e34c26`,Java:`#b07219`,JavaScript:`#f1e05a`,Kotlin:`#a97bff`,PHP:`#4f5d95`,Python:`#3572a5`,Rust:`#dea584`,SCSS:`#c6538c`,Shell:`#89e051`,Swift:`#f05138`,TypeScript:`#3178c6`},af=[`#b07219`,`#3178c6`,`#178600`,`#f34b7d`,`#663399`,`#e34c26`],of=[{name:`ezSpec-CSharp`,host:`GitLab`,hostIcon:wc,href:`https://gitlab.com/CalvinWan0101/ezspec-csharp`,description:`以 C# 實作的 BDD（行為驅動開發）測試框架，靈感來源於 Gherkin 語法。支援以接近自然語言的方式撰寫測試規格，讓業務邏輯與測試行為的描述更貼近真實需求。`,tags:[`C#`,`.NET`,`BDD`,`Testing`],source:{platform:`GitLab`,projectPath:`CalvinWan0101/ezspec-csharp`}},{name:`Soul Knight`,host:`GitHub`,hostIcon:Tc,href:`https://github.com/calvinwan0101/soul-knight`,description:`以 C++ 復刻的 Soul Knight 地下城射擊遊戲。實作角色移動、敵人 AI、武器系統與地圖生成等核心機制，探索物件導向設計在遊戲開發中的應用。`,tags:[`C++`,`Game Dev`,`OOP`],source:{platform:`GitHub`,owner:`calvinwan0101`,repo:`soul-knight`},imageUrl:`https://raw.githubusercontent.com/calvinwan0101/soul-knight/refs/heads/main/soul_knight_cover.png`,imageAlt:`Soul Knight 封面`},{name:`Taiwan Examination Assignment`,host:`GitHub`,hostIcon:Tc,href:`https://github.com/calvinwan0101/taiwan-examination-assignment`,description:`模擬台灣大學入學考試個人申請統一分發流程的演算法實作。以程式化方式處理志願序比對、分發優先級與錄取結果，重現真實分發機制的核心邏輯。`,tags:[`演算法`,`模擬`,`資料結構`],source:{platform:`GitHub`,owner:`calvinwan0101`,repo:`taiwan-examination-assignment`},imageUrl:`https://raw.githubusercontent.com/calvinwan0101/taiwan-examination-assignment/refs/heads/main/cover.png`,imageAlt:`Taiwan Examination Assignment 封面`}],sf=e=>{let t=Object.values(e).reduce((e,t)=>e+t,0);return t===0?[]:Object.entries(e).map(([e,n])=>({name:e,percentage:n/t*100})).sort((e,t)=>t.percentage-e.percentage)},cf=e=>{let t=Object.values(e).reduce((e,t)=>e+t,0);return t===0?[]:Object.entries(e).map(([e,n])=>({name:e,percentage:n/t*100})).sort((e,t)=>t.percentage-e.percentage)},lf=async e=>{if(e.platform===`GitHub`){let t=await fetch(`https://api.github.com/repos/${e.owner}/${e.repo}/languages`,{headers:{Accept:`application/vnd.github+json`}});if(!t.ok)throw Error(`GitHub languages request failed with ${t.status}`);return sf(await t.json())}let t=await fetch(`https://gitlab.com/api/v4/projects/${encodeURIComponent(e.projectPath)}/languages`);if(!t.ok)throw Error(`GitLab languages request failed with ${t.status}`);return cf(await t.json())},uf=e=>af[Array.from(e).reduce((e,t)=>e+t.charCodeAt(0),0)%af.length],df=e=>rf[e]??uf(e),ff=e=>`${e.toFixed(1)}%`,pf=()=>{let e=(0,Yi.c)(7),[t,n]=(0,x.useState)(Xf),r,i;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(r=()=>{let e=!1;return(async()=>{let t=await Promise.all(of.map(Zf));e||n(Object.fromEntries(t))})(),()=>{e=!0}},i=[],e[0]=r,e[1]=i):(r=e[0],i=e[1]),(0,x.useEffect)(r,i);let a;e[2]===Symbol.for(`react.memo_cache_sentinel`)?(a=(0,W.jsxs)(gf,{children:[(0,W.jsxs)(_f,{children:[(0,W.jsx)(gc,{}),`開源專案`]}),(0,W.jsx)(vf,{children:`我的專案`}),(0,W.jsx)(yf,{children:`業餘時間累積的開發作品，涵蓋測試框架、遊戲開發與演算法實作。`})]}),e[2]=a):a=e[2];let o;e[3]===t?o=e[4]:(o=of.map(e=>{let n=e.hostIcon,r=t[e.name];return(0,W.jsxs)(xf,{href:e.href,target:`_blank`,rel:`noreferrer`,"aria-label":`前往 ${e.name}`,children:[(0,W.jsxs)(Sf,{children:[e.imageUrl?(0,W.jsx)(Cf,{src:e.imageUrl,alt:e.imageAlt??e.name}):(0,W.jsxs)(wf,{children:[(0,W.jsx)(Tf,{children:(0,W.jsx)(xc,{})}),(0,W.jsxs)(Ef,{children:[(0,W.jsx)(Ec,{}),e.name]})]}),(0,W.jsx)(Df,{children:(0,W.jsx)(Nc,{})})]}),(0,W.jsxs)(Of,{children:[(0,W.jsxs)(kf,{children:[(0,W.jsx)(Af,{children:e.name}),(0,W.jsxs)(jf,{children:[(0,W.jsx)(n,{}),e.host]})]}),(0,W.jsx)(Mf,{children:e.description}),(0,W.jsxs)(Nf,{children:[(0,W.jsx)(Pf,{children:e.tags.map(Qf)}),(0,W.jsxs)(If,{children:[(0,W.jsx)(Dc,{}),`檢視原始碼`]})]}),(0,W.jsxs)(Lf,{children:[(0,W.jsxs)(Rf,{children:[(0,W.jsx)(zf,{children:`語言組成`}),(0,W.jsxs)(Bf,{children:[r?.status===`loading`?`載入中`:null,r?.status===`error`?`暫時無法取得統計`:null]})]}),(0,W.jsx)(Vf,{"aria-hidden":`true`,children:r?.status===`success`&&r.languages.length>0?r.languages.map($f):(0,W.jsx)(Uf,{})}),r?.status===`success`&&r.languages.length>0?(0,W.jsx)(Wf,{children:r.languages.map(ep)}):null]})]})]},e.name)}),e[3]=t,e[4]=o);let s;return e[5]===o?s=e[6]:(s=(0,W.jsxs)(hf,{children:[a,(0,W.jsx)(bf,{children:o})]}),e[5]=o,e[6]=s),s},mf=Zs`
+`;function $d(e){return(0,W.jsxs)(Od,{children:[(0,W.jsx)(kd,{children:e.label}),(0,W.jsxs)(Ad,{children:[e.value,(0,W.jsxs)(jd,{$active:e.active,children:[e.active?(0,W.jsx)(Mc,{}):null,e.unit]})]})]},e.label)}function ef(e){return(0,W.jsxs)(x.Fragment,{children:[(0,W.jsx)(`line`,{x1:Lu,y1:e.y,x2:Ru,y2:e.y,stroke:e.strong?`rgba(140,46,46,0.2)`:`rgba(140,46,46,0.1)`,strokeWidth:e.strong?`1.5`:`1`}),(0,W.jsx)(`text`,{x:`48`,y:e.y+4,fontSize:`9`,fontFamily:`inherit`,textAnchor:`end`,fill:`rgba(62,50,44,0.5)`,children:e.label})]},e.label)}function tf(e){return(0,W.jsx)(`circle`,{cx:e.x,cy:e.y,r:`3.5`,fill:`#8c2e2e`,children:(0,W.jsx)(`title`,{children:`${e.date}\n購入股數 ${e.sharesLabel}\n單價 ${e.priceLabel}`})},`${e.date}-${e.x}`)}function nf(e){return(0,W.jsx)(`line`,{x1:e,y1:Bu,x2:e,y2:Bu+8,stroke:`rgba(140,46,46,0.3)`,strokeWidth:`1`,strokeDasharray:`3,2`},e)}function rf(e){return(0,W.jsx)(`text`,{x:e.x,y:`168`,fontSize:`8`,fontFamily:`inherit`,textAnchor:`middle`,fill:`rgba(140,46,46,0.6)`,fontWeight:`700`,letterSpacing:`1`,children:e.label},e.label)}function af(e){return(0,W.jsxs)(Xd,{children:[(0,W.jsx)(Jd,{children:e.date}),(0,W.jsx)(Yd,{children:e.shares}),(0,W.jsx)(qd,{children:e.price})]},e.date)}function of(e){return(0,W.jsxs)(x.Fragment,{children:[(0,W.jsx)(Zd,{children:(0,W.jsx)(Qd,{colSpan:3,children:e.month})}),e.entries.map(af)]},e.month)}var sf={"C#":`#178600`,"C++":`#f34b7d`,CSS:`#663399`,Go:`#00add8`,HTML:`#e34c26`,Java:`#b07219`,JavaScript:`#f1e05a`,Kotlin:`#a97bff`,PHP:`#4f5d95`,Python:`#3572a5`,Rust:`#dea584`,SCSS:`#c6538c`,Shell:`#89e051`,Swift:`#f05138`,TypeScript:`#3178c6`},cf=[`#b07219`,`#3178c6`,`#178600`,`#f34b7d`,`#663399`,`#e34c26`],lf=[{name:`ezSpec-CSharp`,host:`GitLab`,hostIcon:wc,href:`https://gitlab.com/CalvinWan0101/ezspec-csharp`,description:`以 C# 實作的 BDD（行為驅動開發）測試框架，靈感來源於 Gherkin 語法。支援以接近自然語言的方式撰寫測試規格，讓業務邏輯與測試行為的描述更貼近真實需求。`,tags:[`C#`,`.NET`,`BDD`,`Testing`],source:{platform:`GitLab`,projectPath:`CalvinWan0101/ezspec-csharp`}},{name:`Soul Knight`,host:`GitHub`,hostIcon:Tc,href:`https://github.com/calvinwan0101/soul-knight`,description:`以 C++ 復刻的 Soul Knight 地下城射擊遊戲。實作角色移動、敵人 AI、武器系統與地圖生成等核心機制，探索物件導向設計在遊戲開發中的應用。`,tags:[`C++`,`Game Dev`,`OOP`],source:{platform:`GitHub`,owner:`calvinwan0101`,repo:`soul-knight`},imageUrl:`https://raw.githubusercontent.com/calvinwan0101/soul-knight/refs/heads/main/soul_knight_cover.png`,imageAlt:`Soul Knight 封面`},{name:`Taiwan Examination Assignment`,host:`GitHub`,hostIcon:Tc,href:`https://github.com/calvinwan0101/taiwan-examination-assignment`,description:`模擬台灣大學入學考試個人申請統一分發流程的演算法實作。以程式化方式處理志願序比對、分發優先級與錄取結果，重現真實分發機制的核心邏輯。`,tags:[`演算法`,`模擬`,`資料結構`],source:{platform:`GitHub`,owner:`calvinwan0101`,repo:`taiwan-examination-assignment`},imageUrl:`https://raw.githubusercontent.com/calvinwan0101/taiwan-examination-assignment/refs/heads/main/cover.png`,imageAlt:`Taiwan Examination Assignment 封面`}],uf=e=>{let t=Object.values(e).reduce((e,t)=>e+t,0);return t===0?[]:Object.entries(e).map(([e,n])=>({name:e,percentage:n/t*100})).sort((e,t)=>t.percentage-e.percentage)},df=e=>{let t=Object.values(e).reduce((e,t)=>e+t,0);return t===0?[]:Object.entries(e).map(([e,n])=>({name:e,percentage:n/t*100})).sort((e,t)=>t.percentage-e.percentage)},ff=async e=>{if(e.platform===`GitHub`){let t=await fetch(`https://api.github.com/repos/${e.owner}/${e.repo}/languages`,{headers:{Accept:`application/vnd.github+json`}});if(!t.ok)throw Error(`GitHub languages request failed with ${t.status}`);return uf(await t.json())}let t=await fetch(`https://gitlab.com/api/v4/projects/${encodeURIComponent(e.projectPath)}/languages`);if(!t.ok)throw Error(`GitLab languages request failed with ${t.status}`);return df(await t.json())},pf=e=>cf[Array.from(e).reduce((e,t)=>e+t.charCodeAt(0),0)%cf.length],mf=e=>sf[e]??pf(e),hf=e=>`${e.toFixed(1)}%`,gf=()=>{let e=(0,Yi.c)(7),[t,n]=(0,x.useState)($f),r,i;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(r=()=>{let e=!1;return(async()=>{let t=await Promise.all(lf.map(ep));e||n(Object.fromEntries(t))})(),()=>{e=!0}},i=[],e[0]=r,e[1]=i):(r=e[0],i=e[1]),(0,x.useEffect)(r,i);let a;e[2]===Symbol.for(`react.memo_cache_sentinel`)?(a=(0,W.jsxs)(yf,{children:[(0,W.jsxs)(bf,{children:[(0,W.jsx)(gc,{}),`開源專案`]}),(0,W.jsx)(xf,{children:`我的專案`}),(0,W.jsx)(Sf,{children:`業餘時間累積的開發作品，涵蓋測試框架、遊戲開發與演算法實作。`})]}),e[2]=a):a=e[2];let o;e[3]===t?o=e[4]:(o=lf.map(e=>{let n=e.hostIcon,r=t[e.name];return(0,W.jsxs)(wf,{href:e.href,target:`_blank`,rel:`noreferrer`,"aria-label":`前往 ${e.name}`,children:[(0,W.jsxs)(Tf,{children:[e.imageUrl?(0,W.jsx)(Ef,{src:e.imageUrl,alt:e.imageAlt??e.name}):(0,W.jsxs)(Df,{children:[(0,W.jsx)(Of,{children:(0,W.jsx)(xc,{})}),(0,W.jsxs)(kf,{children:[(0,W.jsx)(Ec,{}),e.name]})]}),(0,W.jsx)(Af,{children:(0,W.jsx)(Nc,{})})]}),(0,W.jsxs)(jf,{children:[(0,W.jsxs)(Mf,{children:[(0,W.jsx)(Nf,{children:e.name}),(0,W.jsxs)(Pf,{children:[(0,W.jsx)(n,{}),e.host]})]}),(0,W.jsx)(Ff,{children:e.description}),(0,W.jsxs)(If,{children:[(0,W.jsx)(Lf,{children:e.tags.map(tp)}),(0,W.jsxs)(zf,{children:[(0,W.jsx)(Dc,{}),`檢視原始碼`]})]}),(0,W.jsxs)(Bf,{children:[(0,W.jsxs)(Vf,{children:[(0,W.jsx)(Hf,{children:`語言組成`}),(0,W.jsxs)(Uf,{children:[r?.status===`loading`?`載入中`:null,r?.status===`error`?`暫時無法取得統計`:null]})]}),(0,W.jsx)(Wf,{"aria-hidden":`true`,children:r?.status===`success`&&r.languages.length>0?r.languages.map(np):(0,W.jsx)(Kf,{})}),r?.status===`success`&&r.languages.length>0?(0,W.jsx)(qf,{children:r.languages.map(rp)}):null]})]})]},e.name)}),e[3]=t,e[4]=o);let s;return e[5]===o?s=e[6]:(s=(0,W.jsxs)(vf,{children:[a,(0,W.jsx)(Cf,{children:o})]}),e[5]=o,e[6]=s),s},_f=Zs`
   from {
     opacity: 0;
     transform: translateY(24px);
@@ -982,7 +1068,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     opacity: 1;
     transform: translateY(0);
   }
-`,hf=H.main`
+`,vf=H.main`
   width: min(64rem, calc(100% - 3rem));
   margin: 0 auto;
   padding: 2rem 0 5rem;
@@ -993,13 +1079,13 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   @media (max-width: 720px) {
     width: min(64rem, calc(100% - 2rem));
   }
-`,gf=H.section`
+`,yf=H.section`
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 1rem 0 0.5rem;
-  animation: ${mf} 0.7s ease both;
-`,_f=H.div`
+  animation: ${_f} 0.7s ease both;
+`,bf=H.div`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -1016,23 +1102,23 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   svg {
     font-size: 0.95rem;
   }
-`,vf=H.h1`
+`,xf=H.h1`
   margin: 0;
   font-size: clamp(2.2rem, 5vw, 3.4rem);
   font-weight: 900;
   letter-spacing: 0.08em;
   color: var(--accent);
-`,yf=H.p`
+`,Sf=H.p`
   margin: 0;
   max-width: 36rem;
   color: var(--text-muted);
   font-size: 0.98rem;
   line-height: 1.9;
-`,bf=H.section`
+`,Cf=H.section`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-`,xf=H.a`
+`,wf=H.a`
   position: relative;
   display: flex;
   overflow: hidden;
@@ -1044,7 +1130,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     transform 0.25s ease,
     border-color 0.25s ease,
     box-shadow 0.25s ease;
-  animation: ${mf} 0.7s ease both;
+  animation: ${_f} 0.7s ease both;
 
   &::before {
     content: '';
@@ -1072,7 +1158,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   @media (max-width: 720px) {
     flex-direction: column;
   }
-`,Sf=H.div`
+`,Tf=H.div`
   position: relative;
   flex-shrink: 0;
   width: 280px;
@@ -1088,7 +1174,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     border-right: 0;
     border-bottom: 1px solid var(--border-soft);
   }
-`,Cf=H.img`
+`,Ef=H.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1097,11 +1183,11 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     transform 0.3s ease,
     opacity 0.3s ease;
 
-  ${xf}:hover & {
+  ${wf}:hover & {
     opacity: 1;
     transform: scale(1.03);
   }
-`,wf=H.div`
+`,Df=H.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1110,10 +1196,10 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   width: 100%;
   height: 100%;
   padding: 2rem;
-`,Tf=H.div`
+`,Of=H.div`
   color: rgba(140, 46, 46, 0.45);
   font-size: 2rem;
-`,Ef=H.div`
+`,kf=H.div`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -1122,7 +1208,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-`,Df=H.div`
+`,Af=H.div`
   position: absolute;
   right: 1rem;
   bottom: 1rem;
@@ -1141,28 +1227,28 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     opacity 0.2s ease,
     transform 0.2s ease;
 
-  ${xf}:hover & {
+  ${wf}:hover & {
     opacity: 1;
     transform: translateX(0);
   }
-`,Of=H.div`
+`,jf=H.div`
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 1.75rem;
-`,kf=H.div`
+`,Mf=H.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
-`,Af=H.h2`
+`,Nf=H.h2`
   margin: 0;
   font-size: 1.2rem;
   font-weight: 900;
   letter-spacing: 0.03em;
-`,jf=H.span`
+`,Pf=H.span`
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
@@ -1178,12 +1264,12 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   svg {
     font-size: 0.85rem;
   }
-`,Mf=H.p`
+`,Ff=H.p`
   margin: 0;
   color: var(--text-muted);
   font-size: 0.92rem;
   line-height: 1.85;
-`,Nf=H.div`
+`,If=H.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -1194,11 +1280,11 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     flex-direction: column;
     align-items: flex-start;
   }
-`,Pf=H.div`
+`,Lf=H.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-`,Ff=H.span`
+`,Rf=H.span`
   padding: 0.24rem 0.65rem;
   border: 1px solid var(--border-soft);
   border-radius: 2px;
@@ -1206,7 +1292,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-`,If=H.span`
+`,zf=H.span`
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -1215,12 +1301,12 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-weight: 700;
   letter-spacing: 0.08em;
   white-space: nowrap;
-`,Lf=H.div`
+`,Bf=H.div`
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
   margin-top: 0.35rem;
-`,Rf=H.div`
+`,Vf=H.div`
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -1231,18 +1317,18 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     align-items: flex-start;
     gap: 0.2rem;
   }
-`,zf=H.span`
+`,Hf=H.span`
   color: rgba(62, 50, 44, 0.6);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-`,Bf=H.span`
+`,Uf=H.span`
   color: rgba(62, 50, 44, 0.62);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-`,Vf=H.div`
+`,Wf=H.div`
   overflow: hidden;
   display: flex;
   width: 100%;
@@ -1250,7 +1336,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   border: 1px solid rgba(62, 50, 44, 0.1);
   border-radius: 999px;
   background: rgba(62, 50, 44, 0.06);
-`,Hf=H.span`
+`,Gf=H.span`
   display: block;
   height: 100%;
   width: ${({$width:e})=>`${e}%`};
@@ -1259,7 +1345,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   &:first-child {
     box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.14);
   }
-`,Uf=H.span`
+`,Kf=H.span`
   width: 100%;
   height: 100%;
   background: linear-gradient(
@@ -1269,31 +1355,31 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     rgba(62, 50, 44, 0.08) 100%
   );
   background-size: 200% 100%;
-  animation: ${mf} 1.2s ease infinite alternate;
-`,Wf=H.div`
+  animation: ${_f} 1.2s ease infinite alternate;
+`,qf=H.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem 1rem;
   margin-top: 0.15rem;
-`,Gf=H.span`
+`,Jf=H.span`
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   color: rgba(62, 50, 44, 0.72);
   font-size: 0.78rem;
   font-weight: 700;
-`,Kf=H.span`
+`,Yf=H.span`
   display: inline-block;
   width: 0.65rem;
   height: 0.65rem;
   border-radius: 999px;
   background: ${({$color:e})=>e};
-`,qf=H.span`
+`,Xf=H.span`
   color: rgba(62, 50, 44, 0.88);
-`,Jf=H.span`
+`,Zf=H.span`
   color: rgba(62, 50, 44, 0.58);
   font-weight: 600;
-`;function Yf(e){return[e.name,{status:`loading`,languages:[]}]}function Xf(){return Object.fromEntries(of.map(Yf))}async function Zf(e){try{let t=await lf(e.source);return[e.name,{status:`success`,languages:t}]}catch{return[e.name,{status:`error`,languages:[]}]}}function Qf(e){return(0,W.jsx)(Ff,{children:e},e)}function $f(e){return(0,W.jsx)(Hf,{$color:df(e.name),$width:e.percentage},e.name)}function ep(e){return(0,W.jsxs)(Gf,{children:[(0,W.jsx)(Kf,{$color:df(e.name)}),(0,W.jsx)(qf,{children:e.name}),(0,W.jsx)(Jf,{children:ff(e.percentage)})]},e.name)}var tp=()=>{let e=(0,Yi.c)(6),t;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,W.jsx)(ip,{"aria-hidden":`true`}),e[0]=t):t=e[0];let n,r;e[1]===Symbol.for(`react.memo_cache_sentinel`)?(n=(0,W.jsx)(sp,{children:(0,W.jsx)(cp,{children:`404`})}),r=(0,W.jsx)(lp,{}),e[1]=n,e[2]=r):(n=e[1],r=e[2]);let i;e[3]===Symbol.for(`react.memo_cache_sentinel`)?(i=(0,W.jsx)(dp,{children:`此頁面不存在`}),e[3]=i):i=e[3];let a;e[4]===Symbol.for(`react.memo_cache_sentinel`)?(a=(0,W.jsxs)(up,{children:[i,(0,W.jsxs)(fp,{children:[`你所尋找的頁面可能已移除、更名，`,(0,W.jsx)(`br`,{}),`或從未存在於此。`]})]}),e[4]=a):a=e[4];let o;return e[5]===Symbol.for(`react.memo_cache_sentinel`)?(o=(0,W.jsxs)(rp,{children:[t,(0,W.jsx)(ap,{children:(0,W.jsxs)(op,{children:[n,r,a,(0,W.jsx)(pp,{children:(0,W.jsxs)(mp,{to:`/`,children:[(0,W.jsx)(Pc,{}),`返回主頁`]})})]})})]}),e[5]=o):o=e[5],o},np=Zs`
+`;function Qf(e){return[e.name,{status:`loading`,languages:[]}]}function $f(){return Object.fromEntries(lf.map(Qf))}async function ep(e){try{let t=await ff(e.source);return[e.name,{status:`success`,languages:t}]}catch{return[e.name,{status:`error`,languages:[]}]}}function tp(e){return(0,W.jsx)(Rf,{children:e},e)}function np(e){return(0,W.jsx)(Gf,{$color:mf(e.name),$width:e.percentage},e.name)}function rp(e){return(0,W.jsxs)(Jf,{children:[(0,W.jsx)(Yf,{$color:mf(e.name)}),(0,W.jsx)(Xf,{children:e.name}),(0,W.jsx)(Zf,{children:hf(e.percentage)})]},e.name)}var ip=()=>{let e=(0,Yi.c)(6),t;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,W.jsx)(sp,{"aria-hidden":`true`}),e[0]=t):t=e[0];let n,r;e[1]===Symbol.for(`react.memo_cache_sentinel`)?(n=(0,W.jsx)(up,{children:(0,W.jsx)(dp,{children:`404`})}),r=(0,W.jsx)(fp,{}),e[1]=n,e[2]=r):(n=e[1],r=e[2]);let i;e[3]===Symbol.for(`react.memo_cache_sentinel`)?(i=(0,W.jsx)(mp,{children:`此頁面不存在`}),e[3]=i):i=e[3];let a;e[4]===Symbol.for(`react.memo_cache_sentinel`)?(a=(0,W.jsxs)(pp,{children:[i,(0,W.jsxs)(hp,{children:[`你所尋找的頁面可能已移除、更名，`,(0,W.jsx)(`br`,{}),`或從未存在於此。`]})]}),e[4]=a):a=e[4];let o;return e[5]===Symbol.for(`react.memo_cache_sentinel`)?(o=(0,W.jsxs)(op,{children:[t,(0,W.jsx)(cp,{children:(0,W.jsxs)(lp,{children:[n,r,a,(0,W.jsx)(gp,{children:(0,W.jsxs)(_p,{to:`/`,children:[(0,W.jsx)(Pc,{}),`返回主頁`]})})]})})]}),e[5]=o):o=e[5],o},ap=Zs`
   from {
     opacity: 0;
     transform: translateY(24px);
@@ -1303,10 +1389,10 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     opacity: 1;
     transform: translateY(0);
   }
-`,rp=H.div`
+`,op=H.div`
   position: relative;
   isolation: isolate;
-`,ip=H.div`
+`,sp=H.div`
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -1317,7 +1403,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     linear-gradient(to bottom, rgba(140, 46, 46, 0.22) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(circle at center, black 38%, transparent 100%);
-`,ap=H.main`
+`,cp=H.main`
   position: relative;
   z-index: 1;
   min-height: calc(100vh - 12rem);
@@ -1329,7 +1415,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     min-height: calc(100vh - 10rem);
     padding-inline: 1rem;
   }
-`,op=H.section`
+`,lp=H.section`
   width: min(100%, 42rem);
   display: flex;
   flex-direction: column;
@@ -1337,49 +1423,49 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   gap: 2rem;
   padding: 3rem clamp(1.5rem, 3vw, 2.75rem);
   text-align: center;
-  animation: ${np} 0.6s ease both;
+  animation: ${ap} 0.6s ease both;
 
   @media (max-width: 720px) {
     gap: 1.5rem;
     padding-block: 2.5rem;
   }
-`,sp=H.div`
+`,up=H.div`
   position: relative;
   line-height: 1;
   user-select: none;
-`,cp=H.span`
+`,dp=H.span`
   display: block;
   font-size: clamp(7rem, 22vw, 12rem);
   font-weight: 900;
   letter-spacing: 0.05em;
   color: transparent;
   -webkit-text-stroke: 2px var(--accent);
-`,lp=H.div`
+`,fp=H.div`
   width: 3rem;
   height: 2px;
   background: var(--accent);
   opacity: 0.4;
-`,up=H.div`
+`,pp=H.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.9rem;
-`,dp=H.h1`
+`,mp=H.h1`
   margin: 0;
   font-size: clamp(1.5rem, 2vw, 2rem);
   font-weight: 900;
   letter-spacing: 0.1em;
-`,fp=H.p`
+`,hp=H.p`
   margin: 0;
   font-size: 0.95rem;
   line-height: 1.9;
   color: var(--text-muted);
-`,pp=H.div`
+`,gp=H.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.9rem;
-`,mp=H(Ai)`
+`,_p=H(Ai)`
   ${`
   display: inline-flex;
   align-items: center;
@@ -1408,4 +1494,4 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     background: #702424;
     border-color: #702424;
   }
-`,hp=Ti(Br((0,W.jsxs)(Lr,{path:`/`,element:(0,W.jsx)(cl,{}),children:[(0,W.jsx)(Lr,{index:!0,element:(0,W.jsx)(X,{})}),(0,W.jsx)(Lr,{path:`contact`,element:(0,W.jsx)(pl,{})}),(0,W.jsx)(Lr,{path:`projects`,element:(0,W.jsx)(pf,{})}),(0,W.jsx)(Lr,{path:`portfolio`,element:(0,W.jsx)(gd,{})}),(0,W.jsx)(Lr,{path:`*`,element:(0,W.jsx)(tp,{})})]})));(0,Xi.createRoot)(document.getElementById(`root`)).render((0,W.jsx)(x.StrictMode,{children:(0,W.jsx)(qi,{router:hp})}));
+`,vp=Ti(Br((0,W.jsxs)(Lr,{path:`/`,element:(0,W.jsx)(dl,{}),children:[(0,W.jsx)(Lr,{index:!0,element:(0,W.jsx)(Vl,{})}),(0,W.jsx)(Lr,{path:`contact`,element:(0,W.jsx)(gl,{})}),(0,W.jsx)(Lr,{path:`projects`,element:(0,W.jsx)(gf,{})}),(0,W.jsx)(Lr,{path:`portfolio`,element:(0,W.jsx)(yd,{})}),(0,W.jsx)(Lr,{path:`*`,element:(0,W.jsx)(ip,{})})]})));(0,Xi.createRoot)(document.getElementById(`root`)).render((0,W.jsx)(x.StrictMode,{children:(0,W.jsx)(qi,{router:vp})}));

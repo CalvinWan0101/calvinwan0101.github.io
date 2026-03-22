@@ -1,12 +1,10 @@
 {
   "files.exclude": {
     "**/node_modules": true,
-    "**/dist": true,
-    "**/public": true
+    "**/dist": true
   },
   "search.exclude": {
     "**/node_modules": true,
-    "**/dist": true,
-    "**/public": true
+    "**/dist": true
   }
 }

@@ -5,6 +5,23 @@
     <link rel="icon" type="image/svg+xml" href="./src/assets/calvin.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calvin Space</title>
+    <script>
+      (function () {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+        var search = location.search.slice(1);
+        if (search.indexOf('p=/') === 0) {
+          var params = search.split('&');
+          var path = params[0].slice(2).replace(/~and~/g, '&');
+          var query = params[1] ? '?' + params[1].slice(2).replace(/~and~/g, '&') : '';
+          var hash = location.hash;
+          history.replaceState(null, null, path + query + hash);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

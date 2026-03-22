@@ -9,6 +9,8 @@ const navigation = [
   { href: '/contact', label: '聯繫' },
 ]
 
+const logo = new URL('../../../assets/logo.PNG', import.meta.url).href
+
 export const Navbar = () => {
   const location = useLocation()
 
@@ -21,6 +23,11 @@ const NavbarContent = () => {
   return (
     <Header>
       <NavInner>
+        <BrandLink to="/" aria-label="返回首頁" onClick={() => setIsMenuOpen(false)}>
+          <BrandLogoFrame>
+            <BrandLogo src={logo} alt="Calvin Wan logo" />
+          </BrandLogoFrame>
+        </BrandLink>
         <MenuButton
           type="button"
           aria-label={isMenuOpen ? '關閉導覽選單' : '開啟導覽選單'}
@@ -73,12 +80,61 @@ const NavInner = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 
   @media (max-width: 720px) {
     width: min(64rem, calc(100% - 2rem));
-    justify-content: flex-end;
+    justify-content: space-between;
   }
+`
+
+const BrandLink = styled(RouterNavLink)`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 3.25rem;
+  height: 3.25rem;
+  padding: 0.16rem;
+  border: 2px solid rgba(110, 94, 78, 0.32);
+  border-radius: 50%;
+  box-shadow: 0 16px 36px rgba(62, 50, 44, 0.1);
+  overflow: hidden;
+  background: rgba(23, 30, 28, 0.06);
+  transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    opacity: 0.96;
+    transform: translateY(-1px);
+    box-shadow: 0 18px 40px rgba(62, 50, 44, 0.14);
+  }
+
+  @media (max-width: 720px) {
+    width: 2.9rem;
+    height: 2.9rem;
+    padding: 0.14rem;
+  }
+`
+
+const BrandLogoFrame = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0.28rem;
+  border-radius: 50%;
+
+  @media (max-width: 720px) {
+    padding: 0.24rem;
+  }
+`
+
+const BrandLogo = styled.img`
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `
 
 const MenuButton = styled.button`
@@ -96,8 +152,17 @@ const MenuButton = styled.button`
     width: 2.75rem;
     height: 2.75rem;
     margin-left: auto;
-    border-radius: 999px;
+    border: 2px solid rgba(110, 94, 78, 0.32);
+    border-radius: 50%;
     background: rgba(23, 30, 28, 0.06);
+    box-shadow: 0 16px 36px rgba(62, 50, 44, 0.1);
+    transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      opacity: 0.96;
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(62, 50, 44, 0.14);
+    }
   }
 `
 

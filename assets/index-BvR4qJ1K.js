@@ -46,7 +46,9 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
 `;function Yc(e){return!e}var Xc=[{href:`https://github.com/CalvinWan0101`,label:`GitHub`,icon:Ac},{href:`https://linkedin.com/in/calvinwan0101`,label:`LinkedIn`,icon:Tc}],Zc=()=>{let e=(0,Zi.c)(2),t;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,G.jsx)(el,{children:`© 2026 萬祥瑞。保留所有權利。`}),e[0]=t):t=e[0];let n;return e[1]===Symbol.for(`react.memo_cache_sentinel`)?(n=(0,G.jsx)(Qc,{children:(0,G.jsxs)($c,{children:[t,(0,G.jsx)(tl,{children:Xc.map(rl)})]})}),e[1]=n):n=e[1],n},Qc=U.footer`
   margin-top: auto;
   padding: 2rem 0;
-  border-top: 4px solid var(--accent);
+  border-top: 2px solid var(--accent);
+  background: rgba(244, 241, 225, 0.9);
+  backdrop-filter: blur(12px);
 `,$c=U.div`
   width: min(64rem, calc(100% - 3rem));
   margin: 0 auto;
@@ -71,11 +73,12 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
 `,tl=U.div`
   display: flex;
   gap: 1rem;
+  opacity: 0.7;
 `,nl=U.a`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--text);
+  color: inherit;
   font-size: 1.25rem;
   transition:
     color 0.2s ease,

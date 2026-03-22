@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom'
+import { BackgroundAudio } from './audio'
 import { Footer } from './footer'
 import { Navbar } from './navbar'
 
@@ -8,6 +9,7 @@ export const Layout = () => {
       <Navbar />
       <Outlet />
       <Footer />
+      <BackgroundAudio />
     </>
   )
 }

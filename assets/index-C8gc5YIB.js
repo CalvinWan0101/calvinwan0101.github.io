@@ -48,6 +48,8 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   right: 0;
   bottom: calc(100% + 0.5rem);
   margin: 0;
+  width: max-content;
+  max-width: min(28rem, calc(100vw - 2rem));
   border: 1px solid var(--border-soft);
   padding: 0.7rem 0.85rem;
   background: rgba(253, 252, 248, 0.96);
@@ -56,6 +58,8 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-size: 0.8rem;
   line-height: 1.5;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   opacity: ${({$isVisible:e})=>e?1:0};
   transform: translateY(${({$isVisible:e})=>e?`0`:`0.35rem`});
   visibility: ${({$isVisible:e})=>e?`visible`:`hidden`};
@@ -66,8 +70,9 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   pointer-events: none;
 
   @media (max-width: 720px) {
-    max-width: min(18rem, calc(100vw - 2rem));
-    white-space: normal;
+    max-width: calc(100vw - 2rem);
+    font-size: 0.75rem;
+    line-height: 1.35;
   }
 `;function Uc(e){return!e}var Wc=[{href:`https://github.com/CalvinWan0101`,label:`GitHub`,icon:Tc},{href:`https://linkedin.com/in/calvinwan0101`,label:`LinkedIn`,icon:bc}],Gc=()=>{let e=(0,Yi.c)(2),t;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,W.jsx)(Jc,{children:`© 2026 萬祥瑞。保留所有權利。`}),e[0]=t):t=e[0];let n;return e[1]===Symbol.for(`react.memo_cache_sentinel`)?(n=(0,W.jsx)(Kc,{children:(0,W.jsxs)(qc,{children:[t,(0,W.jsx)(Yc,{children:Wc.map(Zc)})]})}),e[1]=n):n=e[1],n},Kc=H.footer`
   margin-top: auto;

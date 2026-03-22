@@ -70,7 +70,7 @@ const experiences: TimelineEntry[] = [
   {
     company: '叡揚資訊 (Galaxy Software Services)',
     title: '程式設計師 (Full-time)',
-    period: 'Jun 2025 - 至今',
+    period: '2025/06 - 至今',
     items: [
       '使用 C#、.NET 與 ABP Framework 構建強健的後端服務。',
       '前端採用 React 與 TypeScript 進行開發。',
@@ -82,7 +82,7 @@ const experiences: TimelineEntry[] = [
   {
     company: '叡揚資訊 (Galaxy Software Services)',
     title: '助理程式設計師 (Internship)',
-    period: 'Jul 2024 - Jun 2025',
+    period: '2024/07 - 2025/06',
     items: ['協助開發企業級系統，熟悉現有程式與架構。', '參與前後端開發。'],
   },
 ]

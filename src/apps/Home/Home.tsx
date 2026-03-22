@@ -106,12 +106,12 @@ const education: TimelineEntry[] = [
     compact: true,
   },
   {
-    title: '中國廣州中山大學附屬外國語實驗中學',
+    title: '廣州中山大學附屬外國語實驗中學',
     period: '2014/09 - 2015/01',
     compact: true,
   },
   {
-    title: '中國廣州中山大學附屬黃埔實驗小學',
+    title: '廣州中山大學附屬黃埔實驗小學',
     period: '2008/09 - 2014/07',
     compact: true,
   },

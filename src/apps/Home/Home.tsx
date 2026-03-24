@@ -38,32 +38,32 @@ const profile = {
   birthYear: '生於 2003 年',
 }
 
-const tags = ['.NET', 'C#', 'React', 'DDD']
+const tags = ['C#', '.NET', 'DDD', 'React']
 
 const skills: Skill[] = [
   {
     corner: '壹',
     title: '後端開發',
     icon: FiServer,
-    items: ['C#', '.NET', 'ABP Framework'],
+    items: ['C#', 'ASP.NET Core', 'ABP Framework', 'Java / Spring Boot'],
   },
   {
     corner: '貳',
     title: '前端開發',
     icon: FiGlobe,
-    items: ['React', 'TypeScript', 'HTML / CSS'],
+    items: ['React', 'TypeScript', 'HTML / CSS / JavaScript'],
   },
   {
     corner: '參',
     title: '資料與雲端',
     icon: FiDatabase,
-    items: ['MySQL', 'Microsoft Azure'],
+    items: ['MySQL', 'Microsoft SQL Server', 'Microsoft Azure'],
   },
   {
     corner: '肆',
     title: '系統架構',
     icon: FiGrid,
-    items: ['Domain-Driven Design', 'Agile Development'],
+    items: ['Domain-Driven Design', 'Test-Driven Design', 'Agile Development'],
   },
 ]
 
@@ -85,6 +85,24 @@ const experiences: TimelineEntry[] = [
     title: '助理程式設計師 (Internship)',
     period: '2024/07 - 2025/06',
     items: ['協助開發企業級系統，熟悉現有程式與架構。', '參與前後端開發。'],
+  },
+  {
+    company: '國立臺北科技大學',
+    title: '物件導向程式設計課程助教',
+    period: '2024/02 - 2024/06',
+    items: [
+      '協助教授準備與批改作業及考試，支援課程教學運作。',
+      '回應學生在課程內容與作業實作上的問題，協助排除學習障礙。',
+    ],
+  },
+  {
+    company: '國立臺北科技大學 軟體工程實驗室',
+    title: 'ezKanban Team',
+    period: '2023/07 - 2024/06',
+    items: [
+      '與 ezKanban 團隊進行 mob programming，參與實際專案開發與協作。',
+      '在專案實作中學習並應用 Domain-Driven Design (DDD)、Test-Driven Design (TDD) 以及 Clean Architecture。',
+    ],
   },
 ]
 

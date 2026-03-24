@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import type { IconType } from 'react-icons'
 import { FiArrowRight, FiExternalLink, FiFolder, FiGithub, FiImage, FiMonitor } from 'react-icons/fi'
 import styled, { keyframes } from 'styled-components'
+import calvinSpaceCoverDesktop from '../../assets/Projects/calvin-space-11.jpg'
+import calvinSpaceCoverMobile from '../../assets/Projects/calvin-space-21.png'
 import ezspecCsharpCoverDesktop from '../../assets/Projects/ezspec-csharp-cover-11.png'
 import ezspecCsharpCoverMobile from '../../assets/Projects/ezspec-csharp-cover-21.png'
 import soulKnightCoverDesktop from '../../assets/Projects/soul-knight-11.png'
@@ -58,6 +60,22 @@ const LANGUAGE_COLORS: Record<string, string> = {
 const LANGUAGE_FALLBACK_COLORS = ['#b07219', '#3178c6', '#178600', '#f34b7d', '#663399', '#e34c26']
 
 const projects: ProjectItem[] = [
+  {
+    name: 'Calvin Space',
+    host: 'GitHub',
+    hostIcon: FiGithub,
+    href: 'https://github.com/CalvinWan0101/calvinwan0101.github.io',
+    description:
+      '以 React、TypeScript 與 Vite 打造的個人作品網站，整合自我介紹、精選專案、投資紀錄與聯絡方式，並以 styled-components 建立一致的視覺體驗。',
+    tags: ['React', 'TypeScript', 'Vite', 'styled-components'],
+    source: {
+      owner: 'CalvinWan0101',
+      repo: 'calvinwan0101.github.io',
+    },
+    desktopImageUrl: calvinSpaceCoverDesktop,
+    mobileImageUrl: calvinSpaceCoverMobile,
+    imageAlt: 'Calvin Space 封面',
+  },
   {
     name: 'ezSpec-CSharp',
     host: 'GitHub',

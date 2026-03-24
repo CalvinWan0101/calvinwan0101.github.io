@@ -30,6 +30,14 @@ type TimelineEntry = {
   compact?: boolean
 }
 
+type EducationEntry = {
+  company?: string
+  title: string
+  period: string
+  active?: boolean
+  compact?: boolean
+}
+
 const profile = {
   avatar,
   name: '萬祥瑞',
@@ -106,21 +114,20 @@ const experiences: TimelineEntry[] = [
   },
 ]
 
-const education: TimelineEntry[] = [
+const education: EducationEntry[] = [
   {
     company: '國立臺北科技大學',
     title: '電資學士班（主修資訊工程）',
     period: '2021/09 - 2025/07',
-    items: ['加入軟體系統實驗室，學習 DDD、TDD、BDD'],
     active: true,
   },
   {
-    title: '臺灣嘉義縣協同中學高中部',
+    title: '嘉義縣協同中學高中部',
     period: '2017/09 - 2020/07',
     compact: true,
   },
   {
-    title: '臺灣嘉義縣協同中學國中部',
+    title: '嘉義縣協同中學國中部',
     period: '2015/02 - 2017/07',
     compact: true,
   },
@@ -235,10 +242,10 @@ export const Home = () => {
               <TimelineDot $active={entry.active}>
                 <TimelineInner $active={entry.active} />
               </TimelineDot>
-              <TimelineCard $active={entry.active}>
+              <TimelineCard $active={entry.active} $hasItems={Boolean(entry.items?.length)}>
                 {entry.company ? <Company $active={entry.active}>{entry.company}</Company> : null}
                 <TimelineTitle>{entry.title}</TimelineTitle>
-                <Period>{entry.period}</Period>
+                <Period $hasItems={Boolean(entry.items?.length)}>{entry.period}</Period>
                 {entry.items ? (
                   <TimelineList>
                     {entry.items.map((item) => (
@@ -272,19 +279,13 @@ export const Home = () => {
               <TimelineDot $active={entry.active} $compact={entry.compact}>
                 <TimelineInner $active={entry.active} $compact={entry.compact} />
               </TimelineDot>
-              <TimelineCard $active={entry.active} $compact={entry.compact}>
+              <TimelineCard
+                $active={entry.active}
+                $compact={entry.compact}
+              >
                 {entry.company ? <Company $active={entry.active}>{entry.company}</Company> : null}
                 <TimelineTitle $compact={entry.compact}>{entry.title}</TimelineTitle>
                 <Period $compact={entry.compact}>{entry.period}</Period>
-                {entry.items ? (
-                  <TimelineList>
-                    {entry.items.map((item) => (
-                      <TimelineListItem key={item} $active={entry.active}>
-                        {item}
-                      </TimelineListItem>
-                    ))}
-                  </TimelineList>
-                ) : null}
               </TimelineCard>
             </TimelineItem>
           ))}
@@ -674,10 +675,13 @@ const TimelineInner = styled.div<{ $active?: boolean; $compact?: boolean }>`
   background: ${props => (props.$active ? 'var(--accent)' : 'var(--text-muted)')};
 `
 
-const TimelineCard = styled.div<{ $active?: boolean; $compact?: boolean }>`
+const TimelineCard = styled.div<{ $active?: boolean; $compact?: boolean; $hasItems?: boolean }>`
   width: ${props => (props.$compact ? 'calc(100% - 2.5rem)' : 'calc(100% - 3.5rem)')};
   margin-left: ${props => (props.$compact ? '2.5rem' : '3.5rem')};
-  padding: ${props => (props.$compact ? '0.55rem 1rem' : '1.5rem')};
+  padding: ${props => {
+    if (props.$compact) return '0.55rem 1rem'
+    return props.$hasItems ? '1.5rem' : '1.25rem 1.5rem'
+  }};
   display: flex;
   flex-direction: ${props => (props.$compact ? 'row' : 'column')};
   align-items: ${props => (props.$compact ? 'baseline' : 'flex-start')};
@@ -710,11 +714,20 @@ const TimelineTitle = styled.h3<{ $compact?: boolean }>`
   opacity: ${props => (props.$compact ? 0.7 : 1)};
 `
 
-const Period = styled.div<{ $compact?: boolean }>`
+const Period = styled.div<{ $compact?: boolean; $hasItems?: boolean }>`
   display: inline-block;
-  margin: ${props => (props.$compact ? '0' : '0.75rem 0 1rem')};
-  padding-bottom: ${props => (props.$compact ? '0' : '0.5rem')};
-  border-bottom: ${props => (props.$compact ? 'none' : '1px solid var(--border-soft)')};
+  margin: ${props => {
+    if (props.$compact) return '0'
+    return props.$hasItems ? '0.75rem 0 1rem' : '0.75rem 0 0'
+  }};
+  padding-bottom: ${props => {
+    if (props.$compact) return '0'
+    return props.$hasItems ? '0.5rem' : '0'
+  }};
+  border-bottom: ${props => {
+    if (props.$compact || !props.$hasItems) return 'none'
+    return '1px solid var(--border-soft)'
+  }};
   font-size: ${props => (props.$compact ? '0.75rem' : '0.875rem')};
   font-weight: 700;
   opacity: ${props => (props.$compact ? 0.45 : 0.8)};

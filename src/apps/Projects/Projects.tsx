@@ -66,7 +66,7 @@ const projects: ProjectItem[] = [
     hostIcon: FiGithub,
     href: 'https://github.com/CalvinWan0101/calvinwan0101.github.io',
     description:
-      '以 React、TypeScript 與 Vite 打造的個人作品網站，整合自我介紹、精選專案、投資紀錄與聯絡方式，並以 styled-components 建立一致的視覺體驗。',
+      '以 React、TypeScript 與 Vite 打造的個人作品網站，整合自我介紹、精選專案、投資紀錄與聯絡方式。',
     tags: ['React', 'TypeScript', 'Vite', 'styled-components'],
     source: {
       owner: 'CalvinWan0101',

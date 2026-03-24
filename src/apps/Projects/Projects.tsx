@@ -2,6 +2,12 @@ import { useEffect, useState } from 'react'
 import type { IconType } from 'react-icons'
 import { FiArrowRight, FiExternalLink, FiFolder, FiGithub, FiImage, FiMonitor } from 'react-icons/fi'
 import styled, { keyframes } from 'styled-components'
+import ezspecCsharpCoverDesktop from '../../assets/Projects/ezspec-csharp-cover-11.png'
+import ezspecCsharpCoverMobile from '../../assets/Projects/ezspec-csharp-cover-21.png'
+import soulKnightCoverDesktop from '../../assets/Projects/soul-knight-11.png'
+import soulKnightCoverMobile from '../../assets/Projects/soul-knight-21.png'
+import taiwanExaminationAssignmentCoverDesktop from '../../assets/Projects/taiwan-examination-assignment-11.png'
+import taiwanExaminationAssignmentCoverMobile from '../../assets/Projects/taiwan-examination-assignment-21.png'
 
 type ProjectSource = {
   owner: string
@@ -16,7 +22,8 @@ type ProjectItem = {
   description: string
   tags: string[]
   source: ProjectSource
-  imageUrl?: string
+  desktopImageUrl?: string
+  mobileImageUrl?: string
   imageAlt?: string
 }
 
@@ -63,7 +70,8 @@ const projects: ProjectItem[] = [
       owner: 'CalvinWan0101',
       repo: 'ezspec-csharp',
     },
-    imageUrl: 'https://raw.githubusercontent.com/CalvinWan0101/ezspec-csharp/master/cover.png',
+    desktopImageUrl: ezspecCsharpCoverDesktop,
+    mobileImageUrl: ezspecCsharpCoverMobile,
     imageAlt: 'ezSpec-CSharp 封面',
   },
   {
@@ -78,8 +86,8 @@ const projects: ProjectItem[] = [
       owner: 'calvinwan0101',
       repo: 'soul-knight',
     },
-    imageUrl:
-      'https://raw.githubusercontent.com/calvinwan0101/soul-knight/refs/heads/main/soul_knight_cover.png',
+    desktopImageUrl: soulKnightCoverDesktop,
+    mobileImageUrl: soulKnightCoverMobile,
     imageAlt: 'Soul Knight 封面',
   },
   {
@@ -94,8 +102,8 @@ const projects: ProjectItem[] = [
       owner: 'calvinwan0101',
       repo: 'taiwan-examination-assignment',
     },
-    imageUrl:
-      'https://raw.githubusercontent.com/calvinwan0101/taiwan-examination-assignment/refs/heads/main/cover.png',
+    desktopImageUrl: taiwanExaminationAssignmentCoverDesktop,
+    mobileImageUrl: taiwanExaminationAssignmentCoverMobile,
     imageAlt: 'Taiwan Examination Assignment 封面',
   },
 ]
@@ -219,8 +227,11 @@ export const Projects = () => {
               aria-label={`前往 ${project.name}`}
             >
               <ProjectMedia>
-                {project.imageUrl ? (
-                  <ProjectImage src={project.imageUrl} alt={project.imageAlt ?? project.name} />
+                {project.desktopImageUrl ? (
+                  <ProjectPicture>
+                    {project.mobileImageUrl ? <source media="(max-width: 720px)" srcSet={project.mobileImageUrl} /> : null}
+                    <ProjectImage src={project.desktopImageUrl} alt={project.imageAlt ?? project.name} />
+                  </ProjectPicture>
                 ) : (
                   <ProjectPlaceholder>
                     <PlaceholderIcon>
@@ -426,7 +437,7 @@ const ProjectMedia = styled.div`
   position: relative;
   flex-shrink: 0;
   width: 280px;
-  min-height: 220px;
+  aspect-ratio: 1 / 1;
   border-right: 1px solid var(--border-soft);
   background:
     radial-gradient(circle at top, rgba(140, 46, 46, 0.12), transparent 45%),
@@ -434,13 +445,20 @@ const ProjectMedia = styled.div`
 
   @media (max-width: 720px) {
     width: 100%;
-    min-height: 210px;
+    aspect-ratio: 2 / 1;
     border-right: 0;
     border-bottom: 1px solid var(--border-soft);
   }
 `
 
+const ProjectPicture = styled.picture`
+  display: block;
+  width: 100%;
+  height: 100%;
+`
+
 const ProjectImage = styled.img`
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;

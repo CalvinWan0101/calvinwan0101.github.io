@@ -1,22 +1,16 @@
 import { useEffect, useState } from 'react'
 import type { IconType } from 'react-icons'
-import { FiArrowRight, FiExternalLink, FiFolder, FiGithub, FiGitlab, FiImage, FiMonitor } from 'react-icons/fi'
+import { FiArrowRight, FiExternalLink, FiFolder, FiGithub, FiImage, FiMonitor } from 'react-icons/fi'
 import styled, { keyframes } from 'styled-components'
 
-type ProjectSource =
-  | {
-      platform: 'GitHub'
-      owner: string
-      repo: string
-    }
-  | {
-      platform: 'GitLab'
-      projectPath: string
-    }
+type ProjectSource = {
+  owner: string
+  repo: string
+}
 
 type ProjectItem = {
   name: string
-  host: 'GitHub' | 'GitLab'
+  host: 'GitHub'
   hostIcon: IconType
   href: string
   description: string
@@ -59,16 +53,18 @@ const LANGUAGE_FALLBACK_COLORS = ['#b07219', '#3178c6', '#178600', '#f34b7d', '#
 const projects: ProjectItem[] = [
   {
     name: 'ezSpec-CSharp',
-    host: 'GitLab',
-    hostIcon: FiGitlab,
-    href: 'https://gitlab.com/CalvinWan0101/ezspec-csharp',
+    host: 'GitHub',
+    hostIcon: FiGithub,
+    href: 'https://github.com/CalvinWan0101/ezspec-csharp',
     description:
       '以 C# 實作的 BDD（行為驅動開發）測試框架，靈感來源於 Gherkin 語法。支援以接近自然語言的方式撰寫測試規格，讓業務邏輯與測試行為的描述更貼近真實需求。',
     tags: ['C#', '.NET', 'BDD', 'Testing'],
     source: {
-      platform: 'GitLab',
-      projectPath: 'CalvinWan0101/ezspec-csharp',
+      owner: 'CalvinWan0101',
+      repo: 'ezspec-csharp',
     },
+    imageUrl: 'https://raw.githubusercontent.com/CalvinWan0101/ezspec-csharp/master/cover.png',
+    imageAlt: 'ezSpec-CSharp 封面',
   },
   {
     name: 'Soul Knight',
@@ -79,7 +75,6 @@ const projects: ProjectItem[] = [
       '以 C++ 復刻的 Soul Knight 地下城射擊遊戲。實作角色移動、敵人 AI、武器系統與地圖生成等核心機制，探索物件導向設計在遊戲開發中的應用。',
     tags: ['C++', 'Game Dev', 'OOP'],
     source: {
-      platform: 'GitHub',
       owner: 'calvinwan0101',
       repo: 'soul-knight',
     },
@@ -96,7 +91,6 @@ const projects: ProjectItem[] = [
       '模擬台灣大學入學考試個人申請統一分發流程的演算法實作。以程式化方式處理志願序比對、分發優先級與錄取結果，重現真實分發機制的核心邏輯。',
     tags: ['演算法', '模擬', '資料結構'],
     source: {
-      platform: 'GitHub',
       owner: 'calvinwan0101',
       repo: 'taiwan-examination-assignment',
     },
@@ -121,47 +115,19 @@ const normalizeLanguageBytes = (payload: Record<string, number>) => {
     .sort((left, right) => right.percentage - left.percentage)
 }
 
-const normalizeLanguagePercentages = (payload: Record<string, number>) => {
-  const totalPercentage = Object.values(payload).reduce((sum, value) => sum + value, 0)
-
-  if (totalPercentage === 0) {
-    return []
-  }
-
-  return Object.entries(payload)
-    .map(([name, percentage]) => ({
-      name,
-      percentage: (percentage / totalPercentage) * 100,
-    }))
-    .sort((left, right) => right.percentage - left.percentage)
-}
-
 const fetchProjectLanguages = async (source: ProjectSource) => {
-  if (source.platform === 'GitHub') {
-    const response = await fetch(`https://api.github.com/repos/${source.owner}/${source.repo}/languages`, {
-      headers: {
-        Accept: 'application/vnd.github+json',
-      },
-    })
-
-    if (!response.ok) {
-      throw new Error(`GitHub languages request failed with ${response.status}`)
-    }
-
-    const payload = (await response.json()) as Record<string, number>
-    return normalizeLanguageBytes(payload)
-  }
-
-  const response = await fetch(
-    `https://gitlab.com/api/v4/projects/${encodeURIComponent(source.projectPath)}/languages`,
-  )
+  const response = await fetch(`https://api.github.com/repos/${source.owner}/${source.repo}/languages`, {
+    headers: {
+      Accept: 'application/vnd.github+json',
+    },
+  })
 
   if (!response.ok) {
-    throw new Error(`GitLab languages request failed with ${response.status}`)
+    throw new Error(`GitHub languages request failed with ${response.status}`)
   }
 
   const payload = (await response.json()) as Record<string, number>
-  return normalizeLanguagePercentages(payload)
+  return normalizeLanguageBytes(payload)
 }
 
 const createFallbackColor = (language: string) => {

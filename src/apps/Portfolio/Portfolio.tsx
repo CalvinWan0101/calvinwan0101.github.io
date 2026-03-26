@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { FiArrowUpRight, FiTrendingUp } from 'react-icons/fi'
 import styled, { keyframes } from 'styled-components'
 
@@ -15,6 +15,7 @@ type ChartPoint = {
   date: string
   sharesLabel: string
   priceLabel: string
+  deltaFromAverage: number
 }
 
 type AxisLabel = {
@@ -67,7 +68,22 @@ const axisValueFormatter = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 2,
 })
 
+const percentFormatter = new Intl.NumberFormat('en-US', {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+})
+
 const parseCurrency = (value: string) => Number(value.replace('$', ''))
+
+const describeDeltaFromAverage = (delta: number) => {
+  if (Math.abs(delta) < 0.005) {
+    return '與平均成本幾乎持平'
+  }
+
+  const formattedDelta = `${percentFormatter.format(Math.abs(delta))}%`
+
+  return delta > 0 ? `比平均成本高 ${formattedDelta}` : `比平均成本低 ${formattedDelta}`
+}
 
 const parseDate = (value: string) => {
   const [year, month, day] = value.split('/').map(Number)
@@ -213,6 +229,7 @@ const chartPoints: ChartPoint[] = chartEntries.map((entry) => ({
   date: entry.date,
   sharesLabel: entry.sharesLabel,
   priceLabel: entry.priceLabel,
+  deltaFromAverage: averagePurchasePrice === 0 ? 0 : ((entry.price - averagePurchasePrice) / averagePurchasePrice) * 100,
 }))
 
 const yAxisValues: number[] = []
@@ -256,6 +273,10 @@ const monthLabels: MonthLabel[] = monthStarts.map((monthStart) => {
 })
 
 const averageLineY = toChartY(averagePurchasePrice)
+const tooltipWidth = 168
+const tooltipHeight = 72
+const tooltipMargin = 10
+const tooltipArrowHalfWidth = 6
 
 const summaryCards: SummaryCardItem[] = [
   {
@@ -279,6 +300,24 @@ const summaryCards: SummaryCardItem[] = [
 const linePoints = chartPoints.map(({ x, y }) => `${x},${y}`).join(' ')
 
 export const Portfolio = () => {
+  const [hoveredPoint, setHoveredPoint] = useState<ChartPoint | null>(null)
+
+  const tooltipPosition = hoveredPoint
+    ? (() => {
+        const left = Math.min(
+          Math.max(hoveredPoint.x - tooltipWidth / 2, 8),
+          chartRight - tooltipWidth + 8,
+        )
+        const top = hoveredPoint.y - tooltipHeight - tooltipMargin
+
+        return {
+          left,
+          top,
+          arrowOffset: hoveredPoint.x - left,
+        }
+      })()
+    : null
+
   return (
     <Main>
       <HeroSection>
@@ -290,6 +329,7 @@ export const Portfolio = () => {
             投資紀錄
           </Badge>
           <Title>投資旅程：VT</Title>
+          <TitleMeta>Vanguard Total World Stock ETF</TitleMeta>
           <Description>
             長期被動投資策略的記錄，專注於全球分散配置與持續成長。
           </Description>
@@ -378,10 +418,92 @@ export const Portfolio = () => {
             />
 
             {chartPoints.map((point) => (
-              <circle key={`${point.date}-${point.x}`} cx={point.x} cy={point.y} r="3.5" fill="#8c2e2e">
-                <title>{`${point.date}\n購入股數 ${point.sharesLabel}\n單價 ${point.priceLabel}`}</title>
-              </circle>
+              <g key={`${point.date}-${point.x}`}>
+                <circle
+                  cx={point.x}
+                  cy={point.y}
+                  r="3.5"
+                  fill="#8c2e2e"
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`${point.date}，當次買入價 ${point.priceLabel}，${describeDeltaFromAverage(point.deltaFromAverage)}`}
+                  onMouseEnter={() => setHoveredPoint(point)}
+                  onMouseLeave={() => setHoveredPoint((current) => (current?.date === point.date ? null : current))}
+                  onFocus={() => setHoveredPoint(point)}
+                  onBlur={() => setHoveredPoint((current) => (current?.date === point.date ? null : current))}
+                >
+                  <title>{`${point.date}\n購入股數 ${point.sharesLabel}\n單價 ${point.priceLabel}`}</title>
+                </circle>
+                <circle
+                  cx={point.x}
+                  cy={point.y}
+                  r="10"
+                  fill="transparent"
+                  onMouseEnter={() => setHoveredPoint(point)}
+                  onMouseLeave={() => setHoveredPoint((current) => (current?.date === point.date ? null : current))}
+                />
+              </g>
             ))}
+
+            {hoveredPoint && tooltipPosition ? (
+              <g aria-hidden="true">
+                <rect
+                  x={tooltipPosition.left}
+                  y={tooltipPosition.top}
+                  width={tooltipWidth}
+                  height={tooltipHeight}
+                  rx="2"
+                  fill="rgba(253, 252, 248, 0.97)"
+                  stroke="rgba(140, 46, 46, 0.18)"
+                />
+                <path
+                  d={`M ${hoveredPoint.x} ${hoveredPoint.y} L ${tooltipPosition.left + tooltipPosition.arrowOffset - tooltipArrowHalfWidth} ${tooltipPosition.top + tooltipHeight} L ${tooltipPosition.left + tooltipPosition.arrowOffset + tooltipArrowHalfWidth} ${tooltipPosition.top + tooltipHeight} Z`}
+                  fill="rgba(253, 252, 248, 0.97)"
+                  stroke="rgba(140, 46, 46, 0.18)"
+                  strokeLinejoin="round"
+                />
+                <text
+                  x={tooltipPosition.left + 12}
+                  y={tooltipPosition.top + 15}
+                  fontSize="8"
+                  fontWeight="700"
+                  letterSpacing="0.3"
+                  fill="rgba(62,50,44,0.62)"
+                >
+                  {hoveredPoint.date}
+                </text>
+                <text
+                  x={tooltipPosition.left + 12}
+                  y={tooltipPosition.top + 30}
+                  fontSize="11"
+                  fontWeight="900"
+                  letterSpacing="-0.1"
+                  fill="rgba(24,19,16,0.92)"
+                >
+                  {`當次買入價 ${hoveredPoint.priceLabel}`}
+                </text>
+                <text
+                  x={tooltipPosition.left + 12}
+                  y={tooltipPosition.top + 44}
+                  fontSize="8"
+                  fontWeight="600"
+                  letterSpacing="0.15"
+                  fill="rgba(62,50,44,0.66)"
+                >
+                  {`買入 ${hoveredPoint.sharesLabel} 股`}
+                </text>
+                <text
+                  x={tooltipPosition.left + 12}
+                  y={tooltipPosition.top + 59}
+                  fontSize="8"
+                  fontWeight="700"
+                  letterSpacing="0.15"
+                  fill={hoveredPoint.deltaFromAverage >= 0 ? 'var(--accent)' : '#2b6d44'}
+                >
+                  {describeDeltaFromAverage(hoveredPoint.deltaFromAverage)}
+                </text>
+              </g>
+            ) : null}
 
             <line
               x1={chartLeft}
@@ -421,6 +543,7 @@ export const Portfolio = () => {
               </text>
             ))}
           </Chart>
+
         </ChartWrap>
 
         <ChartRange>
@@ -527,6 +650,14 @@ const Title = styled.h1`
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 900;
   letter-spacing: 0.05em;
+`
+
+const TitleMeta = styled.div`
+  margin: -0.2rem 0 0.75rem;
+  color: rgba(62, 50, 44, 0.58);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
 `
 
 const Description = styled.p`
@@ -649,6 +780,7 @@ const LegendDashed = styled.span`
 `
 
 const ChartWrap = styled.div`
+  position: relative;
   width: 100%;
 `
 

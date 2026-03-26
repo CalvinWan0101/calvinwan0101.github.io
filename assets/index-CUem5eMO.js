@@ -464,29 +464,14 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   flex-direction: column;
   gap: 1rem;
   transition:
-    transform 0.18s ease,
     border-color 0.2s ease,
+    transform 0.2s ease,
     box-shadow 0.2s ease;
-
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: width 0.25s ease;
-  }
 
   &:hover {
     transform: translateY(-4px);
     border-color: var(--accent);
     box-shadow: var(--shadow);
-  }
-
-  &:hover::after {
-    width: 100%;
   }
 `,Fl=H.div`
   width: 2.75rem;
@@ -501,11 +486,6 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   transition:
     border-color 0.2s ease,
     background 0.2s ease;
-
-  ${Pl}:hover & {
-    border-color: var(--accent);
-    background: rgba(140, 46, 46, 0.06);
-  }
 `,Il=H.div`
   display: flex;
   flex-direction: column;
@@ -528,16 +508,6 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   align-self: flex-end;
   color: var(--accent);
   font-size: 1rem;
-  opacity: 0;
-  transform: translateX(-4px);
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
-
-  ${Pl}:hover & {
-    opacity: 1;
-    transform: translateX(0);
-  }
 `,J=H.section`
   overflow: hidden;
   border: 2px solid var(--border-soft);

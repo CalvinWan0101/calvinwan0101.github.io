@@ -209,29 +209,14 @@ const ContactCard = styled.a`
   flex-direction: column;
   gap: 1rem;
   transition:
-    transform 0.18s ease,
     border-color 0.2s ease,
+    transform 0.2s ease,
     box-shadow 0.2s ease;
-
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: width 0.25s ease;
-  }
 
   &:hover {
     transform: translateY(-4px);
     border-color: var(--accent);
     box-shadow: var(--shadow);
-  }
-
-  &:hover::after {
-    width: 100%;
   }
 `
 
@@ -248,11 +233,6 @@ const CardIcon = styled.div`
   transition:
     border-color 0.2s ease,
     background 0.2s ease;
-
-  ${ContactCard}:hover & {
-    border-color: var(--accent);
-    background: rgba(140, 46, 46, 0.06);
-  }
 `
 
 const CardBody = styled.div`
@@ -285,16 +265,6 @@ const CardArrow = styled.div`
   align-self: flex-end;
   color: var(--accent);
   font-size: 1rem;
-  opacity: 0;
-  transform: translateX(-4px);
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
-
-  ${ContactCard}:hover & {
-    opacity: 1;
-    transform: translateX(0);
-  }
 `
 
 const LocationCard = styled.section`

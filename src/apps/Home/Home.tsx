@@ -53,7 +53,7 @@ const skills: Skill[] = [
     corner: '壹',
     title: '後端開發',
     icon: FiServer,
-    items: ['C#', 'ASP.NET Core', 'ABP Framework', 'Java / Spring Boot'],
+    items: ['C# / ASP.NET Core', 'ABP Framework', 'Java / Spring Boot'],
   },
   {
     corner: '貳',
@@ -78,7 +78,7 @@ const skills: Skill[] = [
 const experiences: TimelineEntry[] = [
   {
     company: '叡揚資訊 (Galaxy Software Services)',
-    title: '程式設計師 (Full-time)',
+    title: '程式設計師（全職）',
     period: '2025/06 - 至今',
     items: [
       '使用 C#、.NET 與 ABP Framework 構建強健的後端服務。',
@@ -90,7 +90,7 @@ const experiences: TimelineEntry[] = [
   },
   {
     company: '叡揚資訊 (Galaxy Software Services)',
-    title: '助理程式設計師 (Internship)',
+    title: '助理程式設計師（實習）',
     period: '2024/07 - 2025/06',
     items: ['協助開發企業級系統，熟悉現有程式與架構。', '參與前後端開發。'],
   },

@@ -95,14 +95,6 @@ const createMonthName = (month: number) =>
     month - 1
   ]
 
-const formatRangeDate = (date: Date) => {
-  const year = date.getFullYear()
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const day = String(date.getDate()).padStart(2, '0')
-
-  return `${year} / ${month} / ${day}`
-}
-
 const getNiceStep = (value: number) => {
   if (!Number.isFinite(value) || value <= 0) {
     return 1
@@ -545,11 +537,6 @@ export const Portfolio = () => {
           </Chart>
 
         </ChartWrap>
-
-        <ChartRange>
-          <span>{formatRangeDate(chartStartDate)}</span>
-          <span>{formatRangeDate(chartEndDate)}</span>
-        </ChartRange>
       </ChartCard>
 
       <HistoryCard>
@@ -789,17 +776,6 @@ const Chart = styled.svg`
   width: 100%;
   height: auto;
   overflow: visible;
-`
-
-const ChartRange = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 0 2px;
-  margin-top: 0.5rem;
-  color: var(--text-muted);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
 `
 
 const HistoryCard = styled(SurfaceCard)`

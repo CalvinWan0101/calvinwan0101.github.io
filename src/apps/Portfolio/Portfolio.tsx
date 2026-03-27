@@ -130,6 +130,7 @@ const purchaseHistory: PurchaseGroup[] = [
   {
     month: '2026 年 3 月',
     entries: [
+      { date: '2026/03/27', shares: '1.00000', price: '$135.36' },
       { date: '2026/03/25', shares: '1.40247', price: '$139.753241' },
       { date: '2026/03/20', shares: '1.00000', price: '$137.41' },
       { date: '2026/03/16', shares: '1.38741', price: '$141.270487' },

@@ -42,7 +42,7 @@ const profile = {
   avatar,
   name: '萬祥瑞',
   badge: '軟體工程師 @ 叡揚資訊',
-  location: '台北，台灣',
+  location: '臺北，臺灣',
   birthYear: '生於 2003 年',
 }
 
@@ -81,10 +81,11 @@ const experiences: TimelineEntry[] = [
     title: '程式設計師（全職）',
     period: '2025/06 - 至今',
     items: [
-      '使用 C#、.NET 與 ABP Framework 構建強健的後端服務。',
-      '前端採用 React 與 TypeScript 進行開發。',
-      '實踐 Domain-Driven Design (DDD) 進行系統架構設計，確保業務邏輯的清晰與可維護性。',
-      '在 Agile 開發流程下運作，持續交付高價值的軟體功能。',
+      '以 C#、ASP.NET Core 與 ABP Framework 進行後端 API 開發與維護。',
+      '以 React 與 TypeScript 開發前端使用者介面。',
+      '使用 Azure 進行應用程式部署與環境管理。',
+      '負責正式環境的監控與運維作業。',
+      '實踐 Domain-Driven Design (DDD) 進行系統建模與架構設計。'
     ],
     active: true,
   },
@@ -92,32 +93,36 @@ const experiences: TimelineEntry[] = [
     company: '叡揚資訊 (Galaxy Software Services)',
     title: '助理程式設計師（實習）',
     period: '2024/07 - 2025/06',
-    items: ['協助開發企業級系統，熟悉現有程式與架構。', '參與前後端開發。'],
+    items: [
+      '參與企業級系統的開發，熟悉既有程式碼與系統架構。',
+      '協助後端 API 與前端介面的功能開發與問題修復。'
+    ]
   },
   {
     company: '國立臺北科技大學',
     title: '物件導向程式設計課程助教',
     period: '2024/02 - 2024/06',
     items: [
-      '協助教授準備與批改作業及考試，支援課程教學運作。',
-      '回應學生在課程內容與作業實作上的問題，協助排除學習障礙。',
-    ],
+      '協助教授批改作業與考試，支援課程教學運作。',
+      '管理 GitLab 與 Jenkins CI 環境，為學生建立帳號、連結 Repository，確保自動測資流程順利運作。',
+      '解答學生在課程內容與作業實作上的疑問，協助排除學習障礙。'
+    ]
   },
   {
     company: '國立臺北科技大學 軟體工程實驗室',
     title: 'ezKanban Team',
     period: '2023/07 - 2024/06',
     items: [
-      '與 ezKanban 團隊進行 mob programming，參與實際專案開發與協作。',
-      '在專案實作中學習並應用 Domain-Driven Design (DDD)、Test-Driven Design (TDD) 以及 Clean Architecture。',
-    ],
-  },
+      '於 ezKanban 團隊中以 mob programming 方式參與專案開發與協作。',
+      '在專案實作中學習並實踐 DDD、TDD、BDD 與 Clean Architecture 等軟體工程方法論。'
+    ]
+  }
 ]
 
 const education: EducationEntry[] = [
   {
     company: '國立臺北科技大學',
-    title: '電資學士班（主修資訊工程）',
+    title: '電資學士班（資訊工程組）',
     period: '2021/09 - 2025/07',
     active: true,
   },

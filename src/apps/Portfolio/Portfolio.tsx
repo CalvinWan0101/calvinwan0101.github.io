@@ -128,6 +128,12 @@ const desiredYAxisTickCount = 8
 
 const purchaseHistory: PurchaseGroup[] = [
   {
+    month: '2026 年 4 月',
+    entries: [
+      { date: '2026/04/06', shares: '1.40090', price: '$139.910013' },
+    ],
+  },
+  {
     month: '2026 年 3 月',
     entries: [
       { date: '2026/03/27', shares: '1.00000', price: '$135.36' },

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { IconType } from 'react-icons'
 import { FiArrowRight, FiExternalLink, FiFolder, FiGithub, FiImage, FiMonitor } from 'react-icons/fi'
 import styled, { keyframes } from 'styled-components'
@@ -11,11 +10,6 @@ import soulKnightCoverMobile from '../../assets/Projects/soul-knight-21.png'
 import taiwanExaminationAssignmentCoverDesktop from '../../assets/Projects/taiwan-examination-assignment-11.png'
 import taiwanExaminationAssignmentCoverMobile from '../../assets/Projects/taiwan-examination-assignment-21.png'
 
-type ProjectSource = {
-  owner: string
-  repo: string
-}
-
 type ProjectItem = {
   name: string
   host: 'GitHub'
@@ -23,41 +17,10 @@ type ProjectItem = {
   href: string
   description: string
   tags: string[]
-  source: ProjectSource
   desktopImageUrl?: string
   mobileImageUrl?: string
   imageAlt?: string
 }
-
-type LanguageShare = {
-  name: string
-  percentage: number
-}
-
-type ProjectLanguageState = {
-  status: 'loading' | 'success' | 'error'
-  languages: LanguageShare[]
-}
-
-const LANGUAGE_COLORS: Record<string, string> = {
-  'C#': '#178600',
-  'C++': '#f34b7d',
-  CSS: '#663399',
-  Go: '#00add8',
-  HTML: '#e34c26',
-  Java: '#b07219',
-  JavaScript: '#f1e05a',
-  Kotlin: '#a97bff',
-  PHP: '#4f5d95',
-  Python: '#3572a5',
-  Rust: '#dea584',
-  SCSS: '#c6538c',
-  Shell: '#89e051',
-  Swift: '#f05138',
-  TypeScript: '#3178c6',
-}
-
-const LANGUAGE_FALLBACK_COLORS = ['#b07219', '#3178c6', '#178600', '#f34b7d', '#663399', '#e34c26']
 
 const projects: ProjectItem[] = [
   {
@@ -68,10 +31,6 @@ const projects: ProjectItem[] = [
     description:
       '以 React、TypeScript 與 Vite 打造的個人作品網站，整合自我介紹、精選專案、投資紀錄與聯絡方式。',
     tags: ['React', 'TypeScript', 'Vite', 'styled-components'],
-    source: {
-      owner: 'CalvinWan0101',
-      repo: 'calvinwan0101.github.io',
-    },
     desktopImageUrl: calvinSpaceCoverDesktop,
     mobileImageUrl: calvinSpaceCoverMobile,
     imageAlt: 'Calvin Space 封面',
@@ -84,10 +43,6 @@ const projects: ProjectItem[] = [
     description:
       '以 C# 實作的 BDD（行為驅動開發）測試框架，靈感來源於 Gherkin 語法。支援以接近自然語言的方式撰寫測試規格，讓業務邏輯與測試行為的描述更貼近真實需求。',
     tags: ['C#', '.NET', 'BDD', 'Testing'],
-    source: {
-      owner: 'CalvinWan0101',
-      repo: 'ezspec-csharp',
-    },
     desktopImageUrl: ezspecCsharpCoverDesktop,
     mobileImageUrl: ezspecCsharpCoverMobile,
     imageAlt: 'ezSpec-CSharp 封面',
@@ -100,10 +55,6 @@ const projects: ProjectItem[] = [
     description:
       '以 C++ 復刻的 Soul Knight 地下城射擊遊戲。實作角色移動、敵人 AI、武器系統與地圖生成等核心機制，探索物件導向設計在遊戲開發中的應用。',
     tags: ['C++', 'Game Dev', 'OOP'],
-    source: {
-      owner: 'calvinwan0101',
-      repo: 'soul-knight',
-    },
     desktopImageUrl: soulKnightCoverDesktop,
     mobileImageUrl: soulKnightCoverMobile,
     imageAlt: 'Soul Knight 封面',
@@ -116,108 +67,13 @@ const projects: ProjectItem[] = [
     description:
       '模擬台灣大學入學考試個人申請統一分發流程的演算法實作。以程式化方式處理志願序比對、分發優先級與錄取結果，重現真實分發機制的核心邏輯。',
     tags: ['演算法', '模擬', '資料結構'],
-    source: {
-      owner: 'calvinwan0101',
-      repo: 'taiwan-examination-assignment',
-    },
     desktopImageUrl: taiwanExaminationAssignmentCoverDesktop,
     mobileImageUrl: taiwanExaminationAssignmentCoverMobile,
     imageAlt: 'Taiwan Examination Assignment 封面',
   },
 ]
 
-const normalizeLanguageBytes = (payload: Record<string, number>) => {
-  const totalBytes = Object.values(payload).reduce((sum, value) => sum + value, 0)
-
-  if (totalBytes === 0) {
-    return []
-  }
-
-  return Object.entries(payload)
-    .map(([name, bytes]) => ({
-      name,
-      percentage: (bytes / totalBytes) * 100,
-    }))
-    .sort((left, right) => right.percentage - left.percentage)
-}
-
-const fetchProjectLanguages = async (source: ProjectSource) => {
-  const response = await fetch(`https://api.github.com/repos/${source.owner}/${source.repo}/languages`, {
-    headers: {
-      Accept: 'application/vnd.github+json',
-    },
-  })
-
-  if (!response.ok) {
-    throw new Error(`GitHub languages request failed with ${response.status}`)
-  }
-
-  const payload = (await response.json()) as Record<string, number>
-  return normalizeLanguageBytes(payload)
-}
-
-const createFallbackColor = (language: string) => {
-  const hash = Array.from(language).reduce((sum, character) => sum + character.charCodeAt(0), 0)
-  return LANGUAGE_FALLBACK_COLORS[hash % LANGUAGE_FALLBACK_COLORS.length]
-}
-
-const getLanguageColor = (language: string) => LANGUAGE_COLORS[language] ?? createFallbackColor(language)
-
-const formatLanguagePercentage = (percentage: number) => `${percentage.toFixed(1)}%`
-
 export const Projects = () => {
-  const [projectLanguages, setProjectLanguages] = useState<Record<string, ProjectLanguageState>>(() =>
-    Object.fromEntries(
-      projects.map((project) => [
-        project.name,
-        {
-          status: 'loading',
-          languages: [],
-        },
-      ]),
-    ),
-  )
-
-  useEffect(() => {
-    let isCancelled = false
-
-    const loadProjectLanguages = async () => {
-      const entries = await Promise.all(
-        projects.map(async (project) => {
-          try {
-            const languages = await fetchProjectLanguages(project.source)
-
-            return [
-              project.name,
-              {
-                status: 'success' as const,
-                languages,
-              },
-            ]
-          } catch {
-            return [
-              project.name,
-              {
-                status: 'error' as const,
-                languages: [],
-              },
-            ]
-          }
-        }),
-      )
-
-      if (!isCancelled) {
-        setProjectLanguages(Object.fromEntries(entries))
-      }
-    }
-
-    void loadProjectLanguages()
-
-    return () => {
-      isCancelled = true
-    }
-  }, [])
-
   return (
     <Main>
       <HeroSection>
@@ -234,7 +90,6 @@ export const Projects = () => {
       <ProjectsList>
         {projects.map((project) => {
           const HostIcon = project.hostIcon
-          const languageState = projectLanguages[project.name]
 
           return (
             <ProjectCard
@@ -290,42 +145,6 @@ export const Projects = () => {
                     檢視原始碼
                   </ProjectLinkHint>
                 </ProjectFooter>
-
-                <LanguageStats>
-                  <LanguageHeader>
-                    <LanguageLabel>語言組成</LanguageLabel>
-                    <LanguageSummary>
-                      {languageState?.status === 'loading' ? '載入中' : null}
-                      {languageState?.status === 'error' ? '暫時無法取得統計' : null}
-                    </LanguageSummary>
-                  </LanguageHeader>
-
-                  <LanguageBar aria-hidden="true">
-                    {languageState?.status === 'success' && languageState.languages.length > 0 ? (
-                      languageState.languages.map((language) => (
-                        <LanguageSegment
-                          key={language.name}
-                          $color={getLanguageColor(language.name)}
-                          $width={language.percentage}
-                        />
-                      ))
-                    ) : (
-                      <LanguageBarPlaceholder />
-                    )}
-                  </LanguageBar>
-
-                  {languageState?.status === 'success' && languageState.languages.length > 0 ? (
-                    <LanguageLegend>
-                      {languageState.languages.map((language) => (
-                        <LanguageLegendItem key={language.name}>
-                          <LanguageDot $color={getLanguageColor(language.name)} />
-                          <LanguageLegendName>{language.name}</LanguageLegendName>
-                          <LanguageLegendValue>{formatLanguagePercentage(language.percentage)}</LanguageLegendValue>
-                        </LanguageLegendItem>
-                      ))}
-                    </LanguageLegend>
-                  ) : null}
-                </LanguageStats>
               </ProjectBody>
             </ProjectCard>
           )
@@ -628,106 +447,4 @@ const ProjectLinkHint = styled.span`
   font-weight: 700;
   letter-spacing: 0.08em;
   white-space: nowrap;
-`
-
-const LanguageStats = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  margin-top: 0.35rem;
-`
-
-const LanguageHeader = styled.div`
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.75rem;
-
-  @media (max-width: 560px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.2rem;
-  }
-`
-
-const LanguageLabel = styled.span`
-  color: rgba(62, 50, 44, 0.6);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-`
-
-const LanguageSummary = styled.span`
-  color: rgba(62, 50, 44, 0.62);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-`
-
-const LanguageBar = styled.div`
-  overflow: hidden;
-  display: flex;
-  width: 100%;
-  height: 0.48rem;
-  border: 1px solid rgba(62, 50, 44, 0.1);
-  border-radius: 999px;
-  background: rgba(62, 50, 44, 0.06);
-`
-
-const LanguageSegment = styled.span<{ $color: string; $width: number }>`
-  display: block;
-  height: 100%;
-  width: ${({ $width }) => `${$width}%`};
-  background: ${({ $color }) => $color};
-
-  &:first-child {
-    box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.14);
-  }
-`
-
-const LanguageBarPlaceholder = styled.span`
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    rgba(62, 50, 44, 0.08) 0%,
-    rgba(140, 46, 46, 0.16) 50%,
-    rgba(62, 50, 44, 0.08) 100%
-  );
-  background-size: 200% 100%;
-  animation: ${fadeUp} 1.2s ease infinite alternate;
-`
-
-const LanguageLegend = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem 1rem;
-  margin-top: 0.15rem;
-`
-
-const LanguageLegendItem = styled.span`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  color: rgba(62, 50, 44, 0.72);
-  font-size: 0.78rem;
-  font-weight: 700;
-`
-
-const LanguageDot = styled.span<{ $color: string }>`
-  display: inline-block;
-  width: 0.65rem;
-  height: 0.65rem;
-  border-radius: 999px;
-  background: ${({ $color }) => $color};
-`
-
-const LanguageLegendName = styled.span`
-  color: rgba(62, 50, 44, 0.88);
-`
-
-const LanguageLegendValue = styled.span`
-  color: rgba(62, 50, 44, 0.58);
-  font-weight: 600;
 `

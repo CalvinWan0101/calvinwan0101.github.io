@@ -46,20 +46,18 @@ const profile = {
   birthYear: '生於 2003 年',
 }
 
-const tags = ['C#', '.NET', 'DDD', 'React']
-
 const skills: Skill[] = [
   {
     corner: '壹',
     title: '後端開發',
     icon: FiServer,
-    items: ['C# / ASP.NET Core', 'ABP Framework', 'Java / Spring Boot'],
+    items: ['ABP Framework', 'Java / Spring Boot', 'RESTful API'],
   },
   {
     corner: '貳',
     title: '前端開發',
     icon: FiGlobe,
-    items: ['React', 'TypeScript', 'HTML / CSS / JavaScript'],
+    items: ['TypeScript', 'HTML / CSS / JavaScript'],
   },
   {
     corner: '參',
@@ -71,7 +69,7 @@ const skills: Skill[] = [
     corner: '肆',
     title: '系統架構',
     icon: FiGrid,
-    items: ['Domain-Driven Design', 'Test-Driven Design', 'Agile Development'],
+    items: ['Test-Driven Design', 'Agile Development'],
   },
 ]
 
@@ -81,11 +79,10 @@ const experiences: TimelineEntry[] = [
     title: '程式設計師（全職）',
     period: '2025/06 - 至今',
     items: [
-      '以 C#、ASP.NET Core 與 ABP Framework 進行後端 API 開發與維護。',
-      '以 React 與 TypeScript 開發前端使用者介面。',
+      '參與後端 API 開發與維護。',
+      '參與前端使用者介面開發。',
       '使用 Azure 進行應用程式部署與環境管理。',
       '負責正式環境的監控與運維作業。',
-      '實踐 Domain-Driven Design (DDD) 進行系統建模與架構設計。'
     ],
     active: true,
   },
@@ -114,7 +111,7 @@ const experiences: TimelineEntry[] = [
     period: '2023/07 - 2024/06',
     items: [
       '於 ezKanban 團隊中以 mob programming 方式參與專案開發與協作。',
-      '在專案實作中學習並實踐 DDD、TDD、BDD 與 Clean Architecture 等軟體工程方法論。'
+      '在專案實作中學習並實踐 TDD、BDD 與 Clean Architecture 等軟體工程方法論。'
     ]
   }
 ]
@@ -186,11 +183,6 @@ export const Home = () => {
               {profile.birthYear}
             </MetaItem>
           </Meta>
-          <Tags>
-            {tags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
-            ))}
-          </Tags>
         </HeroText>
 
         <AvatarCluster>
@@ -436,39 +428,6 @@ const MetaItem = styled.span`
 const MetaIcon = styled.span`
   color: var(--accent);
   font-size: 1.2rem;
-`
-
-const Tags = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
-
-  @media (min-width: 768px) {
-    justify-content: flex-start;
-  }
-`
-
-const Tag = styled.span`
-  padding: 0.375rem 1rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  border: 1px solid rgba(62, 50, 44, 0.3);
-  border-radius: 2px;
-  letter-spacing: 0.1em;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.2s ease;
-
-  &:hover {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--bg);
-    transform: translateY(-2px);
-  }
 `
 
 const AvatarCluster = styled.div`

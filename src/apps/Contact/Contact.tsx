@@ -166,8 +166,8 @@ const BadgeIcon = styled(FiMessageSquare)`
 `
 
 const PageTitle = styled.h1`
-  margin: 0;
-  font-size: clamp(2.4rem, 6vw, 4rem);
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 900;
   letter-spacing: 0.05em;
 `

@@ -388,11 +388,10 @@ const Badge = styled.div`
 `
 
 const PageTitle = styled.h1`
-  margin: 0;
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 900;
-  letter-spacing: 0.08em;
-  color: var(--accent);
+  letter-spacing: 0.05em;
 `
 
 const PageDescription = styled.p`

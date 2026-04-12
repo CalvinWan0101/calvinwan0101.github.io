@@ -1,6 +1,8 @@
 import { Fragment, useState } from 'react'
 import { FiArrowUpRight, FiTrendingUp } from 'react-icons/fi'
 import styled, { keyframes } from 'styled-components'
+import { TradingViewOverview } from './TradingViewOverview'
+import { TradingViewQuote } from './TradingViewQuote'
 
 type SummaryCardItem = {
   label: string
@@ -92,7 +94,7 @@ const parseDate = (value: string) => {
 
 const createMonthName = (month: number) =>
   ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'][
-    month - 1
+  month - 1
   ]
 
 const getNiceStep = (value: number) => {
@@ -303,18 +305,18 @@ export const Portfolio = () => {
 
   const tooltipPosition = hoveredPoint
     ? (() => {
-        const left = Math.min(
-          Math.max(hoveredPoint.x - tooltipWidth / 2, 8),
-          chartRight - tooltipWidth + 8,
-        )
-        const top = hoveredPoint.y - tooltipHeight - tooltipMargin
+      const left = Math.min(
+        Math.max(hoveredPoint.x - tooltipWidth / 2, 8),
+        chartRight - tooltipWidth + 8,
+      )
+      const top = hoveredPoint.y - tooltipHeight - tooltipMargin
 
-        return {
-          left,
-          top,
-          arrowOffset: hoveredPoint.x - left,
-        }
-      })()
+      return {
+        left,
+        top,
+        arrowOffset: hoveredPoint.x - left,
+      }
+    })()
     : null
 
   return (
@@ -328,13 +330,15 @@ export const Portfolio = () => {
             投資紀錄
           </Badge>
           <Title>投資旅程：VT</Title>
-          <TitleMeta>Vanguard Total World Stock ETF</TitleMeta>
+          <TitleMeta>Vanguard Total World Stock Index ETF</TitleMeta>
           <Description>
             長期被動投資策略的記錄，專注於全球分散配置與持續成長。
           </Description>
         </HeroCopy>
       </HeroSection>
-
+      <QuoteStrip>
+        <TradingViewQuote />
+      </QuoteStrip>
       <CardsGrid>
         {summaryCards.map((card) => (
           <SummaryCard key={card.label}>
@@ -349,7 +353,12 @@ export const Portfolio = () => {
           </SummaryCard>
         ))}
       </CardsGrid>
-
+      <WidgetCard>
+        <CardTitleRow>
+          <SectionTitle>即時走勢</SectionTitle>
+        </CardTitleRow>
+        <TradingViewOverview />
+      </WidgetCard>
       <ChartCard>
         <CardTitleRow>
           <SectionTitle>購入單價走勢</SectionTitle>
@@ -788,6 +797,23 @@ const Chart = styled.svg`
 const HistoryCard = styled(SurfaceCard)`
   overflow: hidden;
   animation-delay: 0.24s;
+`
+
+const WidgetCard = styled(SurfaceCard)`
+  padding: 1.5rem;
+  animation-delay: 0.3s;
+  height: 400px;
+`
+
+const QuoteStrip = styled(SurfaceCard)`
+  padding: 0;
+  animation: ${fadeUp} 0.7s ease 0.1s both;
+  overflow: hidden;
+  line-height: 0;
+
+  iframe {
+    display: block;
+  }
 `
 
 const HistoryHeader = styled.div`

@@ -894,7 +894,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     height: 6px;
     background: ${e=>e.$active?`var(--accent)`:`var(--text-muted)`};
   }
-`;function Fu(e){return(0,G.jsx)(wu,{children:e},e)}function Iu(e){let t=e.icon;return(0,G.jsxs)(yu,{children:[(0,G.jsx)(bu,{children:e.corner}),(0,G.jsx)(xu,{children:(0,G.jsx)(t,{})}),(0,G.jsx)(Su,{children:e.title}),(0,G.jsx)(Cu,{children:e.items.map(Fu)})]},e.title)}function Lu(e){return(0,G.jsxs)(Eu,{$active:e.active,children:[(0,G.jsx)(Du,{$active:e.active,children:(0,G.jsx)(Ou,{$active:e.active})}),(0,G.jsxs)(ku,{$active:e.active,$hasItems:!!e.items?.length,children:[e.company?(0,G.jsx)(Au,{$active:e.active,children:e.company}):null,(0,G.jsx)(ju,{children:e.title}),(0,G.jsx)(Mu,{$hasItems:!!e.items?.length,children:e.period}),e.items?(0,G.jsx)(Nu,{children:e.items.map(t=>(0,G.jsx)(Pu,{$active:e.active,children:t},t))}):null]})]},`${e.title}-${e.period}`)}function Ru(e){return(0,G.jsxs)(Eu,{$active:e.active,$compact:e.compact,children:[(0,G.jsx)(Du,{$active:e.active,$compact:e.compact,children:(0,G.jsx)(Ou,{$active:e.active,$compact:e.compact})}),(0,G.jsxs)(ku,{$active:e.active,$compact:e.compact,children:[e.company?(0,G.jsx)(Au,{$active:e.active,children:e.company}):null,(0,G.jsx)(ju,{$compact:e.compact,children:e.title}),(0,G.jsx)(Mu,{$compact:e.compact,children:e.period})]})]},`${e.title}-${e.period}`)}var zu=new Intl.NumberFormat(`en-US`,{style:`currency`,currency:`USD`,minimumFractionDigits:2,maximumFractionDigits:2}),Bu=new Intl.NumberFormat(`en-US`,{minimumFractionDigits:5,maximumFractionDigits:5,useGrouping:!1}),Vu=new Intl.NumberFormat(`en-US`,{minimumFractionDigits:0,maximumFractionDigits:2}),Hu=new Intl.NumberFormat(`en-US`,{minimumFractionDigits:2,maximumFractionDigits:2}),Uu=e=>Number(e.replace(`$`,``)),Wu=e=>{if(Math.abs(e)<.005)return`與平均成本幾乎持平`;let t=`${Hu.format(Math.abs(e))}%`;return e>0?`比平均成本高 ${t}`:`比平均成本低 ${t}`},Z=e=>{let[t,n,r]=e.split(`/`).map(Number);return new Date(t,n-1,r)},Gu=e=>[`一月`,`二月`,`三月`,`四月`,`五月`,`六月`,`七月`,`八月`,`九月`,`十月`,`十一月`,`十二月`][e-1],Ku=e=>{if(!Number.isFinite(e)||e<=0)return 1;let t=10**Math.floor(Math.log10(e)),n=e/t;return n<=1?t:n<=2?2*t:n<=5?5*t:10*t},qu=55,Ju=585,Yu=15,Xu=135,Zu=Ju-qu,Qu=Xu-Yu,$u=8,ed=[{month:`2026 年 4 月`,entries:[{date:`2026/04/06`,shares:`1.40090`,price:`$139.910013`}]},{month:`2026 年 3 月`,entries:[{date:`2026/03/27`,shares:`1.00000`,price:`$135.36`},{date:`2026/03/25`,shares:`1.40247`,price:`$139.753241`},{date:`2026/03/20`,shares:`1.00000`,price:`$137.41`},{date:`2026/03/16`,shares:`1.38741`,price:`$141.270487`},{date:`2026/03/09`,shares:`1.00000`,price:`$139.75`},{date:`2026/03/06`,shares:`1.00000`,price:`$142.43`},{date:`2026/03/05`,shares:`1.37359`,price:`$144.147559`},{date:`2026/03/03`,shares:`1.00000`,price:`$142.91`}]},{month:`2026 年 2 月`,entries:[{date:`2026/02/25`,shares:`1.21921`,price:`$148.457253`},{date:`2026/02/17`,shares:`1.24151`,price:`$145.79`},{date:`2026/02/09`,shares:`1.22803`,price:`$146.575899`}]},{month:`2026 年 1 月`,entries:[{date:`2026/01/30`,shares:`1.00000`,price:`$146.13`},{date:`2026/01/14`,shares:`1.00000`,price:`$144.57`},{date:`2026/01/08`,shares:`1.00000`,price:`$143.42`},{date:`2026/01/05`,shares:`1.00000`,price:`$142.835`}]}],td=ed.flatMap(({entries:e})=>e.map(e=>{let t=Z(e.date);return{date:e.date,shares:Number(e.shares),price:Uu(e.price),timestamp:t.getTime(),month:t.getMonth()+1,sharesLabel:e.shares,priceLabel:e.price}})),nd=[...td].sort((e,t)=>e.timestamp-t.timestamp),rd=td.reduce((e,t)=>e+t.shares,0),id=td.reduce((e,t)=>e+t.shares*t.price,0),ad=rd===0?0:id/rd,od=nd[0],sd=nd[nd.length-1],cd=od?new Date(new Date(od.timestamp).getFullYear(),new Date(od.timestamp).getMonth(),1):new Date,ld=sd?new Date(new Date(sd.timestamp).getFullYear(),new Date(sd.timestamp).getMonth()+1,0):new Date(cd),ud=cd.getTime(),dd=ld.getTime(),fd=dd-ud,pd=Math.min(...nd.map(e=>e.price)),md=Math.max(...nd.map(e=>e.price)),hd=Ku(nd.length>1?(md-pd)/Math.max($u-1,1):md||1),gd=Math.floor(pd/hd)*hd,_d=Math.ceil(md/hd)*hd||hd,vd=_d-gd||hd,yd=e=>fd===0?qu+Zu/2:qu+(e-ud)/fd*Zu,Q=e=>Yu+(_d-e)/vd*Qu,bd=nd.map(e=>({x:yd(e.timestamp),y:Q(e.price),date:e.date,sharesLabel:e.sharesLabel,priceLabel:e.priceLabel,deltaFromAverage:ad===0?0:(e.price-ad)/ad*100})),xd=[];for(let e=_d;e>=gd-hd/2;e-=hd)xd.push(Number(e.toFixed(4)));var Sd=xd.map((e,t)=>({label:Vu.format(e),y:Q(e),strong:t===xd.length-1})),Cd=[];if(od&&sd){let e=new Date(cd),t=new Date(ld.getFullYear(),ld.getMonth(),1);for(;e<=t;)Cd.push(new Date(e)),e.setMonth(e.getMonth()+1)}var wd=Cd.slice(1).map(e=>e.getTime()).filter(e=>e>=ud&&e<=dd).map(yd),Td=Cd.map(e=>{let t=Math.max(e.getTime(),ud),n=new Date(e.getFullYear(),e.getMonth()+1,1).getTime();return{x:yd(t+(Math.min(n,dd)-t)/2),label:Gu(e.getMonth()+1)}}),Ed=Q(ad),Dd=168,Od=72,kd=10,Ad=6,jd=[{label:`持有股數`,value:Bu.format(rd),unit:`VT`},{label:`平均購入價格`,value:zu.format(ad),unit:`USD`},{label:`總投入金額`,value:zu.format(id),unit:`進行中`,active:!0}],Md=bd.map(({x:e,y:t})=>`${e},${t}`).join(` `),$=()=>{let e=(0,Zi.c)(25),[t,n]=(0,x.useState)(null),r;e[0]===t?r=e[1]:(r=t?(()=>{let e=Math.min(Math.max(t.x-Dd/2,8),Ju-Dd+8);return{left:e,top:t.y-Od-kd,arrowOffset:t.x-e}})():null,e[0]=t,e[1]=r);let i=r,a;e[2]===Symbol.for(`react.memo_cache_sentinel`)?(a=(0,G.jsx)(Fd,{children:(0,G.jsxs)(Id,{children:[(0,G.jsxs)(Ld,{children:[(0,G.jsx)(Rd,{children:(0,G.jsx)(yc,{})}),`投資紀錄`]}),(0,G.jsx)(zd,{children:`投資旅程：VT`}),(0,G.jsx)(Bd,{children:`Vanguard Total World Stock ETF`}),(0,G.jsx)(Vd,{children:`長期被動投資策略的記錄，專注於全球分散配置與持續成長。`})]})}),e[2]=a):a=e[2];let o;e[3]===Symbol.for(`react.memo_cache_sentinel`)?(o=(0,G.jsx)(Hd,{children:jd.map(hf)}),e[3]=o):o=e[3];let s;e[4]===Symbol.for(`react.memo_cache_sentinel`)?(s=(0,G.jsx)(Xd,{children:`購入單價走勢`}),e[4]=s):s=e[4];let c;e[5]===Symbol.for(`react.memo_cache_sentinel`)?(c=(0,G.jsxs)(Qd,{children:[(0,G.jsx)($d,{}),`購入單價`]}),e[5]=c):c=e[5];let l;e[6]===Symbol.for(`react.memo_cache_sentinel`)?(l=(0,G.jsx)(ef,{}),e[6]=l):l=e[6];let u;e[7]===Symbol.for(`react.memo_cache_sentinel`)?(u=(0,G.jsxs)(Yd,{children:[s,(0,G.jsxs)(Zd,{children:[c,(0,G.jsxs)(Qd,{children:[l,`平均 `,zu.format(ad)]})]})]}),e[7]=u):u=e[7];let d,f,p,m,h;e[8]===Symbol.for(`react.memo_cache_sentinel`)?(p=Sd.map(gf),m=(0,G.jsx)(`line`,{x1:qu,y1:Yu,x2:qu,y2:Xu,stroke:`rgba(140,46,46,0.25)`,strokeWidth:`1.5`}),h=(0,G.jsx)(`line`,{x1:qu,y1:Ed,x2:Ju,y2:Ed,stroke:`rgba(62,50,44,0.35)`,strokeWidth:`1.5`,strokeDasharray:`5,4`}),d=(0,G.jsx)(`polyline`,{points:Md,fill:`none`,stroke:`#8c2e2e`,strokeWidth:`2`,strokeLinejoin:`round`,strokeLinecap:`round`}),f=bd.map(e=>(0,G.jsxs)(`g`,{children:[(0,G.jsx)(`circle`,{cx:e.x,cy:e.y,r:`3.5`,fill:`#8c2e2e`,tabIndex:0,role:`button`,"aria-label":`${e.date}，當次買入價 ${e.priceLabel}，${Wu(e.deltaFromAverage)}`,onMouseEnter:()=>n(e),onMouseLeave:()=>n(t=>t?.date===e.date?null:t),onFocus:()=>n(e),onBlur:()=>n(t=>t?.date===e.date?null:t),children:(0,G.jsx)(`title`,{children:`${e.date}\n購入股數 ${e.sharesLabel}\n單價 ${e.priceLabel}`})}),(0,G.jsx)(`circle`,{cx:e.x,cy:e.y,r:`10`,fill:`transparent`,onMouseEnter:()=>n(e),onMouseLeave:()=>n(t=>t?.date===e.date?null:t)})]},`${e.date}-${e.x}`)),e[8]=d,e[9]=f,e[10]=p,e[11]=m,e[12]=h):(d=e[8],f=e[9],p=e[10],m=e[11],h=e[12]);let g;e[13]!==t||e[14]!==i?(g=t&&i?(0,G.jsxs)(`g`,{"aria-hidden":`true`,children:[(0,G.jsx)(`rect`,{x:i.left,y:i.top,width:Dd,height:Od,rx:`2`,fill:`rgba(253, 252, 248, 0.97)`,stroke:`rgba(140, 46, 46, 0.18)`}),(0,G.jsx)(`path`,{d:`M ${t.x} ${t.y} L ${i.left+i.arrowOffset-Ad} ${i.top+Od} L ${i.left+i.arrowOffset+Ad} ${i.top+Od} Z`,fill:`rgba(253, 252, 248, 0.97)`,stroke:`rgba(140, 46, 46, 0.18)`,strokeLinejoin:`round`}),(0,G.jsx)(`text`,{x:i.left+12,y:i.top+15,fontSize:`8`,fontWeight:`700`,letterSpacing:`0.3`,fill:`rgba(62,50,44,0.62)`,children:t.date}),(0,G.jsx)(`text`,{x:i.left+12,y:i.top+30,fontSize:`11`,fontWeight:`900`,letterSpacing:`-0.1`,fill:`rgba(24,19,16,0.92)`,children:`當次買入價 ${t.priceLabel}`}),(0,G.jsx)(`text`,{x:i.left+12,y:i.top+44,fontSize:`8`,fontWeight:`600`,letterSpacing:`0.15`,fill:`rgba(62,50,44,0.66)`,children:`買入 ${t.sharesLabel} 股`}),(0,G.jsx)(`text`,{x:i.left+12,y:i.top+59,fontSize:`8`,fontWeight:`700`,letterSpacing:`0.15`,fill:t.deltaFromAverage>=0?`var(--accent)`:`#2b6d44`,children:Wu(t.deltaFromAverage)})]}):null,e[13]=t,e[14]=i,e[15]=g):g=e[15];let _,v,y;e[16]===Symbol.for(`react.memo_cache_sentinel`)?(_=(0,G.jsx)(`line`,{x1:qu,y1:Xu,x2:Ju,y2:Xu,stroke:`rgba(140,46,46,0.25)`,strokeWidth:`1.5`}),v=wd.map(_f),y=Td.map(vf),e[16]=_,e[17]=v,e[18]=y):(_=e[16],v=e[17],y=e[18]);let b;e[19]===g?b=e[20]:(b=(0,G.jsxs)(Jd,{children:[u,(0,G.jsx)(tf,{children:(0,G.jsxs)(nf,{viewBox:`0 0 640 195`,"aria-label":`VT 購入單價走勢圖`,role:`img`,children:[p,m,h,d,f,g,_,v,y]})})]}),e[19]=g,e[20]=b);let S;e[21]===Symbol.for(`react.memo_cache_sentinel`)?(S=(0,G.jsx)(af,{children:(0,G.jsx)(Xd,{children:`購入紀錄`})}),e[21]=S):S=e[21];let C;e[22]===Symbol.for(`react.memo_cache_sentinel`)?(C=(0,G.jsxs)(rf,{children:[S,(0,G.jsx)(of,{children:(0,G.jsxs)(sf,{children:[(0,G.jsx)(`thead`,{children:(0,G.jsxs)(`tr`,{children:[(0,G.jsx)(cf,{children:`日期`}),(0,G.jsx)(cf,{children:`購入股數`}),(0,G.jsx)(cf,{children:`單價 (USD)`})]})}),(0,G.jsx)(`tbody`,{children:ed.map(bf)})]})})]}),e[22]=C):C=e[22];let w;return e[23]===b?w=e[24]:(w=(0,G.jsxs)(Pd,{children:[a,o,b,C]}),e[23]=b,e[24]=w),w},Nd=rc`
+`;function Fu(e){return(0,G.jsx)(wu,{children:e},e)}function Iu(e){let t=e.icon;return(0,G.jsxs)(yu,{children:[(0,G.jsx)(bu,{children:e.corner}),(0,G.jsx)(xu,{children:(0,G.jsx)(t,{})}),(0,G.jsx)(Su,{children:e.title}),(0,G.jsx)(Cu,{children:e.items.map(Fu)})]},e.title)}function Lu(e){return(0,G.jsxs)(Eu,{$active:e.active,children:[(0,G.jsx)(Du,{$active:e.active,children:(0,G.jsx)(Ou,{$active:e.active})}),(0,G.jsxs)(ku,{$active:e.active,$hasItems:!!e.items?.length,children:[e.company?(0,G.jsx)(Au,{$active:e.active,children:e.company}):null,(0,G.jsx)(ju,{children:e.title}),(0,G.jsx)(Mu,{$hasItems:!!e.items?.length,children:e.period}),e.items?(0,G.jsx)(Nu,{children:e.items.map(t=>(0,G.jsx)(Pu,{$active:e.active,children:t},t))}):null]})]},`${e.title}-${e.period}`)}function Ru(e){return(0,G.jsxs)(Eu,{$active:e.active,$compact:e.compact,children:[(0,G.jsx)(Du,{$active:e.active,$compact:e.compact,children:(0,G.jsx)(Ou,{$active:e.active,$compact:e.compact})}),(0,G.jsxs)(ku,{$active:e.active,$compact:e.compact,children:[e.company?(0,G.jsx)(Au,{$active:e.active,children:e.company}):null,(0,G.jsx)(ju,{$compact:e.compact,children:e.title}),(0,G.jsx)(Mu,{$compact:e.compact,children:e.period})]})]},`${e.title}-${e.period}`)}var zu=(0,x.memo)(()=>{let e=(0,Zi.c)(3),t=(0,x.useRef)(null),n,r;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(n=()=>{if(!t.current)return;let e=document.createElement(`script`);return e.src=`https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js`,e.type=`text/javascript`,e.async=!0,e.innerHTML=JSON.stringify({lineWidth:2,lineType:0,chartType:`area`,fontColor:`rgb(106, 109, 120)`,gridLineColor:`rgba(46, 46, 46, 0.06)`,volumeUpColor:`rgba(34, 171, 148, 0.5)`,volumeDownColor:`rgba(247, 82, 95, 0.5)`,backgroundColor:`#ffffff`,widgetFontColor:`#0F0F0F`,upColor:`#22ab94`,downColor:`#f7525f`,borderUpColor:`#22ab94`,borderDownColor:`#f7525f`,wickUpColor:`#22ab94`,wickDownColor:`#f7525f`,colorTheme:`light`,isTransparent:!0,locale:`en`,chartOnly:!0,scalePosition:`right`,scaleMode:`Normal`,fontFamily:`-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif`,valuesTracking:`1`,changeMode:`price-and-percent`,symbols:[[`AMEX:VT|1D`]],dateRanges:[`1d|1`,`1m|30`,`3m|60`,`12m|1D`,`60m|1W`,`all|1M`],fontSize:`10`,headerFontSize:`medium`,autosize:!0,width:`100%`,height:306,noTimeScale:!1,hideDateRanges:!1}),t.current.appendChild(e),()=>{e.remove()}},r=[],e[0]=n,e[1]=r):(n=e[0],r=e[1]),(0,x.useEffect)(n,r);let i;return e[2]===Symbol.for(`react.memo_cache_sentinel`)?(i=(0,G.jsx)(`div`,{className:`tradingview-widget-container`,ref:t,style:{height:280},children:(0,G.jsx)(`div`,{className:`tradingview-widget-container__widget`})}),e[2]=i):i=e[2],i}),Bu=(0,x.memo)(()=>{let e=(0,Zi.c)(4),t=(0,x.useRef)(null),n,r;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(n=()=>{if(!t.current)return;let e=document.createElement(`script`);return e.src=`https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js`,e.type=`text/javascript`,e.async=!0,e.innerHTML=JSON.stringify({symbol:`AMEX:VT`,colorTheme:`light`,isTransparent:!0,locale:`en`,width:`100%`}),t.current.appendChild(e),()=>{e.remove()}},r=[],e[0]=n,e[1]=r):(n=e[0],r=e[1]),(0,x.useEffect)(n,r);let i;e[2]===Symbol.for(`react.memo_cache_sentinel`)?(i=(0,G.jsx)(`div`,{className:`tradingview-widget-container__widget`}),e[2]=i):i=e[2];let a;return e[3]===Symbol.for(`react.memo_cache_sentinel`)?(a=(0,G.jsxs)(`div`,{className:`tradingview-widget-container`,ref:t,children:[i,(0,G.jsxs)(`div`,{className:`tradingview-widget-copyright`,children:[(0,G.jsx)(`a`,{href:`https://www.tradingview.com/symbols/AMEX-VT/`,rel:`noopener nofollow`,target:`_blank`,children:(0,G.jsx)(`span`,{className:`blue-text`,children:`VT price`})}),(0,G.jsx)(`span`,{className:`trademark`,children:` by TradingView`})]})]}),e[3]=a):a=e[3],a}),Vu=new Intl.NumberFormat(`en-US`,{style:`currency`,currency:`USD`,minimumFractionDigits:2,maximumFractionDigits:2}),Hu=new Intl.NumberFormat(`en-US`,{minimumFractionDigits:5,maximumFractionDigits:5,useGrouping:!1}),Uu=new Intl.NumberFormat(`en-US`,{minimumFractionDigits:0,maximumFractionDigits:2}),Wu=new Intl.NumberFormat(`en-US`,{minimumFractionDigits:2,maximumFractionDigits:2}),Z=e=>Number(e.replace(`$`,``)),Gu=e=>{if(Math.abs(e)<.005)return`與平均成本幾乎持平`;let t=`${Wu.format(Math.abs(e))}%`;return e>0?`比平均成本高 ${t}`:`比平均成本低 ${t}`},Ku=e=>{let[t,n,r]=e.split(`/`).map(Number);return new Date(t,n-1,r)},qu=e=>[`一月`,`二月`,`三月`,`四月`,`五月`,`六月`,`七月`,`八月`,`九月`,`十月`,`十一月`,`十二月`][e-1],Ju=e=>{if(!Number.isFinite(e)||e<=0)return 1;let t=10**Math.floor(Math.log10(e)),n=e/t;return n<=1?t:n<=2?2*t:n<=5?5*t:10*t},Yu=55,Xu=585,Zu=15,Qu=135,$u=Xu-Yu,ed=Qu-Zu,td=8,nd=[{month:`2026 年 4 月`,entries:[{date:`2026/04/06`,shares:`1.40090`,price:`$139.910013`}]},{month:`2026 年 3 月`,entries:[{date:`2026/03/27`,shares:`1.00000`,price:`$135.36`},{date:`2026/03/25`,shares:`1.40247`,price:`$139.753241`},{date:`2026/03/20`,shares:`1.00000`,price:`$137.41`},{date:`2026/03/16`,shares:`1.38741`,price:`$141.270487`},{date:`2026/03/09`,shares:`1.00000`,price:`$139.75`},{date:`2026/03/06`,shares:`1.00000`,price:`$142.43`},{date:`2026/03/05`,shares:`1.37359`,price:`$144.147559`},{date:`2026/03/03`,shares:`1.00000`,price:`$142.91`}]},{month:`2026 年 2 月`,entries:[{date:`2026/02/25`,shares:`1.21921`,price:`$148.457253`},{date:`2026/02/17`,shares:`1.24151`,price:`$145.79`},{date:`2026/02/09`,shares:`1.22803`,price:`$146.575899`}]},{month:`2026 年 1 月`,entries:[{date:`2026/01/30`,shares:`1.00000`,price:`$146.13`},{date:`2026/01/14`,shares:`1.00000`,price:`$144.57`},{date:`2026/01/08`,shares:`1.00000`,price:`$143.42`},{date:`2026/01/05`,shares:`1.00000`,price:`$142.835`}]}],rd=nd.flatMap(({entries:e})=>e.map(e=>{let t=Ku(e.date);return{date:e.date,shares:Number(e.shares),price:Z(e.price),timestamp:t.getTime(),month:t.getMonth()+1,sharesLabel:e.shares,priceLabel:e.price}})),id=[...rd].sort((e,t)=>e.timestamp-t.timestamp),ad=rd.reduce((e,t)=>e+t.shares,0),od=rd.reduce((e,t)=>e+t.shares*t.price,0),sd=ad===0?0:od/ad,cd=id[0],ld=id[id.length-1],ud=cd?new Date(new Date(cd.timestamp).getFullYear(),new Date(cd.timestamp).getMonth(),1):new Date,dd=ld?new Date(new Date(ld.timestamp).getFullYear(),new Date(ld.timestamp).getMonth()+1,0):new Date(ud),fd=ud.getTime(),pd=dd.getTime(),md=pd-fd,hd=Math.min(...id.map(e=>e.price)),gd=Math.max(...id.map(e=>e.price)),_d=Ju(id.length>1?(gd-hd)/Math.max(td-1,1):gd||1),vd=Math.floor(hd/_d)*_d,yd=Math.ceil(gd/_d)*_d||_d,Q=yd-vd||_d,bd=e=>md===0?Yu+$u/2:Yu+(e-fd)/md*$u,xd=e=>Zu+(yd-e)/Q*ed,Sd=id.map(e=>({x:bd(e.timestamp),y:xd(e.price),date:e.date,sharesLabel:e.sharesLabel,priceLabel:e.priceLabel,deltaFromAverage:sd===0?0:(e.price-sd)/sd*100})),Cd=[];for(let e=yd;e>=vd-_d/2;e-=_d)Cd.push(Number(e.toFixed(4)));var wd=Cd.map((e,t)=>({label:Uu.format(e),y:xd(e),strong:t===Cd.length-1})),Td=[];if(cd&&ld){let e=new Date(ud),t=new Date(dd.getFullYear(),dd.getMonth(),1);for(;e<=t;)Td.push(new Date(e)),e.setMonth(e.getMonth()+1)}var Ed=Td.slice(1).map(e=>e.getTime()).filter(e=>e>=fd&&e<=pd).map(bd),Dd=Td.map(e=>{let t=Math.max(e.getTime(),fd),n=new Date(e.getFullYear(),e.getMonth()+1,1).getTime();return{x:bd(t+(Math.min(n,pd)-t)/2),label:qu(e.getMonth()+1)}}),Od=xd(sd),kd=168,Ad=72,jd=10,Md=6,$=[{label:`持有股數`,value:Hu.format(ad),unit:`VT`},{label:`平均購入價格`,value:Vu.format(sd),unit:`USD`},{label:`總投入金額`,value:Vu.format(od),unit:`進行中`,active:!0}],Nd=Sd.map(({x:e,y:t})=>`${e},${t}`).join(` `),Pd=()=>{let e=(0,Zi.c)(27),[t,n]=(0,x.useState)(null),r;e[0]===t?r=e[1]:(r=t?(()=>{let e=Math.min(Math.max(t.x-kd/2,8),Xu-kd+8);return{left:e,top:t.y-Ad-jd,arrowOffset:t.x-e}})():null,e[0]=t,e[1]=r);let i=r,a;e[2]===Symbol.for(`react.memo_cache_sentinel`)?(a=(0,G.jsx)(Ld,{children:(0,G.jsxs)(Rd,{children:[(0,G.jsxs)(zd,{children:[(0,G.jsx)(Bd,{children:(0,G.jsx)(yc,{})}),`投資紀錄`]}),(0,G.jsx)(Vd,{children:`投資旅程：VT`}),(0,G.jsx)(Hd,{children:`Vanguard Total World Stock ETF`}),(0,G.jsx)(Ud,{children:`長期被動投資策略的記錄，專注於全球分散配置與持續成長。`})]})}),e[2]=a):a=e[2];let o;e[3]===Symbol.for(`react.memo_cache_sentinel`)?(o=(0,G.jsx)(cf,{children:(0,G.jsx)(Bu,{})}),e[3]=o):o=e[3];let s;e[4]===Symbol.for(`react.memo_cache_sentinel`)?(s=(0,G.jsx)(Wd,{children:$.map(yf)}),e[4]=s):s=e[4];let c;e[5]===Symbol.for(`react.memo_cache_sentinel`)?(c=(0,G.jsxs)(sf,{children:[(0,G.jsx)(Zd,{children:(0,G.jsx)(Qd,{children:`即時走勢`})}),(0,G.jsx)(zu,{})]}),e[5]=c):c=e[5];let l;e[6]===Symbol.for(`react.memo_cache_sentinel`)?(l=(0,G.jsx)(Qd,{children:`購入單價走勢`}),e[6]=l):l=e[6];let u;e[7]===Symbol.for(`react.memo_cache_sentinel`)?(u=(0,G.jsxs)(ef,{children:[(0,G.jsx)(tf,{}),`購入單價`]}),e[7]=u):u=e[7];let d;e[8]===Symbol.for(`react.memo_cache_sentinel`)?(d=(0,G.jsx)(nf,{}),e[8]=d):d=e[8];let f;e[9]===Symbol.for(`react.memo_cache_sentinel`)?(f=(0,G.jsxs)(Zd,{children:[l,(0,G.jsxs)($d,{children:[u,(0,G.jsxs)(ef,{children:[d,`平均 `,Vu.format(sd)]})]})]}),e[9]=f):f=e[9];let p,m,h,g,_;e[10]===Symbol.for(`react.memo_cache_sentinel`)?(_=wd.map(bf),p=(0,G.jsx)(`line`,{x1:Yu,y1:Zu,x2:Yu,y2:Qu,stroke:`rgba(140,46,46,0.25)`,strokeWidth:`1.5`}),m=(0,G.jsx)(`line`,{x1:Yu,y1:Od,x2:Xu,y2:Od,stroke:`rgba(62,50,44,0.35)`,strokeWidth:`1.5`,strokeDasharray:`5,4`}),h=(0,G.jsx)(`polyline`,{points:Nd,fill:`none`,stroke:`#8c2e2e`,strokeWidth:`2`,strokeLinejoin:`round`,strokeLinecap:`round`}),g=Sd.map(e=>(0,G.jsxs)(`g`,{children:[(0,G.jsx)(`circle`,{cx:e.x,cy:e.y,r:`3.5`,fill:`#8c2e2e`,tabIndex:0,role:`button`,"aria-label":`${e.date}，當次買入價 ${e.priceLabel}，${Gu(e.deltaFromAverage)}`,onMouseEnter:()=>n(e),onMouseLeave:()=>n(t=>t?.date===e.date?null:t),onFocus:()=>n(e),onBlur:()=>n(t=>t?.date===e.date?null:t),children:(0,G.jsx)(`title`,{children:`${e.date}\n購入股數 ${e.sharesLabel}\n單價 ${e.priceLabel}`})}),(0,G.jsx)(`circle`,{cx:e.x,cy:e.y,r:`10`,fill:`transparent`,onMouseEnter:()=>n(e),onMouseLeave:()=>n(t=>t?.date===e.date?null:t)})]},`${e.date}-${e.x}`)),e[10]=p,e[11]=m,e[12]=h,e[13]=g,e[14]=_):(p=e[10],m=e[11],h=e[12],g=e[13],_=e[14]);let v;e[15]!==t||e[16]!==i?(v=t&&i?(0,G.jsxs)(`g`,{"aria-hidden":`true`,children:[(0,G.jsx)(`rect`,{x:i.left,y:i.top,width:kd,height:Ad,rx:`2`,fill:`rgba(253, 252, 248, 0.97)`,stroke:`rgba(140, 46, 46, 0.18)`}),(0,G.jsx)(`path`,{d:`M ${t.x} ${t.y} L ${i.left+i.arrowOffset-Md} ${i.top+Ad} L ${i.left+i.arrowOffset+Md} ${i.top+Ad} Z`,fill:`rgba(253, 252, 248, 0.97)`,stroke:`rgba(140, 46, 46, 0.18)`,strokeLinejoin:`round`}),(0,G.jsx)(`text`,{x:i.left+12,y:i.top+15,fontSize:`8`,fontWeight:`700`,letterSpacing:`0.3`,fill:`rgba(62,50,44,0.62)`,children:t.date}),(0,G.jsx)(`text`,{x:i.left+12,y:i.top+30,fontSize:`11`,fontWeight:`900`,letterSpacing:`-0.1`,fill:`rgba(24,19,16,0.92)`,children:`當次買入價 ${t.priceLabel}`}),(0,G.jsx)(`text`,{x:i.left+12,y:i.top+44,fontSize:`8`,fontWeight:`600`,letterSpacing:`0.15`,fill:`rgba(62,50,44,0.66)`,children:`買入 ${t.sharesLabel} 股`}),(0,G.jsx)(`text`,{x:i.left+12,y:i.top+59,fontSize:`8`,fontWeight:`700`,letterSpacing:`0.15`,fill:t.deltaFromAverage>=0?`var(--accent)`:`#2b6d44`,children:Gu(t.deltaFromAverage)})]}):null,e[15]=t,e[16]=i,e[17]=v):v=e[17];let y,b,S;e[18]===Symbol.for(`react.memo_cache_sentinel`)?(y=(0,G.jsx)(`line`,{x1:Yu,y1:Qu,x2:Xu,y2:Qu,stroke:`rgba(140,46,46,0.25)`,strokeWidth:`1.5`}),b=Ed.map(xf),S=Dd.map(Sf),e[18]=y,e[19]=b,e[20]=S):(y=e[18],b=e[19],S=e[20]);let C;e[21]===v?C=e[22]:(C=(0,G.jsxs)(Xd,{children:[f,(0,G.jsx)(rf,{children:(0,G.jsxs)(af,{viewBox:`0 0 640 195`,"aria-label":`VT 購入單價走勢圖`,role:`img`,children:[_,p,m,h,g,v,y,b,S]})})]}),e[21]=v,e[22]=C);let w;e[23]===Symbol.for(`react.memo_cache_sentinel`)?(w=(0,G.jsx)(lf,{children:(0,G.jsx)(Qd,{children:`購入紀錄`})}),e[23]=w):w=e[23];let T;e[24]===Symbol.for(`react.memo_cache_sentinel`)?(T=(0,G.jsxs)(of,{children:[w,(0,G.jsx)(uf,{children:(0,G.jsxs)(df,{children:[(0,G.jsx)(`thead`,{children:(0,G.jsxs)(`tr`,{children:[(0,G.jsx)(ff,{children:`日期`}),(0,G.jsx)(ff,{children:`購入股數`}),(0,G.jsx)(ff,{children:`單價 (USD)`})]})}),(0,G.jsx)(`tbody`,{children:nd.map(wf)})]})})]}),e[24]=T):T=e[24];let E;return e[25]===C?E=e[26]:(E=(0,G.jsxs)(Id,{children:[a,o,s,c,C,T]}),e[25]=C,e[26]=E),E},Fd=rc`
   from {
     opacity: 0;
     transform: translateY(24px);
@@ -904,7 +904,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     opacity: 1;
     transform: translateY(0);
   }
-`,Pd=H.main`
+`,Id=H.main`
   width: min(64rem, calc(100% - 3rem));
   margin: 0 auto;
   padding: 2rem 0 5rem;
@@ -916,12 +916,12 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     width: min(64rem, calc(100% - 2rem));
     padding-top: 1.5rem;
   }
-`,Fd=H.section`
+`,Ld=H.section`
   padding-top: 1rem;
-  animation: ${Nd} 0.7s ease both;
-`,Id=H.div`
+  animation: ${Fd} 0.7s ease both;
+`,Rd=H.div`
   max-width: 38rem;
-`,Ld=H.div`
+`,zd=H.div`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -934,32 +934,32 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-weight: 700;
   letter-spacing: 0.1em;
   background: rgba(253, 252, 248, 0.72);
-`,Rd=H.span`
+`,Bd=H.span`
   display: inline-flex;
   flex-shrink: 0;
   font-size: 0.875rem;
-`,zd=H.h1`
+`,Vd=H.h1`
   margin: 0 0 0.75rem;
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 900;
   letter-spacing: 0.05em;
-`,Bd=H.div`
+`,Hd=H.div`
   margin: -0.2rem 0 0.75rem;
   color: rgba(62, 50, 44, 0.58);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-`,Vd=H.p`
+`,Ud=H.p`
   margin: 0;
   font-size: 0.9375rem;
   line-height: 1.8;
   color: var(--text-muted);
-`,Hd=H.section`
+`,Wd=H.section`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
-  animation: ${Nd} 0.7s ease 0.08s both;
-`,Ud=H.article`
+  animation: ${Fd} 0.7s ease 0.08s both;
+`,Gd=H.article`
   padding: 1.5rem;
   background: rgba(253, 252, 248, 0.92);
   border: 2px solid var(--border-soft);
@@ -974,14 +974,14 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     transform: translateY(-4px);
     box-shadow: var(--shadow);
   }
-`,Wd=H.div`
+`,Kd=H.div`
   margin-bottom: 0.6rem;
   color: var(--text-muted);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-`,Gd=H.div`
+`,qd=H.div`
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -989,7 +989,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-size: 1.75rem;
   font-weight: 900;
   letter-spacing: -0.02em;
-`,Kd=H.span`
+`,Jd=H.span`
   display: inline-flex;
   align-items: center;
   gap: 0.2rem;
@@ -998,26 +998,26 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-`,qd=H.section`
+`,Yd=H.section`
   background: rgba(253, 252, 248, 0.92);
   border: 2px solid var(--border-soft);
   border-radius: 2px;
-  animation: ${Nd} 0.7s ease 0.16s both;
-`,Jd=H(qd)`
+  animation: ${Fd} 0.7s ease 0.16s both;
+`,Xd=H(Yd)`
   padding: 1.5rem;
-`,Yd=H.div`
+`,Zd=H.div`
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
   gap: 0.75rem;
   margin-bottom: 1.25rem;
-`,Xd=H.h2`
+`,Qd=H.h2`
   margin: 0;
   font-size: 1.125rem;
   font-weight: 900;
   letter-spacing: 0.05em;
-`,Zd=H.div`
+`,$d=H.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1026,41 +1026,54 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-`,Qd=H.span`
+`,ef=H.span`
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-`,$d=H.span`
+`,tf=H.span`
   display: inline-block;
   width: 18px;
   height: 2px;
   background: var(--accent);
-`,ef=H.span`
+`,nf=H.span`
   display: inline-block;
   width: 18px;
   height: 0;
   border-top: 2px dashed var(--text-muted);
-`,tf=H.div`
+`,rf=H.div`
   position: relative;
   width: 100%;
-`,nf=H.svg`
+`,af=H.svg`
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
-`,rf=H(qd)`
+`,of=H(Yd)`
   overflow: hidden;
   animation-delay: 0.24s;
-`,af=H.div`
+`,sf=H(Yd)`
+  padding: 1.5rem;
+  animation-delay: 0.3s;
+  height: 400px;
+`,cf=H(Yd)`
+  padding: 0;
+  animation: ${Fd} 0.7s ease 0.1s both;
+  overflow: hidden;
+  line-height: 0;
+
+  iframe {
+    display: block;
+  }
+`,lf=H.div`
   padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-soft);
-`,of=H.div`
+`,uf=H.div`
   overflow-x: auto;
-`,sf=H.table`
+`,df=H.table`
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-`,cf=H.th`
+`,ff=H.th`
   position: sticky;
   top: 0;
   z-index: 1;
@@ -1073,18 +1086,18 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   letter-spacing: 0.12em;
   text-transform: uppercase;
   white-space: nowrap;
-`,lf=H.td`
+`,pf=H.td`
   padding: 0.9rem 1.5rem;
   border-bottom: 1px solid rgba(62, 50, 44, 0.07);
   font-size: 0.875rem;
   font-weight: 500;
   white-space: nowrap;
-`,uf=H(lf)`
+`,mf=H(pf)`
   color: var(--text-muted);
   font-weight: 700;
-`,df=H(lf)`
+`,hf=H(pf)`
   font-weight: 900;
-`,ff=H.tr`
+`,gf=H.tr`
   &:last-child td {
     border-bottom: none;
   }
@@ -1092,9 +1105,9 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   &:hover {
     background: rgba(140, 46, 46, 0.04);
   }
-`,pf=H.tr`
+`,_f=H.tr`
   background: rgba(140, 46, 46, 0.06);
-`,mf=H.td`
+`,vf=H.td`
   padding: 0.5rem 1.5rem;
   border-bottom: 1px solid var(--border-soft);
   color: var(--accent);
@@ -1102,7 +1115,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-`;function hf(e){return(0,G.jsxs)(Ud,{children:[(0,G.jsx)(Wd,{children:e.label}),(0,G.jsxs)(Gd,{children:[e.value,(0,G.jsxs)(Kd,{$active:e.active,children:[e.active?(0,G.jsx)(Lc,{}):null,e.unit]})]})]},e.label)}function gf(e){return(0,G.jsxs)(x.Fragment,{children:[(0,G.jsx)(`line`,{x1:qu,y1:e.y,x2:Ju,y2:e.y,stroke:e.strong?`rgba(140,46,46,0.2)`:`rgba(140,46,46,0.1)`,strokeWidth:e.strong?`1.5`:`1`}),(0,G.jsx)(`text`,{x:`48`,y:e.y+4,fontSize:`9`,fontFamily:`inherit`,textAnchor:`end`,fill:`rgba(62,50,44,0.5)`,children:e.label})]},e.label)}function _f(e){return(0,G.jsx)(`line`,{x1:e,y1:Xu,x2:e,y2:Xu+8,stroke:`rgba(140,46,46,0.3)`,strokeWidth:`1`,strokeDasharray:`3,2`},e)}function vf(e){return(0,G.jsx)(`text`,{x:e.x,y:`168`,fontSize:`8`,fontFamily:`inherit`,textAnchor:`middle`,fill:`rgba(140,46,46,0.6)`,fontWeight:`700`,letterSpacing:`1`,children:e.label},e.label)}function yf(e){return(0,G.jsxs)(ff,{children:[(0,G.jsx)(uf,{children:e.date}),(0,G.jsx)(df,{children:e.shares}),(0,G.jsx)(lf,{children:e.price})]},e.date)}function bf(e){return(0,G.jsxs)(x.Fragment,{children:[(0,G.jsx)(pf,{children:(0,G.jsx)(mf,{colSpan:3,children:e.month})}),e.entries.map(yf)]},e.month)}var xf=[{name:`Calvin Space`,host:`GitHub`,hostIcon:Ac,href:`https://github.com/CalvinWan0101/calvinwan0101.github.io`,description:`以 React、TypeScript 與 Vite 打造的個人作品網站，整合自我介紹、精選專案、投資紀錄與聯絡方式。`,tags:[`React`,`TypeScript`,`Vite`,`styled-components`],desktopImageUrl:`/assets/calvin-space-11-CbOU0gW1.jpg`,mobileImageUrl:`/assets/calvin-space-21-CfXhWrvd.png`,imageAlt:`Calvin Space 封面`},{name:`ezSpec-CSharp`,host:`GitHub`,hostIcon:Ac,href:`https://github.com/CalvinWan0101/ezspec-csharp`,description:`以 C# 實作的 BDD（行為驅動開發）測試框架，靈感來源於 Gherkin 語法。支援以接近自然語言的方式撰寫測試規格，讓業務邏輯與測試行為的描述更貼近真實需求。`,tags:[`C#`,`.NET`,`BDD`,`Testing`],desktopImageUrl:`/assets/ezspec-csharp-cover-11-23oU_1XK.png`,mobileImageUrl:`/assets/ezspec-csharp-cover-21-2zMUPT_6.png`,imageAlt:`ezSpec-CSharp 封面`},{name:`Soul Knight`,host:`GitHub`,hostIcon:Ac,href:`https://github.com/calvinwan0101/soul-knight`,description:`以 C++ 復刻的 Soul Knight 地下城射擊遊戲。實作角色移動、敵人 AI、武器系統與地圖生成等核心機制，探索物件導向設計在遊戲開發中的應用。`,tags:[`C++`,`Game Dev`,`OOP`],desktopImageUrl:`/assets/soul-knight-11-DWxNFOMa.png`,mobileImageUrl:`/assets/soul-knight-21-DeJDlGZf.png`,imageAlt:`Soul Knight 封面`},{name:`Taiwan Examination Assignment`,host:`GitHub`,hostIcon:Ac,href:`https://github.com/calvinwan0101/taiwan-examination-assignment`,description:`模擬台灣大學入學考試個人申請統一分發流程的演算法實作。以程式化方式處理志願序比對、分發優先級與錄取結果，重現真實分發機制的核心邏輯。`,tags:[`演算法`,`模擬`,`資料結構`],desktopImageUrl:`/assets/taiwan-examination-assignment-11-DC2ayvoS.png`,mobileImageUrl:`/assets/taiwan-examination-assignment-21-CbIBflYR.png`,imageAlt:`Taiwan Examination Assignment 封面`}],Sf=()=>{let e=(0,Zi.c)(2),t;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,G.jsxs)(Tf,{children:[(0,G.jsxs)(Ef,{children:[(0,G.jsx)(Sc,{}),`開源專案`]}),(0,G.jsx)(Df,{children:`我的專案`}),(0,G.jsx)(Of,{children:`業餘時間累積的開發作品，涵蓋測試框架、遊戲開發與演算法實作。`})]}),e[0]=t):t=e[0];let n;return e[1]===Symbol.for(`react.memo_cache_sentinel`)?(n=(0,G.jsxs)(wf,{children:[t,(0,G.jsx)(kf,{children:xf.map(Jf)})]}),e[1]=n):n=e[1],n},Cf=rc`
+`;function yf(e){return(0,G.jsxs)(Gd,{children:[(0,G.jsx)(Kd,{children:e.label}),(0,G.jsxs)(qd,{children:[e.value,(0,G.jsxs)(Jd,{$active:e.active,children:[e.active?(0,G.jsx)(Lc,{}):null,e.unit]})]})]},e.label)}function bf(e){return(0,G.jsxs)(x.Fragment,{children:[(0,G.jsx)(`line`,{x1:Yu,y1:e.y,x2:Xu,y2:e.y,stroke:e.strong?`rgba(140,46,46,0.2)`:`rgba(140,46,46,0.1)`,strokeWidth:e.strong?`1.5`:`1`}),(0,G.jsx)(`text`,{x:`48`,y:e.y+4,fontSize:`9`,fontFamily:`inherit`,textAnchor:`end`,fill:`rgba(62,50,44,0.5)`,children:e.label})]},e.label)}function xf(e){return(0,G.jsx)(`line`,{x1:e,y1:Qu,x2:e,y2:Qu+8,stroke:`rgba(140,46,46,0.3)`,strokeWidth:`1`,strokeDasharray:`3,2`},e)}function Sf(e){return(0,G.jsx)(`text`,{x:e.x,y:`168`,fontSize:`8`,fontFamily:`inherit`,textAnchor:`middle`,fill:`rgba(140,46,46,0.6)`,fontWeight:`700`,letterSpacing:`1`,children:e.label},e.label)}function Cf(e){return(0,G.jsxs)(gf,{children:[(0,G.jsx)(mf,{children:e.date}),(0,G.jsx)(hf,{children:e.shares}),(0,G.jsx)(pf,{children:e.price})]},e.date)}function wf(e){return(0,G.jsxs)(x.Fragment,{children:[(0,G.jsx)(_f,{children:(0,G.jsx)(vf,{colSpan:3,children:e.month})}),e.entries.map(Cf)]},e.month)}var Tf=[{name:`Calvin Space`,host:`GitHub`,hostIcon:Ac,href:`https://github.com/CalvinWan0101/calvinwan0101.github.io`,description:`以 React、TypeScript 與 Vite 打造的個人作品網站，整合自我介紹、精選專案、投資紀錄與聯絡方式。`,tags:[`React`,`TypeScript`,`Vite`,`styled-components`],desktopImageUrl:`/assets/calvin-space-11-CbOU0gW1.jpg`,mobileImageUrl:`/assets/calvin-space-21-CfXhWrvd.png`,imageAlt:`Calvin Space 封面`},{name:`ezSpec-CSharp`,host:`GitHub`,hostIcon:Ac,href:`https://github.com/CalvinWan0101/ezspec-csharp`,description:`以 C# 實作的 BDD（行為驅動開發）測試框架，靈感來源於 Gherkin 語法。支援以接近自然語言的方式撰寫測試規格，讓業務邏輯與測試行為的描述更貼近真實需求。`,tags:[`C#`,`.NET`,`BDD`,`Testing`],desktopImageUrl:`/assets/ezspec-csharp-cover-11-23oU_1XK.png`,mobileImageUrl:`/assets/ezspec-csharp-cover-21-2zMUPT_6.png`,imageAlt:`ezSpec-CSharp 封面`},{name:`Soul Knight`,host:`GitHub`,hostIcon:Ac,href:`https://github.com/calvinwan0101/soul-knight`,description:`以 C++ 復刻的 Soul Knight 地下城射擊遊戲。實作角色移動、敵人 AI、武器系統與地圖生成等核心機制，探索物件導向設計在遊戲開發中的應用。`,tags:[`C++`,`Game Dev`,`OOP`],desktopImageUrl:`/assets/soul-knight-11-DWxNFOMa.png`,mobileImageUrl:`/assets/soul-knight-21-DeJDlGZf.png`,imageAlt:`Soul Knight 封面`},{name:`Taiwan Examination Assignment`,host:`GitHub`,hostIcon:Ac,href:`https://github.com/calvinwan0101/taiwan-examination-assignment`,description:`模擬台灣大學入學考試個人申請統一分發流程的演算法實作。以程式化方式處理志願序比對、分發優先級與錄取結果，重現真實分發機制的核心邏輯。`,tags:[`演算法`,`模擬`,`資料結構`],desktopImageUrl:`/assets/taiwan-examination-assignment-11-DC2ayvoS.png`,mobileImageUrl:`/assets/taiwan-examination-assignment-21-CbIBflYR.png`,imageAlt:`Taiwan Examination Assignment 封面`}],Ef=()=>{let e=(0,Zi.c)(2),t;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,G.jsxs)(kf,{children:[(0,G.jsxs)(Af,{children:[(0,G.jsx)(Sc,{}),`開源專案`]}),(0,G.jsx)(jf,{children:`我的專案`}),(0,G.jsx)(Mf,{children:`業餘時間累積的開發作品，涵蓋測試框架、遊戲開發與演算法實作。`})]}),e[0]=t):t=e[0];let n;return e[1]===Symbol.for(`react.memo_cache_sentinel`)?(n=(0,G.jsxs)(Of,{children:[t,(0,G.jsx)(Nf,{children:Tf.map(Qf)})]}),e[1]=n):n=e[1],n},Df=rc`
   from {
     opacity: 0;
     transform: translateY(24px);
@@ -1112,7 +1125,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     opacity: 1;
     transform: translateY(0);
   }
-`,wf=H.main`
+`,Of=H.main`
   width: min(64rem, calc(100% - 3rem));
   margin: 0 auto;
   padding: 2rem 0 5rem;
@@ -1123,13 +1136,13 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   @media (max-width: 720px) {
     width: min(64rem, calc(100% - 2rem));
   }
-`,Tf=H.section`
+`,kf=H.section`
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 1rem 0 0.5rem;
-  animation: ${Cf} 0.7s ease both;
-`,Ef=H.div`
+  animation: ${Df} 0.7s ease both;
+`,Af=H.div`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -1146,22 +1159,22 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   svg {
     font-size: 0.95rem;
   }
-`,Df=H.h1`
+`,jf=H.h1`
   margin: 0 0 0.75rem;
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 900;
   letter-spacing: 0.05em;
-`,Of=H.p`
+`,Mf=H.p`
   margin: 0;
   max-width: 36rem;
   color: var(--text-muted);
   font-size: 0.98rem;
   line-height: 1.9;
-`,kf=H.section`
+`,Nf=H.section`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-`,Af=H.a`
+`,Pf=H.a`
   position: relative;
   display: flex;
   overflow: hidden;
@@ -1173,7 +1186,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     transform 0.25s ease,
     border-color 0.25s ease,
     box-shadow 0.25s ease;
-  animation: ${Cf} 0.7s ease both;
+  animation: ${Df} 0.7s ease both;
 
   &::before {
     content: '';
@@ -1201,7 +1214,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   @media (max-width: 720px) {
     flex-direction: column;
   }
-`,jf=H.div`
+`,Ff=H.div`
   position: relative;
   flex-shrink: 0;
   width: 280px;
@@ -1217,11 +1230,11 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     border-right: 0;
     border-bottom: 1px solid var(--border-soft);
   }
-`,Mf=H.picture`
+`,If=H.picture`
   display: block;
   width: 100%;
   height: 100%;
-`,Nf=H.img`
+`,Lf=H.img`
   display: block;
   width: 100%;
   height: 100%;
@@ -1231,11 +1244,11 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     transform 0.3s ease,
     opacity 0.3s ease;
 
-  ${Af}:hover & {
+  ${Pf}:hover & {
     opacity: 1;
     transform: scale(1.03);
   }
-`,Pf=H.div`
+`,Rf=H.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1244,10 +1257,10 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   width: 100%;
   height: 100%;
   padding: 2rem;
-`,Ff=H.div`
+`,zf=H.div`
   color: rgba(140, 46, 46, 0.45);
   font-size: 2rem;
-`,If=H.div`
+`,Bf=H.div`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -1256,7 +1269,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-`,Lf=H.div`
+`,Vf=H.div`
   position: absolute;
   right: 1rem;
   bottom: 1rem;
@@ -1275,28 +1288,28 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     opacity 0.2s ease,
     transform 0.2s ease;
 
-  ${Af}:hover & {
+  ${Pf}:hover & {
     opacity: 1;
     transform: translateX(0);
   }
-`,Rf=H.div`
+`,Hf=H.div`
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 1.75rem;
-`,zf=H.div`
+`,Uf=H.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
-`,Bf=H.h2`
+`,Wf=H.h2`
   margin: 0;
   font-size: 1.2rem;
   font-weight: 900;
   letter-spacing: 0.03em;
-`,Vf=H.span`
+`,Gf=H.span`
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
@@ -1312,12 +1325,12 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   svg {
     font-size: 0.85rem;
   }
-`,Hf=H.p`
+`,Kf=H.p`
   margin: 0;
   color: var(--text-muted);
   font-size: 0.92rem;
   line-height: 1.85;
-`,Uf=H.div`
+`,qf=H.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -1328,11 +1341,11 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     flex-direction: column;
     align-items: flex-start;
   }
-`,Wf=H.div`
+`,Jf=H.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-`,Gf=H.span`
+`,Yf=H.span`
   padding: 0.24rem 0.65rem;
   border: 1px solid var(--border-soft);
   border-radius: 2px;
@@ -1340,7 +1353,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-`,Kf=H.span`
+`,Xf=H.span`
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -1349,7 +1362,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   font-weight: 700;
   letter-spacing: 0.08em;
   white-space: nowrap;
-`;function qf(e){return(0,G.jsx)(Gf,{children:e},e)}function Jf(e){let t=e.hostIcon;return(0,G.jsxs)(Af,{href:e.href,target:`_blank`,rel:`noreferrer`,"aria-label":`前往 ${e.name}`,children:[(0,G.jsxs)(jf,{children:[e.desktopImageUrl?(0,G.jsxs)(Mf,{children:[e.mobileImageUrl?(0,G.jsx)(`source`,{media:`(max-width: 720px)`,srcSet:e.mobileImageUrl}):null,(0,G.jsx)(Nf,{src:e.desktopImageUrl,alt:e.imageAlt??e.name})]}):(0,G.jsxs)(Pf,{children:[(0,G.jsx)(Ff,{children:(0,G.jsx)(Dc,{})}),(0,G.jsxs)(If,{children:[(0,G.jsx)(jc,{}),e.name]})]}),(0,G.jsx)(Lf,{children:(0,G.jsx)(W,{})})]}),(0,G.jsxs)(Rf,{children:[(0,G.jsxs)(zf,{children:[(0,G.jsx)(Bf,{children:e.name}),(0,G.jsxs)(Vf,{children:[(0,G.jsx)(t,{}),e.host]})]}),(0,G.jsx)(Hf,{children:e.description}),(0,G.jsxs)(Uf,{children:[(0,G.jsx)(Wf,{children:e.tags.map(qf)}),(0,G.jsxs)(Kf,{children:[(0,G.jsx)(Mc,{}),`檢視原始碼`]})]})]})]},e.name)}var Yf=()=>{let e=(0,Zi.c)(6),t;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,G.jsx)(Qf,{"aria-hidden":`true`}),e[0]=t):t=e[0];let n,r;e[1]===Symbol.for(`react.memo_cache_sentinel`)?(n=(0,G.jsx)(tp,{children:(0,G.jsx)(np,{children:`404`})}),r=(0,G.jsx)(rp,{}),e[1]=n,e[2]=r):(n=e[1],r=e[2]);let i;e[3]===Symbol.for(`react.memo_cache_sentinel`)?(i=(0,G.jsx)(ap,{children:`此頁面不存在`}),e[3]=i):i=e[3];let a;e[4]===Symbol.for(`react.memo_cache_sentinel`)?(a=(0,G.jsxs)(ip,{children:[i,(0,G.jsxs)(op,{children:[`你所尋找的頁面可能已移除、更名，`,(0,G.jsx)(`br`,{}),`或從未存在於此。`]})]}),e[4]=a):a=e[4];let o;return e[5]===Symbol.for(`react.memo_cache_sentinel`)?(o=(0,G.jsxs)(Zf,{children:[t,(0,G.jsx)($f,{children:(0,G.jsxs)(ep,{children:[n,r,a,(0,G.jsx)(sp,{children:(0,G.jsxs)(cp,{to:`/`,children:[(0,G.jsx)(Rc,{}),`返回主頁`]})})]})})]}),e[5]=o):o=e[5],o},Xf=rc`
+`;function Zf(e){return(0,G.jsx)(Yf,{children:e},e)}function Qf(e){let t=e.hostIcon;return(0,G.jsxs)(Pf,{href:e.href,target:`_blank`,rel:`noreferrer`,"aria-label":`前往 ${e.name}`,children:[(0,G.jsxs)(Ff,{children:[e.desktopImageUrl?(0,G.jsxs)(If,{children:[e.mobileImageUrl?(0,G.jsx)(`source`,{media:`(max-width: 720px)`,srcSet:e.mobileImageUrl}):null,(0,G.jsx)(Lf,{src:e.desktopImageUrl,alt:e.imageAlt??e.name})]}):(0,G.jsxs)(Rf,{children:[(0,G.jsx)(zf,{children:(0,G.jsx)(Dc,{})}),(0,G.jsxs)(Bf,{children:[(0,G.jsx)(jc,{}),e.name]})]}),(0,G.jsx)(Vf,{children:(0,G.jsx)(W,{})})]}),(0,G.jsxs)(Hf,{children:[(0,G.jsxs)(Uf,{children:[(0,G.jsx)(Wf,{children:e.name}),(0,G.jsxs)(Gf,{children:[(0,G.jsx)(t,{}),e.host]})]}),(0,G.jsx)(Kf,{children:e.description}),(0,G.jsxs)(qf,{children:[(0,G.jsx)(Jf,{children:e.tags.map(Zf)}),(0,G.jsxs)(Xf,{children:[(0,G.jsx)(Mc,{}),`檢視原始碼`]})]})]})]},e.name)}var $f=()=>{let e=(0,Zi.c)(6),t;e[0]===Symbol.for(`react.memo_cache_sentinel`)?(t=(0,G.jsx)(np,{"aria-hidden":`true`}),e[0]=t):t=e[0];let n,r;e[1]===Symbol.for(`react.memo_cache_sentinel`)?(n=(0,G.jsx)(ap,{children:(0,G.jsx)(op,{children:`404`})}),r=(0,G.jsx)(sp,{}),e[1]=n,e[2]=r):(n=e[1],r=e[2]);let i;e[3]===Symbol.for(`react.memo_cache_sentinel`)?(i=(0,G.jsx)(lp,{children:`此頁面不存在`}),e[3]=i):i=e[3];let a;e[4]===Symbol.for(`react.memo_cache_sentinel`)?(a=(0,G.jsxs)(cp,{children:[i,(0,G.jsxs)(up,{children:[`你所尋找的頁面可能已移除、更名，`,(0,G.jsx)(`br`,{}),`或從未存在於此。`]})]}),e[4]=a):a=e[4];let o;return e[5]===Symbol.for(`react.memo_cache_sentinel`)?(o=(0,G.jsxs)(tp,{children:[t,(0,G.jsx)(rp,{children:(0,G.jsxs)(ip,{children:[n,r,a,(0,G.jsx)(dp,{children:(0,G.jsxs)(fp,{to:`/`,children:[(0,G.jsx)(Rc,{}),`返回主頁`]})})]})})]}),e[5]=o):o=e[5],o},ep=rc`
   from {
     opacity: 0;
     transform: translateY(24px);
@@ -1359,10 +1372,10 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     opacity: 1;
     transform: translateY(0);
   }
-`,Zf=H.div`
+`,tp=H.div`
   position: relative;
   isolation: isolate;
-`,Qf=H.div`
+`,np=H.div`
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -1373,7 +1386,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     linear-gradient(to bottom, rgba(140, 46, 46, 0.22) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(circle at center, black 38%, transparent 100%);
-`,$f=H.main`
+`,rp=H.main`
   position: relative;
   z-index: 1;
   min-height: calc(100vh - 12rem);
@@ -1385,7 +1398,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     min-height: calc(100vh - 10rem);
     padding-inline: 1rem;
   }
-`,ep=H.section`
+`,ip=H.section`
   width: min(100%, 42rem);
   display: flex;
   flex-direction: column;
@@ -1393,49 +1406,49 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   gap: 2rem;
   padding: 3rem clamp(1.5rem, 3vw, 2.75rem);
   text-align: center;
-  animation: ${Xf} 0.6s ease both;
+  animation: ${ep} 0.6s ease both;
 
   @media (max-width: 720px) {
     gap: 1.5rem;
     padding-block: 2.5rem;
   }
-`,tp=H.div`
+`,ap=H.div`
   position: relative;
   line-height: 1;
   user-select: none;
-`,np=H.span`
+`,op=H.span`
   display: block;
   font-size: clamp(7rem, 22vw, 12rem);
   font-weight: 900;
   letter-spacing: 0.05em;
   color: transparent;
   -webkit-text-stroke: 2px var(--accent);
-`,rp=H.div`
+`,sp=H.div`
   width: 3rem;
   height: 2px;
   background: var(--accent);
   opacity: 0.4;
-`,ip=H.div`
+`,cp=H.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.9rem;
-`,ap=H.h1`
+`,lp=H.h1`
   margin: 0;
   font-size: clamp(1.5rem, 2vw, 2rem);
   font-weight: 900;
   letter-spacing: 0.1em;
-`,op=H.p`
+`,up=H.p`
   margin: 0;
   font-size: 0.95rem;
   line-height: 1.9;
   color: var(--text-muted);
-`,sp=H.div`
+`,dp=H.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.9rem;
-`,cp=H(Ai)`
+`,fp=H(Ai)`
   ${`
   display: inline-flex;
   align-items: center;
@@ -1464,4 +1477,4 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     background: #702424;
     border-color: #702424;
   }
-`,lp=Ti(Br((0,G.jsxs)(Lr,{path:`/`,element:(0,G.jsx)(bl,{}),children:[(0,G.jsx)(Lr,{index:!0,element:(0,G.jsx)(Zl,{})}),(0,G.jsx)(Lr,{path:`contact`,element:(0,G.jsx)(Tl,{})}),(0,G.jsx)(Lr,{path:`projects`,element:(0,G.jsx)(Sf,{})}),(0,G.jsx)(Lr,{path:`portfolio`,element:(0,G.jsx)($,{})}),(0,G.jsx)(Lr,{path:`*`,element:(0,G.jsx)(Yf,{})})]})));(0,Xi.createRoot)(document.getElementById(`root`)).render((0,G.jsx)(x.StrictMode,{children:(0,G.jsx)(qi,{router:lp})}));
+`,pp=Ti(Br((0,G.jsxs)(Lr,{path:`/`,element:(0,G.jsx)(bl,{}),children:[(0,G.jsx)(Lr,{index:!0,element:(0,G.jsx)(Zl,{})}),(0,G.jsx)(Lr,{path:`contact`,element:(0,G.jsx)(Tl,{})}),(0,G.jsx)(Lr,{path:`projects`,element:(0,G.jsx)(Ef,{})}),(0,G.jsx)(Lr,{path:`portfolio`,element:(0,G.jsx)(Pd,{})}),(0,G.jsx)(Lr,{path:`*`,element:(0,G.jsx)($f,{})})]})));(0,Xi.createRoot)(document.getElementById(`root`)).render((0,G.jsx)(x.StrictMode,{children:(0,G.jsx)(qi,{router:pp})}));

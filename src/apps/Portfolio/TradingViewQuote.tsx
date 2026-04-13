@@ -27,10 +27,11 @@ export const TradingViewQuote = memo(() => {
     <div className="tradingview-widget-container" ref={container}>
       <div className="tradingview-widget-container__widget"></div>
       <div className="tradingview-widget-copyright">
+        <span className="trademark">即時報價由 </span>
         <a href="https://www.tradingview.com/symbols/AMEX-VT/" rel="noopener nofollow" target="_blank">
-          <span className="blue-text">VT price</span>
+          <span className="blue-text">TradingView</span>
         </a>
-        <span className="trademark"> by TradingView</span>
+        <span className="trademark"> 提供</span>
       </div>
     </div>
   )

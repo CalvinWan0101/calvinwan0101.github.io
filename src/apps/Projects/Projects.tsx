@@ -27,7 +27,7 @@ const projects: ProjectItem[] = [
     name: 'Calvin Forge',
     host: 'GitHub',
     hostIcon: FiGithub,
-    href: 'https://github.com/CalvinWan0101/calvinwan0101.github.io',
+    href: 'https://github.com/CalvinWan0101/calvin-forge',
     description:
       '以 React、TypeScript 與 Vite 打造的個人作品網站，整合自我介紹、精選專案、投資紀錄與聯絡方式。',
     tags: ['React', 'TypeScript', 'Vite', 'styled-components'],

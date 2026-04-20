@@ -14,7 +14,7 @@
           "regexp": ""
         },
         "background": {
-          "beginsPattern": "Calvin Space@0.0.0 dev",
+          "beginsPattern": "Calvin Forge@0.0.0 dev",
           "endsPattern": ".*"
         }
       }

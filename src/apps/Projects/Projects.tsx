@@ -24,7 +24,7 @@ type ProjectItem = {
 
 const projects: ProjectItem[] = [
   {
-    name: 'Calvin Space',
+    name: 'Calvin Forge',
     host: 'GitHub',
     hostIcon: FiGithub,
     href: 'https://github.com/CalvinWan0101/calvinwan0101.github.io',

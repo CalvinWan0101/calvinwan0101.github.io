@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { FiArrowUpRight, FiTrendingUp } from 'react-icons/fi'
 import styled, { keyframes } from 'styled-components'
 import { TradingViewOverview } from './TradingViewOverview'
@@ -48,8 +48,74 @@ type ParsedPurchaseEntry = {
   price: number
   timestamp: number
   month: number
+  monthKey: string
+  monthLabel: string
   sharesLabel: string
   priceLabel: string
+  investedLabel: string
+}
+
+type DropdownOption = {
+  value: string
+  label: string
+}
+
+type MonthDropdownProps = {
+  id: string
+  value: string
+  options: DropdownOption[]
+  allLabel: string
+  onChange: (value: string) => void
+}
+
+const MonthDropdown = ({ id, value, options, allLabel, onChange }: MonthDropdownProps) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const wrapRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  const allOptions: DropdownOption[] = [{ value: 'all', label: allLabel }, ...options]
+  const selectedLabel = allOptions.find((o) => o.value === value)?.label ?? allLabel
+
+  return (
+    <DropdownWrap ref={wrapRef}>
+      <DropdownButton
+        type="button"
+        id={id}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen((open) => !open)}
+      >
+        {selectedLabel}
+        <DropdownChevron $isOpen={isOpen} aria-hidden="true" />
+      </DropdownButton>
+      <DropdownPanel $isOpen={isOpen} role="listbox" aria-label="月份篩選">
+        {allOptions.map((option) => (
+          <DropdownOptionButton
+            key={option.value}
+            type="button"
+            role="option"
+            aria-selected={value === option.value}
+            $active={value === option.value}
+            onClick={() => {
+              onChange(option.value)
+              setIsOpen(false)
+            }}
+          >
+            {option.label}
+          </DropdownOptionButton>
+        ))}
+      </DropdownPanel>
+    </DropdownWrap>
+  )
 }
 
 const currencyFormatter = new Intl.NumberFormat('en-US', {
@@ -96,6 +162,14 @@ const createMonthName = (month: number) =>
   ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'][
   month - 1
   ]
+
+const createMonthKey = (date: Date) => {
+  const year = date.getFullYear()
+  const month = `${date.getMonth() + 1}`.padStart(2, '0')
+  return `${year}-${month}`
+}
+
+const createMonthLabel = (date: Date) => `${date.getFullYear()} 年 ${date.getMonth() + 1} 月`
 
 const getNiceStep = (value: number) => {
   if (!Number.isFinite(value) || value <= 0) {
@@ -178,8 +252,11 @@ const purchaseEntries: ParsedPurchaseEntry[] = purchaseHistory.flatMap(({ entrie
       price: parseCurrency(entry.price),
       timestamp: date.getTime(),
       month: date.getMonth() + 1,
+      monthKey: createMonthKey(date),
+      monthLabel: createMonthLabel(date),
       sharesLabel: entry.shares,
       priceLabel: entry.price,
+      investedLabel: currencyFormatter.format(Number(entry.shares) * parseCurrency(entry.price)),
     }
   }),
 )
@@ -300,9 +377,41 @@ const summaryCards: SummaryCardItem[] = [
 ]
 
 const linePoints = chartPoints.map(({ x, y }) => `${x},${y}`).join(' ')
+const historyPageSize = 5
+const currentMonthKey = createMonthKey(new Date())
 
 export const Portfolio = () => {
   const [hoveredPoint, setHoveredPoint] = useState<ChartPoint | null>(null)
+  const [selectedMonth, setSelectedMonth] = useState(currentMonthKey)
+  const [currentHistoryPage, setCurrentHistoryPage] = useState(1)
+
+  const historyMonthOptions = Array.from(
+    new Map(purchaseEntries.map((entry) => [entry.monthKey, entry.monthLabel])).entries(),
+  ).map(([value, label]) => ({
+    value,
+    label,
+  }))
+
+  const filteredHistoryEntries = purchaseEntries.filter((entry) =>
+    selectedMonth === 'all' ? true : entry.monthKey === selectedMonth,
+  )
+
+  const historyPageCount = Math.max(1, Math.ceil(filteredHistoryEntries.length / historyPageSize))
+  const safeCurrentHistoryPage = Math.min(currentHistoryPage, historyPageCount)
+  const historyPageStart = (safeCurrentHistoryPage - 1) * historyPageSize
+  const paginatedHistoryEntries = filteredHistoryEntries.slice(
+    historyPageStart,
+    historyPageStart + historyPageSize,
+  )
+  const paddedHistoryEntries = Array.from({ length: historyPageSize }, (_, index) =>
+    paginatedHistoryEntries[index] ?? null,
+  )
+
+  const paginationItems = Array.from({ length: historyPageCount }, (_, index) => index + 1)
+  const selectedMonthLabel =
+    selectedMonth === 'all'
+      ? '全部月份'
+      : historyMonthOptions.find((option) => option.value === selectedMonth)?.label ?? createMonthLabel(new Date())
 
   const tooltipPosition = hoveredPoint
     ? (() => {
@@ -559,6 +668,16 @@ export const Portfolio = () => {
       <HistoryCard>
         <HistoryHeader>
           <SectionTitle>購入紀錄</SectionTitle>
+          <MonthDropdown
+            id="portfolio-history-month"
+            value={selectedMonth}
+            options={historyMonthOptions}
+            allLabel="全部月份"
+            onChange={(value) => {
+              setSelectedMonth(value)
+              setCurrentHistoryPage(1)
+            }}
+          />
         </HistoryHeader>
 
         <TableScroll>
@@ -568,26 +687,61 @@ export const Portfolio = () => {
                 <TableHeadCell>日期</TableHeadCell>
                 <TableHeadCell>購入股數</TableHeadCell>
                 <TableHeadCell>單價 (USD)</TableHeadCell>
+                <TableHeadCell>投入金額</TableHeadCell>
               </tr>
             </thead>
             <tbody>
-              {purchaseHistory.map((group) => (
-                <Fragment key={group.month}>
-                  <MonthSeparator>
-                    <MonthCell colSpan={3}>{group.month}</MonthCell>
-                  </MonthSeparator>
-                  {group.entries.map((entry) => (
-                    <TableRow key={entry.date}>
-                      <DateCell>{entry.date}</DateCell>
-                      <SharesCell>{entry.shares}</SharesCell>
-                      <TableCell>{entry.price}</TableCell>
-                    </TableRow>
-                  ))}
-                </Fragment>
+              {paddedHistoryEntries.map((entry, index) => (
+                <TableRow key={entry ? `${entry.monthKey}-${entry.date}-${entry.sharesLabel}` : `empty-row-${index}`}>
+                  <DateCell>{entry?.date ?? '\u00A0'}</DateCell>
+                  <SharesCell>{entry?.sharesLabel ?? '\u00A0'}</SharesCell>
+                  <TableCell>{entry?.priceLabel ?? '\u00A0'}</TableCell>
+                  <TableCell>{entry?.investedLabel ?? '\u00A0'}</TableCell>
+                </TableRow>
               ))}
             </tbody>
           </Table>
         </TableScroll>
+
+        <PaginationBar>
+          <PaginationStatus>
+            {filteredHistoryEntries.length === 0
+              ? `${selectedMonthLabel} 目前沒有符合條件的購買紀錄`
+              : historyPageCount > 1
+                ? `共 ${filteredHistoryEntries.length} 筆・第 ${safeCurrentHistoryPage} / ${historyPageCount} 頁`
+                : `共 ${filteredHistoryEntries.length} 筆`}
+          </PaginationStatus>
+          <PaginationControls>
+            {historyPageCount > 1 && (
+              <PaginationButton
+                type="button"
+                disabled={safeCurrentHistoryPage === 1}
+                onClick={() => setCurrentHistoryPage((page) => Math.max(1, page - 1))}
+              >
+                上一頁
+              </PaginationButton>
+            )}
+            {historyPageCount > 1 && paginationItems.map((page) => (
+              <PaginationButton
+                key={page}
+                type="button"
+                $active={page === safeCurrentHistoryPage}
+                onClick={() => setCurrentHistoryPage(page)}
+              >
+                {page}
+              </PaginationButton>
+            ))}
+            {historyPageCount > 1 && (
+              <PaginationButton
+                type="button"
+                disabled={safeCurrentHistoryPage === historyPageCount}
+                onClick={() => setCurrentHistoryPage((page) => Math.min(historyPageCount, page + 1))}
+              >
+                下一頁
+              </PaginationButton>
+            )}
+          </PaginationControls>
+        </PaginationBar>
       </HistoryCard>
     </Main>
   )
@@ -818,8 +972,103 @@ const QuoteStrip = styled(SurfaceCard)`
 `
 
 const HistoryHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-soft);
+`
+
+const DropdownWrap = styled.div`
+  position: relative;
+  display: inline-flex;
+
+  @media (max-width: 720px) {
+    flex: 1;
+    min-width: 0;
+  }
+`
+
+const DropdownButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  min-height: 2.25rem;
+  padding: 0.45rem 1rem;
+  border: 1px solid rgba(23, 30, 28, 0.14);
+  border-radius: 999px;
+  background: rgba(244, 241, 225, 0.98);
+  color: inherit;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+
+  @media (max-width: 720px) {
+    width: 100%;
+    min-width: 0;
+  }
+
+  &:hover {
+    background: rgba(180, 99, 62, 0.12);
+    color: var(--accent);
+  }
+`
+
+const DropdownChevron = styled.span<{ $isOpen: boolean }>`
+  display: inline-block;
+  flex-shrink: 0;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: ${({ $isOpen }) => ($isOpen ? 'translateY(15%) rotate(-135deg)' : 'translateY(-20%) rotate(45deg)')};
+  transition: transform 0.2s ease;
+`
+
+const DropdownPanel = styled.div<{ $isOpen: boolean }>`
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 100%;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  border: 1px solid rgba(23, 30, 28, 0.14);
+  border-radius: 1.25rem;
+  background: rgba(244, 241, 225, 0.98);
+  box-shadow: 0 1rem 2.5rem rgba(23, 30, 28, 0.12);
+  z-index: 10;
+  opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
+  transform: ${({ $isOpen }) => ($isOpen ? 'translateY(0)' : 'translateY(-0.5rem)')};
+  pointer-events: ${({ $isOpen }) => ($isOpen ? 'auto' : 'none')};
+  transition: opacity 0.2s ease, transform 0.2s ease;
+`
+
+const DropdownOptionButton = styled.button<{ $active?: boolean }>`
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 999px;
+  background: ${({ $active }) => ($active ? 'rgba(180, 99, 62, 0.12)' : 'transparent')};
+  color: ${({ $active }) => ($active ? 'var(--accent)' : 'inherit')};
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    background: rgba(180, 99, 62, 0.12);
+    color: var(--accent);
+  }
 `
 
 const TableScroll = styled.div`
@@ -849,9 +1098,12 @@ const TableHeadCell = styled.th`
 
 const TableCell = styled.td`
   padding: 0.9rem 1.5rem;
+  height: 3.5rem;
   border-bottom: 1px solid rgba(62, 50, 44, 0.07);
   font-size: 0.875rem;
   font-weight: 500;
+  line-height: 1.4;
+  vertical-align: middle;
   white-space: nowrap;
 `
 
@@ -874,16 +1126,59 @@ const TableRow = styled.tr`
   }
 `
 
-const MonthSeparator = styled.tr`
-  background: rgba(140, 46, 46, 0.06);
+const PaginationBar = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+  padding: 1rem 1.5rem 1.2rem;
+  border-top: 1px solid var(--border-soft);
+
+  @media (max-width: 720px) {
+    align-items: stretch;
+  }
 `
 
-const MonthCell = styled.td`
-  padding: 0.5rem 1.5rem;
-  border-bottom: 1px solid var(--border-soft);
-  color: var(--accent);
-  font-size: 0.7rem;
+const PaginationStatus = styled.div`
+  color: var(--text-muted);
+  font-size: 0.76rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+`
+
+const PaginationControls = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+
+  @media (max-width: 720px) {
+    width: 100%;
+  }
+`
+
+const PaginationButton = styled.button<{ $active?: boolean }>`
+  padding: 0.45rem 0.75rem;
+  border: 1px solid ${({ $active }) => ($active ? 'var(--accent)' : 'rgba(140, 46, 46, 0.18)')};
+  background: ${({ $active }) => ($active ? 'rgba(140, 46, 46, 0.12)' : 'rgba(253, 252, 248, 0.92)')};
+  color: ${({ $active }) => ($active ? 'var(--accent)' : 'var(--text)')};
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+
+  &:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
 `

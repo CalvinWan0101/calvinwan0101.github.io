@@ -1,14 +1,12 @@
 import type { IconType } from 'react-icons'
 import { FiArrowRight, FiExternalLink, FiFolder, FiGithub, FiImage, FiMonitor } from 'react-icons/fi'
 import styled, { keyframes } from 'styled-components'
-import calvinSpaceCoverDesktop from '../../assets/Projects/calvin-space-11.jpg'
-import calvinSpaceCoverMobile from '../../assets/Projects/calvin-space-21.png'
+import calvinForgeCoverDesktop from '../../assets/Projects/calvin-forge-11.png'
+import calvinForgeCoverMobile from '../../assets/Projects/calvin-forge-21.png'
 import ezspecCsharpCoverDesktop from '../../assets/Projects/ezspec-csharp-cover-11.png'
 import ezspecCsharpCoverMobile from '../../assets/Projects/ezspec-csharp-cover-21.png'
 import soulKnightCoverDesktop from '../../assets/Projects/soul-knight-11.png'
 import soulKnightCoverMobile from '../../assets/Projects/soul-knight-21.png'
-import taiwanExaminationAssignmentCoverDesktop from '../../assets/Projects/taiwan-examination-assignment-11.png'
-import taiwanExaminationAssignmentCoverMobile from '../../assets/Projects/taiwan-examination-assignment-21.png'
 
 type ProjectItem = {
   name: string
@@ -31,9 +29,9 @@ const projects: ProjectItem[] = [
     description:
       '以 React、TypeScript 與 Vite 打造的個人作品網站，整合自我介紹、精選專案、投資紀錄與聯絡方式。',
     tags: ['React', 'TypeScript', 'Vite', 'styled-components'],
-    desktopImageUrl: calvinSpaceCoverDesktop,
-    mobileImageUrl: calvinSpaceCoverMobile,
-    imageAlt: 'Calvin Space 封面',
+    desktopImageUrl: calvinForgeCoverDesktop,
+    mobileImageUrl: calvinForgeCoverMobile,
+    imageAlt: 'Calvin Forge 封面',
   },
   {
     name: 'ezSpec-CSharp',
@@ -58,19 +56,7 @@ const projects: ProjectItem[] = [
     desktopImageUrl: soulKnightCoverDesktop,
     mobileImageUrl: soulKnightCoverMobile,
     imageAlt: 'Soul Knight 封面',
-  },
-  {
-    name: 'Taiwan Examination Assignment',
-    host: 'GitHub',
-    hostIcon: FiGithub,
-    href: 'https://github.com/calvinwan0101/taiwan-examination-assignment',
-    description:
-      '模擬台灣大學入學考試個人申請統一分發流程的演算法實作。以程式化方式處理志願序比對、分發優先級與錄取結果，重現真實分發機制的核心邏輯。',
-    tags: ['演算法', '模擬', '資料結構'],
-    desktopImageUrl: taiwanExaminationAssignmentCoverDesktop,
-    mobileImageUrl: taiwanExaminationAssignmentCoverMobile,
-    imageAlt: 'Taiwan Examination Assignment 封面',
-  },
+  }
 ]
 
 export const Projects = () => {

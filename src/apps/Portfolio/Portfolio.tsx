@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
-import { FiArrowUpRight, FiTrendingUp } from 'react-icons/fi'
+import { FiArrowUpRight, FiChevronLeft, FiChevronRight, FiTrendingUp } from 'react-icons/fi'
 import styled, { keyframes } from 'styled-components'
 import { TradingViewOverview } from './TradingViewOverview'
 import { TradingViewQuote } from './TradingViewQuote'
@@ -12,6 +12,7 @@ type SummaryCardItem = {
 }
 
 type ChartPoint = {
+  id: string
   x: number
   y: number
   date: string
@@ -43,6 +44,7 @@ type PurchaseGroup = {
 }
 
 type ParsedPurchaseEntry = {
+  id: string
   date: string
   shares: number
   price: number
@@ -243,17 +245,19 @@ const purchaseHistory: PurchaseGroup[] = [
   },
 ]
 
-const purchaseEntries: ParsedPurchaseEntry[] = purchaseHistory.flatMap(({ entries }) =>
-  entries.map((entry) => {
+const purchaseEntries: ParsedPurchaseEntry[] = purchaseHistory.flatMap(({ entries }, groupIndex) =>
+  entries.map((entry, entryIndex) => {
     const date = parseDate(entry.date)
+    const monthKey = createMonthKey(date)
 
     return {
+      id: `${monthKey}-${entry.date}-${entry.shares}-${entry.price}-${groupIndex}-${entryIndex}`,
       date: entry.date,
       shares: Number(entry.shares),
       price: parseCurrency(entry.price),
       timestamp: date.getTime(),
       month: date.getMonth() + 1,
-      monthKey: createMonthKey(date),
+      monthKey,
       monthLabel: createMonthLabel(date),
       sharesLabel: entry.shares,
       priceLabel: entry.price,
@@ -304,6 +308,7 @@ const toChartX = (timestamp: number) => {
 const toChartY = (price: number) => chartTop + ((yAxisMax - price) / yAxisRange) * chartHeight
 
 const chartPoints: ChartPoint[] = chartEntries.map((entry) => ({
+  id: entry.id,
   x: toChartX(entry.timestamp),
   y: toChartY(entry.price),
   date: entry.date,
@@ -379,11 +384,10 @@ const summaryCards: SummaryCardItem[] = [
 
 const linePoints = chartPoints.map(({ x, y }) => `${x},${y}`).join(' ')
 const historyPageSize = 5
-const currentMonthKey = createMonthKey(new Date())
 
 export const Portfolio = () => {
   const [hoveredPoint, setHoveredPoint] = useState<ChartPoint | null>(null)
-  const [selectedMonth, setSelectedMonth] = useState(currentMonthKey)
+  const [selectedMonth, setSelectedMonth] = useState('all')
   const [currentHistoryPage, setCurrentHistoryPage] = useState(1)
 
   const historyMonthOptions = Array.from(
@@ -408,7 +412,6 @@ export const Portfolio = () => {
     paginatedHistoryEntries[index] ?? null,
   )
 
-  const paginationItems = Array.from({ length: historyPageCount }, (_, index) => index + 1)
   const selectedMonthLabel =
     selectedMonth === 'all'
       ? '全部月份'
@@ -537,7 +540,7 @@ export const Portfolio = () => {
             />
 
             {chartPoints.map((point) => (
-              <g key={`${point.date}-${point.x}`}>
+              <g key={point.id}>
                 <circle
                   cx={point.x}
                   cy={point.y}
@@ -693,7 +696,7 @@ export const Portfolio = () => {
             </thead>
             <tbody>
               {paddedHistoryEntries.map((entry, index) => (
-                <TableRow key={entry ? `${entry.monthKey}-${entry.date}-${entry.sharesLabel}` : `empty-row-${index}`}>
+                <TableRow key={entry ? entry.id : `empty-row-${index}`}>
                   <DateCell>{entry?.date ?? '\u00A0'}</DateCell>
                   <SharesCell>{entry?.sharesLabel ?? '\u00A0'}</SharesCell>
                   <TableCell>{entry?.priceLabel ?? '\u00A0'}</TableCell>
@@ -716,29 +719,23 @@ export const Portfolio = () => {
             {historyPageCount > 1 && (
               <PaginationButton
                 type="button"
+                aria-label="上一頁"
                 disabled={safeCurrentHistoryPage === 1}
                 onClick={() => setCurrentHistoryPage((page) => Math.max(1, page - 1))}
               >
+                <FiChevronLeft />
                 上一頁
               </PaginationButton>
             )}
-            {historyPageCount > 1 && paginationItems.map((page) => (
-              <PaginationButton
-                key={page}
-                type="button"
-                $active={page === safeCurrentHistoryPage}
-                onClick={() => setCurrentHistoryPage(page)}
-              >
-                {page}
-              </PaginationButton>
-            ))}
             {historyPageCount > 1 && (
               <PaginationButton
                 type="button"
+                aria-label="下一頁"
                 disabled={safeCurrentHistoryPage === historyPageCount}
                 onClick={() => setCurrentHistoryPage((page) => Math.min(historyPageCount, page + 1))}
               >
                 下一頁
+                <FiChevronRight />
               </PaginationButton>
             )}
           </PaginationControls>
@@ -1079,6 +1076,7 @@ const TableScroll = styled.div`
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
   text-align: left;
 `
 
@@ -1095,6 +1093,7 @@ const TableHeadCell = styled.th`
   letter-spacing: 0.12em;
   text-transform: uppercase;
   white-space: nowrap;
+  width: 25%;
 `
 
 const TableCell = styled.td`
@@ -1137,7 +1136,9 @@ const PaginationBar = styled.div`
   border-top: 1px solid var(--border-soft);
 
   @media (max-width: 720px) {
+    flex-direction: column;
     align-items: stretch;
+    padding: 0.9rem 1rem 1rem;
   }
 `
 
@@ -1147,19 +1148,31 @@ const PaginationStatus = styled.div`
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+
+  @media (max-width: 720px) {
+    text-align: center;
+  }
 `
 
 const PaginationControls = styled.div`
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.45rem;
 
   @media (max-width: 720px) {
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
   }
 `
 
 const PaginationButton = styled.button<{ $active?: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
   padding: 0.45rem 0.75rem;
   border: 1px solid ${({ $active }) => ($active ? 'var(--accent)' : 'rgba(140, 46, 46, 0.18)')};
   background: ${({ $active }) => ($active ? 'rgba(140, 46, 46, 0.12)' : 'rgba(253, 252, 248, 0.92)')};
@@ -1181,5 +1194,12 @@ const PaginationButton = styled.button<{ $active?: boolean }>`
   &:disabled {
     opacity: 0.45;
     cursor: not-allowed;
+  }
+
+  @media (max-width: 720px) {
+    width: 100%;
+    min-width: 0;
+    padding-inline: 0.5rem;
+    white-space: nowrap;
   }
 `

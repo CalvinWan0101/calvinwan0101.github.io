@@ -206,6 +206,10 @@ const desiredYAxisTickCount = 8
 
 const purchaseHistory: PurchaseGroup[] = [
   {
+    month: '2026 年 5 月',
+    entries: [{ date: '2026/05/05', shares: '1.30426', price: '$151.810010' }],
+  },
+  {
     month: '2026 年 4 月',
     entries: [
       { date: '2026/04/27', shares: '1.32279', price: '$150.439605' },
@@ -216,30 +220,30 @@ const purchaseHistory: PurchaseGroup[] = [
   {
     month: '2026 年 3 月',
     entries: [
-      { date: '2026/03/27', shares: '1.00000', price: '$135.36' },
+      { date: '2026/03/27', shares: '1.00000', price: '$135.360000' },
       { date: '2026/03/25', shares: '1.40247', price: '$139.753241' },
-      { date: '2026/03/20', shares: '1.00000', price: '$137.41' },
+      { date: '2026/03/20', shares: '1.00000', price: '$137.410000' },
       { date: '2026/03/16', shares: '1.38741', price: '$141.270487' },
-      { date: '2026/03/09', shares: '1.00000', price: '$139.75' },
-      { date: '2026/03/06', shares: '1.00000', price: '$142.43' },
+      { date: '2026/03/09', shares: '1.00000', price: '$139.750000' },
+      { date: '2026/03/06', shares: '1.00000', price: '$142.430000' },
       { date: '2026/03/05', shares: '1.37359', price: '$144.147559' },
-      { date: '2026/03/03', shares: '1.00000', price: '$142.91' },
+      { date: '2026/03/03', shares: '1.00000', price: '$142.910000' },
     ],
   },
   {
     month: '2026 年 2 月',
     entries: [
       { date: '2026/02/25', shares: '1.21921', price: '$148.457253' },
-      { date: '2026/02/17', shares: '1.24151', price: '$145.79' },
+      { date: '2026/02/17', shares: '1.24151', price: '$145.790000' },
       { date: '2026/02/09', shares: '1.22803', price: '$146.575899' },
     ],
   },
   {
     month: '2026 年 1 月',
     entries: [
-      { date: '2026/01/30', shares: '1.00000', price: '$146.13' },
-      { date: '2026/01/14', shares: '1.00000', price: '$144.57' },
-      { date: '2026/01/08', shares: '1.00000', price: '$143.42' },
+      { date: '2026/01/30', shares: '1.00000', price: '$146.130000' },
+      { date: '2026/01/14', shares: '1.00000', price: '$144.570000' },
+      { date: '2026/01/08', shares: '1.00000', price: '$143.420000' },
       { date: '2026/01/05', shares: '1.00000', price: '$142.835' },
     ],
   },

@@ -79,10 +79,10 @@ const experiences: TimelineEntry[] = [
     title: '程式設計師（全職）',
     period: '2025/06 - 至今',
     items: [
-      '參與後端 API 開發與維護。',
-      '參與前端使用者介面開發。',
-      '使用 Azure 進行應用程式部署與環境管理。',
-      '負責正式環境的監控與運維作業。',
+      '使用 C#、ASP.NET Core 與 ABP Framework 開發與維護後端 API。',
+      '使用 React 與 TypeScript 開發前端介面與資料串接。',
+      '參與 DDD 系統建模與模組設計。',
+      '獨立負責 Azure 應用程式部署、環境管理與正式環境監控維運。',
     ],
     active: true,
   },
@@ -91,8 +91,9 @@ const experiences: TimelineEntry[] = [
     title: '助理程式設計師（實習）',
     period: '2024/07 - 2025/06',
     items: [
-      '參與企業級系統的開發，熟悉既有程式碼與系統架構。',
-      '協助後端 API 與前端介面的功能開發與問題修復。'
+      '參與企業級系統開發，熟悉既有程式碼與系統架構。',
+      '協助後端 API 與前端介面開發、問題修復。',
+      '使用 C#、ASP.NET Core、ABP Framework、React 與 TypeScript 進行功能實作。',
     ]
   },
   {

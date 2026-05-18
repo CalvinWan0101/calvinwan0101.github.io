@@ -207,7 +207,10 @@ const desiredYAxisTickCount = 8
 const purchaseHistory: PurchaseGroup[] = [
   {
     month: '2026 年 5 月',
-    entries: [{ date: '2026/05/05', shares: '1.30426', price: '$151.810010' }],
+    entries: [
+      { date: '2026/05/15', shares: '1.29062', price: '$154.189952' },
+      { date: '2026/05/05', shares: '1.30426', price: '$151.810010' },
+    ],
   },
   {
     month: '2026 年 4 月',
@@ -244,7 +247,7 @@ const purchaseHistory: PurchaseGroup[] = [
       { date: '2026/01/30', shares: '1.00000', price: '$146.130000' },
       { date: '2026/01/14', shares: '1.00000', price: '$144.570000' },
       { date: '2026/01/08', shares: '1.00000', price: '$143.420000' },
-      { date: '2026/01/05', shares: '1.00000', price: '$142.835' },
+      { date: '2026/01/05', shares: '1.00000', price: '$142.835000' },
     ],
   },
 ]
